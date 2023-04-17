@@ -211,14 +211,14 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Upload Foto/Scan Akta Mertua dan Orang Tua</label>
+            <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="customFile">
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
+            <label>Upload Foto/Scan Kartu Keluarga</label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="customFile">
               <label class="custom-file-label" for="customFile">Choose file</label>
@@ -395,6 +395,13 @@
           </div>
           <div class="form-group">
             <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Kartu Keluarga</label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="customFile">
               <label class="custom-file-label" for="customFile">Choose file</label>
@@ -1127,7 +1134,21 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
+            <label>Upload Foto/Scan Permohonan Akta Lahir</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Surat Keterangan Lahir</label>
+            <div class="custom-file">
+              <input type="file" class="custom-file-input" id="customFile">
+              <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Buku Nikah Orang Tua/SPTJM (misal nikah siri)</label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="customFile">
               <label class="custom-file-label" for="customFile">Choose file</label>
@@ -1479,14 +1500,14 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Surat Keterangan Kepala Desa</label>
+            <label>Upload Foto/Scan Surat Keterangan Kepala Desa atau Surat Keterangan Rumah Sakit</label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="customFile">
               <label class="custom-file-label" for="customFile">Choose file</label>
             </div>
           </div>
           <div class="form-group">
-            <label>Upload Foto/Scan Surat Keterangan Rumah Sakit</label>
+            <label>Upload Foto/Scan Kartu Keluarga</label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="customFile">
               <label class="custom-file-label" for="customFile">Choose file</label>
@@ -1653,13 +1674,6 @@
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
             <label>Upload Foto/Scan Surat Keterangan Pindah</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Choose file</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Kartu Keluarga</label>
             <div class="custom-file">
               <input type="file" class="custom-file-input" id="customFile">
               <label class="custom-file-label" for="customFile">Choose file</label>
