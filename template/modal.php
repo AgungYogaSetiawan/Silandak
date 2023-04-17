@@ -169,9 +169,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -347,9 +345,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -524,9 +520,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -728,9 +722,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -913,9 +905,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -1102,9 +1092,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -1276,9 +1264,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -1458,9 +1444,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -1633,9 +1617,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -1816,9 +1798,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
@@ -1985,9 +1965,7 @@
             <div class="form-group col-6">
               <label>Kecamatan</label>
               <select class="form-control selectric">
-                <option selected>--Pilih Kecamatan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
+                <option selected>Banua Lawas</option>
               </select>
             </div>
           </div>
