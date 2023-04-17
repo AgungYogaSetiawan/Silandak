@@ -24,10 +24,9 @@
                 <div id="pengaduan" style="display:none;">
                   <form method="POST">
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="judul_laporan" placeholder="Ketik Judul Laporan Anda">
                     </div>
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Isi Laporan Anda">
+                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Judul dan Isi Laporan Anda">
                     </div>
                     <div class="mb-3">
                       <input type="date" class="form-control" id="tanggal_laporan" placeholder="Pilih Tanggal Kejadian">
@@ -60,10 +59,7 @@
                 <div id="aspirasi" style="display:none;">
                   <form method="POST">
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="judul_laporan" placeholder="Ketik Judul Laporan Anda">
-                    </div>
-                    <div class="mb-3">
-                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Isi Laporan Anda">
+                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Judul dan Isi Laporan Anda">
                     </div>
                     <div class="mb-3">
                       <input type="text" class="form-control" id="tanggal_laporan" placeholder="Ketik Asal Pelapor">
@@ -93,10 +89,7 @@
                 <div id="permintaan_informasi" style="display:none;">
                   <form method="POST">
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="judul_laporan" placeholder="Ketik Judul Laporan Anda">
-                    </div>
-                    <div class="mb-3">
-                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Isi Laporan Anda">
+                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Judul dan Isi Laporan Anda">
                     </div>
                     <div class="mb-3">
                       <input type="text" class="form-control" id="tanggal_laporan" placeholder="Ketik Asal Pelapor">
