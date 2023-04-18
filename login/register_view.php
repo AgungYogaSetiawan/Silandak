@@ -1,3 +1,18 @@
+<?php
+require '../pengaturan/fungsi.php';
+
+if(isset($_POST['daftar'])){
+  if(registrasi($_POST) > 0){
+      echo "<script>alert('user baru berhasil ditambahkan!');</script>";
+  } else {
+      echo mysqli_error($conn);
+  }
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +57,7 @@
                     <div class="card-header text-danger"><h6>Daftar</h6></div>
 
                     <div class="card-body">
-                        <form method="POST" action="login_proses.php" class="needs-validation" novalidate="">
+                        <form method="POST" action="" class="needs-validation" novalidate="">
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input id="username" type="text" class="form-control" name="username" tabindex="1" required autofocus>
@@ -61,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger btn-lg btn-block" tabindex="4" name>
+                                <button type="submit" class="btn btn-danger btn-lg btn-block" tabindex="4" name="daftar">
                                     Daftar
                                 </button>
                             </div>
