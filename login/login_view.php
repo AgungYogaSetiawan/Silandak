@@ -1,6 +1,24 @@
 <?php
 session_start();
 require '../pengaturan/fungsi.php';
+// cek cookie
+if(isset($_COOKIE["user_id"]) && isset($_COOKIE["user_key"])){
+  $id = $_COOKIE["user_id"];
+  $key = $_COOKIE["user_key"];
+
+  // ambil username berdasarkan id
+  $result = mysqli_query($conn, "SELECT username FROM tb_user WHERE id_user='$id'");
+  $row = mysqli_fetch_assoc($result);
+
+  // cek cookie dan username
+  if($key === hash('sha256', $row["username"])){
+    $_SESSION["login"] = true;
+    $_SESSION['id'] = $row['id_user'];
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['peran'] = $row['level'];
+  }
+}
+
 if(isset($_SESSION['login'])) {
     header('location:../index.php?page=beranda');
 }
@@ -20,6 +38,19 @@ if(isset($_POST["login"])){
       $_SESSION['id'] = $row['id_user'];
       $_SESSION['username'] = $row['username'];
       $_SESSION['peran'] = $row['level'];
+
+      // cek remember me cookie
+      if(isset($_POST["remember"])){
+        // buat cookie
+        $user_id = $row["id_user"];
+        $user_hash = hash('sha256', $row["username"]);
+        $expiry_time = time() + 1800; // Kadaluarsa dalam 30 menit
+        $secure = true; // Hanya dapat dikirimkan melalui HTTPS
+        $http_only = true; // Tidak dapat diakses melalui JavaScript
+        setcookie('user_id', $user_id, $expiry_time, '/', '', $secure, $http_only);
+        setcookie('user_key', $user_hash, $expiry_time, '/', '', $secure, $http_only);
+      }
+
       echo "<script>alert('Login Berhasil! Selamat datang=$username');</script>";
       echo "<meta http-equiv='refresh' content='0;url=../index.php?page=beranda'>";
       exit;
