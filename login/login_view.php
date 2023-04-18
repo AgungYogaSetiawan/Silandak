@@ -1,9 +1,9 @@
 <?php
-require '../pengaturan/fungsi.php';
 session_start();
-// if(isset($_SESSION['id'])) {
-//     header('location:../index.php?page=home');
-// }
+require '../pengaturan/fungsi.php';
+if(isset($_SESSION['login'])) {
+    header('location:../index.php?page=beranda');
+}
 if(isset($_POST["login"])){
   $username = $_POST["username"];
   $password = $_POST["password"];
@@ -14,10 +14,12 @@ if(isset($_POST["login"])){
   if(mysqli_num_rows($result) === 1 ){
     // cek password
     $row = mysqli_fetch_assoc($result);
-    $_SESSION['id'] = $row['id_user'];
-    $_SESSION['username'] = $row['username'];
-    $_SESSION['peran'] = $row['level'];
     if(password_verify($password, $row["password"])){
+      // set session
+      $_SESSION['login'] = true;
+      $_SESSION['id'] = $row['id_user'];
+      $_SESSION['username'] = $row['username'];
+      $_SESSION['peran'] = $row['level'];
       echo "<script>alert('Login Berhasil! Selamat datang=$username');</script>";
       echo "<meta http-equiv='refresh' content='0;url=../index.php?page=beranda'>";
       exit;

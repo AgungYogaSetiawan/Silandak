@@ -54,7 +54,7 @@
                 <i class="fas fa-exchange-alt"></i> Ganti Password
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="login/logout.php" class="dropdown-item has-icon text-danger">
+                <a href="login/logout.php" class="dropdown-item has-icon text-danger" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt"></i> Keluar
                 </a>
             </div>

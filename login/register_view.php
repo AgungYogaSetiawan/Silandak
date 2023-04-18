@@ -1,9 +1,9 @@
 <?php
-// session_start();
+session_start();
 require '../pengaturan/fungsi.php';
-// if(isset($_SESSION['id'])) {
-//     header('location:../index.php?page=home');
-// }
+if(isset($_SESSION['login'])) {
+    header('location:../index.php?page=beranda');
+}
 
 if(isset($_POST['daftar'])){
   if(registrasi($_POST) > 0){

@@ -1,7 +1,8 @@
 <?php
 session_start();
-if(!isset($_SESSION['id'])){
+if(!isset($_SESSION['login'])){
     header("location:login/login_view.php");
+    exit;
 }
 include "pengaturan/koneksi.php";
 include "template/header.php";
