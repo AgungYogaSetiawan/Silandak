@@ -3,7 +3,7 @@
   <section class="section">
     <div class="section-header justify-content-between bg-danger rounded-lg">
       <h1 class="text-white">FORM GANTI PASSWORD</h1>
-      <a href="#"><h1 class="text-white"><i class="fas fa-arrow-left" style="font-size:20px;"></i> Kembali</h1></a>
+      <a href="beranda"><h1 class="text-white"><i class="fas fa-arrow-left" style="font-size:20px;"></i> Kembali</h1></a>
     </div>
 
     <div class="section-body">
@@ -13,7 +13,7 @@
             <div class="card card-danger">
               <div class="card-header text-danger"><h6>GANTI PASSWORD</h6></div>
               <div class="card-body">
-                <form method="POST">
+                <form method="POST" action="pengaturan/aksi_ganti_pass.php">
                     <div class="form-group">
                       <label for="old_pass">Kata Sandi Lama</label>
                       <input id="old_pass" type="password" class="form-control" name="old_pass" autofocus require>
@@ -35,12 +35,12 @@
                     </div>
 
                     <div class="form-group">
-                      <button type="submit" class="btn btn-success btn-md">
+                      <button type="submit" class="btn btn-success btn-md" name="ubah">
                         <i class="fas fa-save"></i> Simpan
                       </button>
-                      <button type="submit" class="btn btn-danger btn-md">
+                      <a href="beranda" class="btn btn-danger btn-md">
                         <i class="fas fa-window-close"></i> Batal
-                      </button>
+                      </a>
                     </div>
                 </form>
               </div>
