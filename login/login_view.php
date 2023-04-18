@@ -1,7 +1,29 @@
 <?php
+require '../pengaturan/fungsi.php';
 session_start();
-if(isset($_SESSION['id'])) {
-    header('location:../index.php?page=home');
+// if(isset($_SESSION['id'])) {
+//     header('location:../index.php?page=home');
+// }
+if(isset($_POST["login"])){
+  $username = $_POST["username"];
+  $password = $_POST["password"];
+
+  $result = mysqli_query($conn, "SELECT * FROM tb_user WHERE username = '$username'");
+
+  // cek username
+  if(mysqli_num_rows($result) === 1 ){
+    // cek password
+    $row = mysqli_fetch_assoc($result);
+    $_SESSION['id'] = $row['id_user'];
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['peran'] = $row['level'];
+    if(password_verify($password, $row["password"])){
+      echo "<script>alert('Login Berhasil! Selamat datang=$username');</script>";
+      echo "<meta http-equiv='refresh' content='0;url=../index.php?page=beranda'>";
+      exit;
+    }
+  }
+  $error = true;
 }
 ?>
 <!DOCTYPE html>
@@ -41,12 +63,15 @@ if(isset($_SESSION['id'])) {
                         <img src="../assets/img/logo_tabalong.png" alt="logo" width="100">
                         <h4>APLIKASI PELAYANAN ONLINE KECAMATAN BANUA LAWAS</h4>
                     </div>
+                <?php if(isset($error)) : ?>
+                  <div class="alert alert-danger">Username / Passsword anda salah!</div>
+                <?php endif; ?>
 
                 <div class="card card-danger">
                     <div class="card-header text-danger"><h6>Login</h6></div>
 
                     <div class="card-body">
-                        <form method="POST" action="login_proses.php" class="needs-validation" novalidate="">
+                        <form method="POST" action="" class="needs-validation" novalidate="">
                             <div class="form-group">
                                 <label for="username">Username</label>
                                 <input id="username" type="text" class="form-control" name="username" tabindex="1" required autofocus>
@@ -78,7 +103,7 @@ if(isset($_SESSION['id'])) {
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-danger btn-lg btn-block" tabindex="4" name>
+                                <button type="submit" class="btn btn-danger btn-lg btn-block" tabindex="4" name="login">
                                     Login
                                 </button>
                             </div>

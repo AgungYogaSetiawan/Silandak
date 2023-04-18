@@ -1,9 +1,13 @@
 <?php
+// session_start();
 require '../pengaturan/fungsi.php';
+// if(isset($_SESSION['id'])) {
+//     header('location:../index.php?page=home');
+// }
 
 if(isset($_POST['daftar'])){
   if(registrasi($_POST) > 0){
-      echo "<script>alert('user baru berhasil ditambahkan!');</script>";
+      echo "<script>alert('Akun anda berhasil dibuat!');</script>";
   } else {
       echo mysqli_error($conn);
   }
