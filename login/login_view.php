@@ -51,9 +51,32 @@ if(isset($_POST["login"])){
         setcookie('user_key', $user_hash, $expiry_time, '/', '', $secure, $http_only);
       }
 
-      echo "<script>alert('Login Berhasil! Selamat datang=$username');</script>";
-      echo "<meta http-equiv='refresh' content='0;url=../index.php?page=beranda'>";
-      exit;
+      // cek jika warga yang login
+      if($row["level"] == "warga"){
+        $_SESSION['id'] = $row['id_user'];
+        $_SESSION['username'] = $username;
+        $_SESSION['peran'] = "warga";
+        // alihkan ke menu warga
+        echo "<script>alert('Login Berhasil! Selamat datang=$username');</script>";
+        echo "<meta http-equiv='refresh' content='0;url=../index.php?page=beranda'>";
+        exit;
+      } else if($row["level"] == "admin kecamatan"){
+        $_SESSION['id'] = $row['id_user'];
+        $_SESSION['username'] = $username;
+        $_SESSION['peran'] = "admin kecamatan";
+        // alihkan ke menu warga
+        echo "<script>alert('Login Berhasil! Selamat datang=$username');</script>";
+        echo "<meta http-equiv='refresh' content='0;url=../index.php?page=adminkecamatan'>";
+        exit;
+      } else if($row["level"] == "admin desa"){
+        $_SESSION['id'] = $row['id_user'];
+        $_SESSION['username'] = $username;
+        $_SESSION['peran'] = "admin desa";
+        // alihkan ke menu warga
+        echo "<script>alert('Login Berhasil! Selamat datang=$username');</script>";
+        echo "<meta http-equiv='refresh' content='0;url=../index.php?page=admindesa'>";
+        exit;
+      }
     }
   }
   $error = true;
@@ -116,11 +139,11 @@ if(isset($_POST["login"])){
                             <div class="form-group">
                                 <div class="d-block">
                                     <label for="password" class="control-label">Password</label>
-                                        <div class="float-right">
+                                        <!-- <div class="float-right">
                                             <a href="auth-forgot-password.html" class="text-small text-danger" style="text-decoration:none;">
                                                 Lupa Password?
                                             </a>
-                                        </div>
+                                        </div> -->
                                 </div>
                                 <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
                                     <div class="invalid-feedback">
@@ -147,7 +170,7 @@ if(isset($_POST["login"])){
                     Belum punya akun? Silahkan <a href="register_view.php" class="text-danger" style="text-decoration:none;">Daftar</a>
                 </div>
                 <div class="mt-5 text-muted text-center">
-                    <button data-toggle='modal' data-target='#modalFAQ' class="btn btn-transparent text-danger">FAQ</button> | <button data-toggle='modal' data-target='#modalAbout' class="btn btn-transparent text-danger">TENTANG APLIKASI</button> | <button data-toggle='modal' data-target='#modalPengaduan' class="btn btn-transparent text-danger">PENGADUAN</button>
+                    <button data-toggle='modal' data-target='#modalFAQ' class="btn btn-transparent text-danger">FAQ</button> | <button data-toggle='modal' data-target='#modalAbout' class="btn btn-transparent text-danger">TENTANG APLIKASI</button> | <button data-toggle='modal' data-target='#modalPengaduan' class="btn btn-transparent text-danger">PENGADUAN</button> | <button data-toggle='modal' data-target='#modalLupaPassword' class="btn btn-transparent text-danger">LUPA PASSWORD</button>
                 </div>
                 <div class="simple-footer">
                     Copyright &copy; <a href="https://www.linkedin.com/in/agung-yoga-setiawan/" target="_blank" class="text-danger">Agung Yoga Setiawan</a> 2023
@@ -376,6 +399,49 @@ if(isset($_POST["login"])){
     </div>
 </div>
 <!-- end modal pengaduan -->
+
+
+<!-- Modal lupa password -->
+<div class="modal fade" id="modalLupaPassword" tabindex="-1" role="dialog" aria-labelledby="modalLupaPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="modalLupaPasswordLabel">Lupa Password</h5> 
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" id="bodydetail">
+            <div class="text-muted mb-3">
+                    <p>Masukan username dan nomor handphone / nomor whatsapp anda untuk pemprosesan mengganti kata sandi baru.</p>
+                </div>
+                <form method="POST">
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input id="username" type="text" class="form-control" name="username" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="no_hp">Nomor Handphone</label>
+                      <input id="no_hp" type="number" class="form-control" name="no_hp" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="keterangan">Keterangan</label>
+                      <input id="keterangan" type="text" class="form-control" name="keterangan" require>
+                    </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-md" name="ubah">
+                      <i class="fas fa-paper-plane"></i> Kirim
+                    </button>
+                  </div>
+                </form>
+        </div>
+        </div>
+        </div>
+    </div>
+</div>
+<!-- end modal lupa password -->
+
 
 <!-- General JS Scripts -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

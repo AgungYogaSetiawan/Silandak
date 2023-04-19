@@ -32,6 +32,9 @@ switch ($page) {
     case 'about':
         include "profil/about.php";
         break;
+    case 'pesan':
+        include "profil/messages.php";
+        break;
     case 'permohonankartukeluarga':
         include "kartu_keluarga/permohonan_kk.php";
         break;

@@ -8,6 +8,7 @@ if(isset($_SESSION['login'])) {
 if(isset($_POST['daftar'])){
   if(registrasi($_POST) > 0){
       echo "<script>alert('Akun anda berhasil dibuat!');</script>";
+      echo "<meta http-equiv='refresh' content='0;url=login_view.php'>";
   } else {
       echo mysqli_error($conn);
   }

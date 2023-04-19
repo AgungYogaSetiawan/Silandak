@@ -50,6 +50,11 @@
                 <a href="profile" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Profil
                 </a>
+                <?php if($_SESSION["peran"] == "admin kecamatan"){ ?>
+                <a href="pesan" class="dropdown-item has-icon">
+                <i class="far fa-envelope"></i> Pesan
+                </a>
+                <?php } ?>
                 <a href="gantipassword" class="dropdown-item has-icon">
                 <i class="fas fa-exchange-alt"></i> Ganti Password
                 </a>
@@ -123,7 +128,7 @@
                 </li>
                 <?php } ?>
 
-                <?php if($_SESSION['peran'] == "admin") {?>
+                <?php if($_SESSION['peran'] == "admin kecamatan") {?>
                 <li class="nav-item">
                     <a href="beranda" class="nav-link"><i class="fas fa-home"></i><span class="font-weight-bold">Beranda</span></a>
                 </li>
