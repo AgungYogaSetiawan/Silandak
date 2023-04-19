@@ -1,2 +1,2 @@
 <?php
-$konek = mysqli_connect("localhost", "root", "", "sipentral");
+$konek = mysqli_connect("localhost", "root", "", "silandak");

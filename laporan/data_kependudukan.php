@@ -13,7 +13,7 @@
             <div class="card-body">
             <a href="#" class="btn btn-primary btn-md mb-4">Tambah Data</a>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered">
+                <table class="table table-hover table-bordered">
                     <thead>
                     <tr>
                         <th rowspan=2 style="text-align:center; vertical-align: middle;" valign="middle">NO</th>

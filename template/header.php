@@ -132,6 +132,9 @@
                 <li class="nav-item">
                     <a href="beranda" class="nav-link"><i class="fas fa-home"></i><span class="font-weight-bold">Beranda</span></a>
                 </li>
+                <li class="nav-item">
+                    <a href="users" class="nav-link"><i class="fas fa-user"></i><span class="font-weight-bold">Data User</span></a>
+                </li>
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-file-alt"></i><span class="font-weight-bold">Laporan</span></a>
                     <ul class="dropdown-menu">

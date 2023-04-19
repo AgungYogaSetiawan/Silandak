@@ -4,7 +4,8 @@ if(!isset($_SESSION['login'])){
     header("location:login/login_view.php");
     exit;
 }
-include "pengaturan/koneksi.php";
+// include "pengaturan/koneksi.php";
+include "pengaturan/fungsi.php";
 include "template/header.php";
 $page = $_GET['page'];
 switch ($page) {
@@ -34,6 +35,9 @@ switch ($page) {
         break;
     case 'pesan':
         include "profil/messages.php";
+        break;
+    case 'users':
+        include "pengguna/pengguna_read.php";
         break;
     case 'permohonankartukeluarga':
         include "kartu_keluarga/permohonan_kk.php";

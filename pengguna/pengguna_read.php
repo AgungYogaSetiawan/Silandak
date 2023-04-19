@@ -1,54 +1,57 @@
 <!-- Main Content -->
 <div class="main-content">
-    <section class="section">
-        <div class="section-header">
-            <h1>Akun Pengguna</h1>
-        </div>
+<section class="section">
 
-        <div class="section-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Data Akun Pengguna</h4>
-                            <div class="card-header-action">
-                                <a href="?page=pengguna_create" class="btn btn-success"><i class="fa fa-plus-circle"></i> Tambah Data</a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Username</th>
-                                        <th>Login Terakhir</th>
-                                        <th>Peran</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $no = 1;
-                                    $query = "SELECT * from pengguna";
-                                    $exe = mysqli_query($konek, $query);
-                                    while ($data = mysqli_fetch_array($exe)) : ?>
-                                        <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td><?= $data['username']; ?></td>
-                                            <td><?= date('d-M-Y h:i:s', strtotime($data['login_terakhir'])) ?></td>
-                                            <td><?= $data['peran']; ?></td>
-                                            <td>
-                                                <a href="?page=pengguna_edit&id=<?= $data['id'] ?>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i>Edit</a>
-                                                <a href="?page=pengguna_delete&id=<?= $data['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Ingin hapus data ini?');"><i class="fa fa-trash"></i>Hapus</a>
-                                            </td>
-                                        </tr>
-                                    <?php endwhile; ?>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+<div class="section-body">
+    <div class="mt-5">
+    <div class="row">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
+        <div class="card card-danger">
+            <div class="card-header">
+            <h4 class="text-danger">Data User</h4>
+            </div>
+            <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover" id="tabel">
+                <thead>
+                    <tr>
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Level</th>
+                    <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $query = mysqli_query($conn, "SELECT * FROM tb_user");
+                    $no = 1;
+                    while($row = mysqli_fetch_array($query)){?>
+                        <tr>
+                            <td><?php echo $no++ ?></td>
+                            <td><?php echo $row["username"] ?></td>
+                            <td><?php echo $row["password"] ?></td>
+                            <td><?php echo $row["level"] ?></td>
+                            <td>
+                                <div class='btn-row'>
+                                    <div class='btn-group'>
+                                        <a href='#' class='btn btn-warning btn-md mr-2'><i class='fas fa-user-edit'></i></a>
+                                        <a href='#' class='btn btn-danger btn-md'><i class='fas fa-trash'></i></a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+                </table>
+            </div>
             </div>
         </div>
-    </section>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
 </div>
