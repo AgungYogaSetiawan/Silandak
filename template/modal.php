@@ -1,36 +1,3 @@
-<!-- Modal faq -->
-<div class="modal fade" id="modalFAQ" tabindex="-1" role="dialog" aria-labelledby="modalFAQLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalFAQLabel">Frequently Asked Questions (FAQ)</h5> 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="bodydetail">
-        <div class="author-box">
-            <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
-            <div class="author-box">
-            <p>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aliquid temporibus hic quidem itaque dignissimos veniam, nostrum accusantium tempore blanditiis earum at soluta neque asperiores!</p>
-            </div>
-
-            <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
-            <div class="author-box">
-            <p>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aliquid temporibus hic quidem itaque dignissimos veniam, nostrum accusantium tempore blanditiis earum at soluta neque asperiores!</p>
-            </div>
-
-            <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
-            <div class="author-box">
-            <p>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aliquid temporibus hic quidem itaque dignissimos veniam, nostrum accusantium tempore blanditiis earum at soluta neque asperiores!</p>
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end modal faq -->
-
 <!-- Modal persyaratan -->
 <div class="modal fade" id="modalPersyaratan" tabindex="-1" role="dialog" aria-labelledby="modalPersyaratanLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
