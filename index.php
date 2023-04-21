@@ -10,8 +10,10 @@ include "template/header.php";
 $page = $_GET['page'];
 switch ($page) {
     case 'beranda':
-        include "dashboard/dashboard_view.php";
-        break;
+        if($_SESSION["peran"] == "warga"){ 
+            include "dashboard/dashboard_view.php";
+            break;
+    };
     case 'adminkecamatan':
         include "dashboard/dashboard_admin.php";
         break;

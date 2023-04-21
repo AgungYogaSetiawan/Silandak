@@ -7,6 +7,21 @@ pelayanan dukpil
 - biodata wni -> kk
 - rekam ktp -> kk
 
+LIST TASK
+- membuat sistem lupa password, user mengirim pesan ke admin untuk meminta digantikan password kemudian pesan masuk ke admin selanjutnya admin akan mengganti password dan setelah selesai admin akan menghubungi user melalui wa atau sms. (warga dan admin kecamatan)
+
+- membuat isi konten tentang aplikasi (semua level)
+
+- membuat sistem crud pada modal di setiap pelayanan dan menampilkan hasil input ke data baru, progress, dan selesai (warga dan admin kecamatan)
+
+- membuat sistem pengaduan laporan dan menampilkan hasil ke admin (warga dan admin kecamatan)
+
+- membuat crud pada laporan data penduduk (warga dan admin desa)
+
+- membuat sistem permohonan surat setelah menginput data (warga)
+
+- membuat tampilan profil (semua level)
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

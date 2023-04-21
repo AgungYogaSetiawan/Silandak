@@ -10,7 +10,7 @@
         Copyright &copy; 2023 <div class="bullet"></div> Coded By <a href="https://www.linkedin.com/in/agung-yoga-setiawan/" target="_blank" class="text-danger">Agung Yoga Setiawan</a>
     </div>
     <div class="footer-right">
-        2.3.0
+        Version 1.0.0
     </div>
 </footer>
 </div>
