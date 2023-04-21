@@ -195,7 +195,7 @@ if(isset($_POST["login"])){
             <div class="author-box">
                 <div class="author-box font-weight-bolder">Q: Apa itu SILANDAK?</div>
                 <div class="author-box">
-                <p>A: SILANDAK (Sistem Informasi Pelayanan Online Kecamatan) yang berguna untuk menyediakan pelayanan yang ada di kecamatan namun berbasis online yang dapat diakses dari mana saja?</p>
+                <p>A: SILANDAK (Sistem Informasi Pelayanan Online Kecamatan) yang berguna untuk menyediakan pelayanan yang ada di kecamatan namun berbasis online yang dapat diakses dari mana saja</p>
                 </div>
                 <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
                 <div class="author-box">

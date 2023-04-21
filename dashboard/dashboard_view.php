@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
               <h5>Kartu Keluarga</h5>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam optio nobis rerum dolore omnis quia tempore voluptatum illum consectetur deleniti?</p>
+              <p>Kartu Keluarga adalah Kartu Identitas Keluarga yang memuat data tentang susunan, hubungan dan jumlah anggota keluarga. Kartu Keluarga wajib dimiliki oleh setiap keluarga. Kartu ini berisi data lengkap tentang identitas Kepala Keluarga dan anggota keluarganya.</p>
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle='modal' data-target='#modalDaftarKK'><i class="fas fa-user-edit"></i> Daftar</button>
@@ -29,7 +29,7 @@
             </div>
             <div class="card-body">
               <h5>Akta Kelahiran</h5>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur facere repellendus ipsa praesentium recusandae.</p>
+              <p>Akta kelahiran atau bisa disebut dengan akta lahir adalah tanda bukti berisi pernyataan yang teramat penting dan diperlukan guna mengatur dan menyimpan bahan keterangan tentang kelahiran seorang bayi dalam bentuk selembar kertas yang sudah dicetak.</p>
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle='modal' data-target='#modalDaftarAktaLahir'><i class="fas fa-user-edit"></i> Daftar</button>
@@ -44,7 +44,7 @@
             </div>
             <div class="card-body">
               <h5>Surat Pindah</h5>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, ratione architecto. Ullam expedita distinctio eaque iusto.</p>
+              <p>Surat Keterangan Pindah digunakan sebagai dasar perekaman dalam database kependudukan dan proses perubahan KK bagi Kepala/Anggota Keluarga yang tidak pindah. Surat Keterangan Pindah Datang digunakan sebagai dasar perekaman dalam database kependudukan dan proses penerbitan KK / KTP di alamat yang baru.</p>
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarSuratPindah"><i class="fas fa-user-edit"></i> Daftar</button>
@@ -59,7 +59,7 @@
             </div>
             <div class="card-body">
               <h5>Akta Kematian</h5>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quo tempora eum debitis.</p>
+              <p>Akta Kematian merupakan bukti sah berupa akta otentik yang dibuat dan diterbitkan oleh Dinas Kependudukan dan Pencatatan Sipil, sebagai bukti tertulis terkait pencatatan kematian seseorang.</p>
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarAktaKematian"><i class="fas fa-user-edit"></i> Daftar</button>
@@ -74,7 +74,7 @@
             </div>
             <div class="card-body">
               <h5>Surat Pindah Datang</h5>
-              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Animi eum repudiandae voluptate eius quis.</p>
+              <p>Surat Keterangan Pindah Datang digunakan sebagai dasar proses perekaman dalam data base kependudukan, perubahan KK bagi kepala/anggota keluarga yang tidak pindah dan proses Penerbitan KK/KTP di alamat baru.</p>
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarSuratPindahDatang"><i class="fas fa-user-edit"></i> Daftar</button>
@@ -89,7 +89,7 @@
             </div>
             <div class="card-body">
               <h5>Biodata WNI</h5>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti voluptatibus amet sequi at, quo doloremque consequuntur architecto sint.</p>
+              <p>Biodata WNI tidak terdapat masa berlaku dan merupakan salah satu dokumen administrasi kependudukan atau identitas penduduk dalam bentuk fisik kertas bukan blangko seperti KTP.</p>
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarBiodataWNI"><i class="fas fa-user-edit"></i> Daftar</button>
@@ -104,7 +104,7 @@
             </div>
             <div class="card-body">
               <h5>Rekam KTP</h5>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate tenetur nihil perferendis neque voluptates ducimus quaerat aliquam praesentium nam minima.</p>
+              <p>Data biometric adalah data penduduk yang disertai dengan ciri-ciri tubuh berupa sidik jari, iris mata dan wajah. Dengan selesainya penginputan dan proses identifikasi data penduduk, maka output yang dihasilkan tersimpan dalam cip, gunanya untuk menyimpan biodata, sidik jari dan tanda tangan.</p>
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarRekamKTP"><i class="fas fa-user-edit"></i> Daftar</button>
