@@ -14,21 +14,26 @@
               <div class="card-header text-danger"><h6>LUPA PASSWORD</h6></div>
               <div class="card-body">
                 <div class="text-muted mb-3">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, esse ea eum excepturi tempora laborum nam itaque exercitationem officia fugiat!</p>
+                    <p>Masukan username dan nomor handphone / nomor whatsapp anda untuk pemprosesan mengganti kata sandi baru.</p>
                 </div>
                 <form method="POST">
                     <div class="form-group">
+                      <label for="username">Username</label>
+                      <input id="username" type="text" class="form-control" name="username" require>
+                    </div>
+                    <div class="form-group">
                       <label for="no_hp">Nomor Handphone</label>
                       <input id="no_hp" type="number" class="form-control" name="no_hp" require>
+                    </div>
+                    <div class="form-group">
+                      <label for="keterangan">Keterangan</label>
+                      <input id="keterangan" type="text" class="form-control" name="keterangan" require>
                     </div>
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-success btn-md" name="ubah">
                       <i class="fas fa-paper-plane"></i> Kirim
                     </button>
-                    <a href="beranda" class="btn btn-danger btn-md">
-                      <i class="fas fa-window-close"></i> Batal
-                    </a>
                   </div>
                 </form>
               </div>

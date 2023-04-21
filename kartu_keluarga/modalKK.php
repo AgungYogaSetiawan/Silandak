@@ -10,19 +10,13 @@
       </div>
       <div class="modal-body" id="bodydetail">
         <div class="author-box">
-            <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
             <div class="author-box">
-            <p>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aliquid temporibus hic quidem itaque dignissimos veniam, nostrum accusantium tempore blanditiis earum at soluta neque asperiores!</p>
-            </div>
-
-            <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
-            <div class="author-box">
-            <p>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aliquid temporibus hic quidem itaque dignissimos veniam, nostrum accusantium tempore blanditiis earum at soluta neque asperiores!</p>
-            </div>
-
-            <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
-            <div class="author-box">
-            <p>A: ddddddddddddLorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aliquid temporibus hic quidem itaque dignissimos veniam, nostrum accusantium tempore blanditiis earum at soluta neque asperiores!</p>
+            <ol>
+              <li>Mengisi formulir data pemohon</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan buku nikah</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan ijazah pendidikan terakhir/sk kerja (jika ada)</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan kartu tanda pendudukan</li>
+            </ol>
             </div>
         </div>
       </div>
