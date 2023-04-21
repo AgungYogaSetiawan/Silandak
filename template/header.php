@@ -145,11 +145,11 @@
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-folder-plus"></i><span class="font-weight-bold">Data Baru <span class="badge-notif-new" data-badge-new="20"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item"><a href='dataBaruKartuKeluarga' class='nav-link text-dark'>Kartu Keluarga <span class='badge badge-success'>4</span></a></li>
+                        <li class="dropdown-item"><a href='dataBaruKartuKeluarga' class='nav-link text-dark'><span class="badge-notif" data-badge="20">Kartu Keluarga</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Akta Lahir <span class="badge badge-success">4</span> <span class="badge badge-success">4</span> <span class="badge badge-success">4</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Surat Pindah <span class="badge badge-success">4</span> <span class="badge badge-success">4</span> <span class="badge badge-success">4</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Akta Kematian <span class="badge badge-success">4</span> <span class="badge badge-success">4</span> <span class="badge badge-success">4</span></a></li>
-                        <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Surat Pindah Datang <span class="badge badge-success">4</span> <span class="badge badge-success">4</span> <span class="badge badge-success">4</span></a></li>
+                        <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark"> <span class="badge-notif" data-badge="20">Surat Pindah Datang</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Biodata WNI <span class="badge badge-success">4</span> <span class="badge badge-success">4</span> <span class="badge badge-success">4</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Rekam KTP <span class="badge badge-success">4</span> <span class="badge badge-success">4</span> <span class="badge badge-success">4</span></a></li>
                     </ul>
