@@ -98,6 +98,27 @@
     });
 </script>
 
+<!-- script modal edit user -->
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $('#edit_modal').on('show.bs.modal', function (e) {
+        var idx = $(e.relatedTarget).data('id');
+        //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'pengguna/pengguna_detail.php',
+                data :  'idx='+ idx,
+                success : function(data){
+                $('.hasil-data').html(data);//menampilkan data ke dalam modal
+                }
+            });
+        });
+});
+
+</script>
+<!-- end script modal edit user -->
+
 
 <!-- JS Libraies -->
 

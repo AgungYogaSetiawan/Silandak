@@ -35,7 +35,7 @@
                             <td>
                                 <div class='btn-row'>
                                     <div class='btn-group'>
-                                        <a href='pengguna/pengguna_edit.php?id_user=$row[0]' class='btn btn-warning btn-md mr-2'><i class='fas fa-user-edit'></i></a>
+                                        <a href='#edit_modal' class='btn btn-warning btn-md mr-2' data-toggle='modal' data-id=".$row['id_user']."><i class='fas fa-user-edit'></i></a>
                                         <a href='#' class='btn btn-danger btn-md'><i class='fas fa-trash'></i></a>
                                     </div>
                                 </div>
@@ -56,3 +56,22 @@
 </div>
 </section>
 </div>
+
+<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="modalLupaPasswordLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLupaPasswordLabel">Edit Data User</h5> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="bodydetail">
+                <div class="hasil-data"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
