@@ -67,4 +67,15 @@ class CRUD {
     $result = $this->db->query($query);
     return $result;
   }
+
+  // Fungsi untuk mengambil data yang akan diubah
+  function get_data($table, $id) {
+      $sql = "SELECT * FROM $table WHERE id_user=$id";
+      $result = $this->db->query($sql);
+      if ($result->num_rows > 0) {
+          return $result->fetch_assoc();
+      } else {
+          return FALSE;
+      }
+  }
 }

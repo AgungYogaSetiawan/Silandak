@@ -17,7 +17,6 @@
                     <tr>
                     <th>No</th>
                     <th>Username</th>
-                    <th>Password</th>
                     <th>Level</th>
                     <th>Aksi</th>
                     </tr>
@@ -30,16 +29,18 @@
                         <tr>
                             <td><?php echo $no++ ?></td>
                             <td><?php echo $row["username"] ?></td>
-                            <td><?php echo $row["password"] ?></td>
                             <td><?php echo $row["level"] ?></td>
+                            <?php
+                            echo "
                             <td>
                                 <div class='btn-row'>
                                     <div class='btn-group'>
-                                        <a href='#' class='btn btn-warning btn-md mr-2'><i class='fas fa-user-edit'></i></a>
+                                        <a href='pengguna/pengguna_edit.php?id_user=$row[0]' class='btn btn-warning btn-md mr-2'><i class='fas fa-user-edit'></i></a>
                                         <a href='#' class='btn btn-danger btn-md'><i class='fas fa-trash'></i></a>
                                     </div>
                                 </div>
-                            </td>
+                            </td>";
+                            ?>
                         </tr>
                     <?php
                     }

@@ -41,6 +41,9 @@ switch ($page) {
     case 'users':
         include "pengguna/pengguna_read.php";
         break;
+    case 'edituser':
+        include "pengguna/pengguna_edit.php";
+        break;
     case 'permohonankartukeluarga':
         include "kartu_keluarga/permohonan_kk.php";
         break;
