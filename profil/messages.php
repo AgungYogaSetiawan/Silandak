@@ -15,19 +15,40 @@
                   <table class="table table-striped" id="tabel">
                     <thead>
                       <tr>
-                        <th>Waktu</th>
+                        <th>No</th>
                         <th>Nama</th>
                         <th>No.HP</th>
                         <th>Isi Pesan</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>04 April 2023</td>
-                        <td>Create a mobile app</td>
-                        <td>6375494824923356</td>
-                        <td>142843737535</td>
-                      </tr>
+                      <?php
+                        // menginisialisasi objek koneksi ke database
+                        $db = new mysqli('localhost', 'root', '', 'silandak');
+
+                        // menginstansiasi objek CRUD dengan objek koneksi $db
+                        $crud = new CRUD($db);
+
+                        // mengambil data dari tabel menggunakan fungsi read
+                        $result = $crud->read('tb_pesan');
+
+                        // menampilkan data dalam tabel HTML
+                        if ($result->num_rows > 0) {
+                          $no = 1;
+                          while($row = $result->fetch_assoc()) {
+                            echo '<tr>';
+                            echo '<td>'.$no++.'</td>';
+                            echo '<td>'.$row['username'].'</td>';
+                            echo '<td>'.$row['no_hp'].'</td>';
+                            echo '<td>'.$row['pesan'].'</td>';
+                            echo '</tr>';
+                          }
+                        } else {
+                          echo '<tr><td colspan="3">Tidak ada data</td></tr>';
+                        }
+                        // menutup koneksi ke database
+                        $db->close();
+                      ?>
                     </tbody>
                   </table>
                 </div>

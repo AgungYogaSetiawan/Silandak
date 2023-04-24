@@ -50,7 +50,7 @@ class CRUD {
         $query .= " WHERE id = $id";
     }
     $result = $this->db->query($query);
-    return $result->fetch_all(MYSQLI_ASSOC);
+    return $result;
   }
 
   function update($table, $id, $data) {

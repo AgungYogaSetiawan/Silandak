@@ -90,7 +90,6 @@ if(isset($_POST["login"])){
 // memeriksa apakah ada input data yang dikirimkan melalui method POST
 if (isset($_POST['kirim'])) {
     // mengambil nilai input dari form
-    $waktu = date('d F Y, h:i:s A');
     $username = $_POST['username'];
     $no_hp = $_POST['no_hp'];
     $pesan = $_POST['pesan'];
@@ -103,7 +102,6 @@ if (isset($_POST['kirim'])) {
 
     // menambahkan data ke tabel menggunakan fungsi create
     $data = array(
-      'waktu' => $waktu,
       'username' => $username,
       'no_hp' => $no_hp,
       'pesan' => $pesan
@@ -492,7 +490,7 @@ if (isset($_POST['kirim'])) {
                     </div>
                     <div class="form-group">
                       <label for="no_hp">Nomor Handphone</label>
-                      <input id="no_hp" type="number" class="form-control" name="no_hp" require>
+                      <input id="no_hp" type="text" class="form-control" name="no_hp" require>
                     </div>
                     <div class="form-group">
                       <label for="pesan">Keterangan</label>
