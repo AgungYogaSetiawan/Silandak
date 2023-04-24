@@ -1,6 +1,8 @@
 <?php
 session_start();
 require '../pengaturan/fungsi.php';
+
+// membuat sistem login //
 // cek cookie
 if(isset($_COOKIE["user_id"]) && isset($_COOKIE["user_key"])){
   $id = $_COOKIE["user_id"];
@@ -81,6 +83,42 @@ if(isset($_POST["login"])){
   }
   $error = true;
 }
+// akhir membuat sistem login //
+
+
+// membuat sistem tambah data lupa password //
+// memeriksa apakah ada input data yang dikirimkan melalui method POST
+if (isset($_POST['kirim'])) {
+    // mengambil nilai input dari form
+    $waktu = date('d F Y, h:i:s A');
+    $username = $_POST['username'];
+    $no_hp = $_POST['no_hp'];
+    $pesan = $_POST['pesan'];
+
+    // menginisialisasi objek koneksi ke database
+    $db = new mysqli('localhost', 'root', '', 'silandak');
+
+    // menginstansiasi objek CRUD dengan objek koneksi $db
+    $crud = new CRUD($db);
+
+    // menambahkan data ke tabel menggunakan fungsi create
+    $data = array(
+      'waktu' => $waktu,
+      'username' => $username,
+      'no_hp' => $no_hp,
+      'pesan' => $pesan
+    );
+    $result = $crud->create('tb_pesan', $data);
+
+    // memeriksa apakah data berhasil ditambahkan
+    if ($result) {
+      echo "<script>alert('Pesan berhasil dikirim!');</script>";
+    } else {
+      echo "<script>alert('Pesan gagal dikirim, mohon ulangi lagi!');</script>";
+    }
+}
+
+// akhir membuat sistem tambah data lupa password //
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -457,12 +495,12 @@ if(isset($_POST["login"])){
                       <input id="no_hp" type="number" class="form-control" name="no_hp" require>
                     </div>
                     <div class="form-group">
-                      <label for="keterangan">Keterangan</label>
-                      <input id="keterangan" type="text" class="form-control" name="keterangan" require>
+                      <label for="pesan">Keterangan</label>
+                      <input id="pesan" type="text" class="form-control" name="pesan">
                     </div>
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-md" name="ubah">
+                    <button type="submit" class="btn btn-success btn-md" name="kirim">
                       <i class="fas fa-paper-plane"></i> Kirim
                     </button>
                   </div>
