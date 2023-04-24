@@ -63,7 +63,16 @@ switch ($page) {
         include "laporan/data_kependudukan.php";
         break;
     case 'lapor':
-        include "laporan/lapor_view.php";
+        include "pengaduan/lapor_view.php";
+        break;
+    case 'aduan':
+        include "pengaduan/aduan.php";
+        break;
+    case 'aspirasi':
+        include "pengaduan/aspirasi.php";
+        break;
+    case 'informasi':
+        include "pengaduan/informasi.php";
         break;
 }
 

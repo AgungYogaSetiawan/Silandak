@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap.min.css">
 
 <!-- CSS Libraries -->
+<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
 
 <!-- Template CSS -->
 <link rel="stylesheet" href="assets/css/style.css">
@@ -134,6 +136,14 @@
                 </li>
                 <li class="nav-item">
                     <a href="users" class="nav-link"><i class="fas fa-user"></i><span class="font-weight-bold">Data User</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-exclamation-circle"></i><span class="font-weight-bold">Pengaduan</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href='aduan' class='nav-link text-dark'>Pengaduan</a></li>
+                        <li class="dropdown-item"><a href="aspirasi" class="nav-link text-dark">Aspirasi</a></li>
+                        <li class="dropdown-item"><a href="informasi" class="nav-link text-dark">Permintaan Informasi</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-file-alt"></i><span class="font-weight-bold">Laporan</span></a>

@@ -22,7 +22,7 @@
               
               <div class="card-body">
                 <div id="pengaduan" style="display:none;">
-                  <form method="POST">
+                  <form method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                     </div>
                     <div class="mb-3">
@@ -35,7 +35,7 @@
                       <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Lokasi Kejadian">
                     </div>       
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile">
+                      <input type="file" class="custom-file-input" id="customFile" name="files[]" multiple>
                       <label class="custom-file-label" for="customFile">Upload Lampiran</label>
                     </div>
 

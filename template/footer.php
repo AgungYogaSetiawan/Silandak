@@ -58,7 +58,7 @@
         $('#tabel').DataTable({
             "language": {
                 "lengthMenu": "Tampilkan _MENU_ data per halaman",
-                "zeroRecords": "Data tidak ditemuka - maaf",
+                "zeroRecords": "Data tidak ditemukan",
                 "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
                 "infoEmpty": "Data belum tersedia",
                 "infoFiltered": "(filtered from _MAX_ total records)",
@@ -121,6 +121,7 @@ $(document).ready(function(){
 
 
 <!-- JS Libraies -->
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 
 <!-- Page Specific JS File -->
 
