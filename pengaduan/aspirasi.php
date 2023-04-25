@@ -16,8 +16,7 @@
                 <thead>
                     <tr>
                     <th>No</th>
-                    <th>Judul Laporan</th>
-                    <th>Isi Laporan</th>
+                    <th>Judul dan Isi Laporan</th>
                     <th>Asal Pelapor</th>
                     <th>Lampiran</th>
                     </tr>
@@ -39,7 +38,6 @@
                         while($row = $result->fetch_assoc()) {
                         echo '<tr>';
                         echo '<td>'.$no++.'</td>';
-                        echo '<td>'.$row['judul'].'</td>';
                         echo '<td>'.$row['pesan'].'</td>';
                         echo '<td>'.$row['asal_pelapor'].'</td>';
                         echo '<td>'.$row['lampiran'].'</td>';

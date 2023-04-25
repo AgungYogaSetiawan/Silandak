@@ -1,3 +1,58 @@
+<?php
+include 'pengaturan/koneksi.php';
+
+if (isset($_POST['submit'])) {
+    // Ambil data diri dari form
+    $pesan = mysqli_real_escape_string($konek, $_POST['pesan']);
+    $tgl_kejadian = $_POST['tgl_kejadian'];
+    $lokasi = mysqli_real_escape_string($konek, $_POST['lokasi']);
+    if($_POST["alias"] == "anonim") {
+      $alias = "anonymous";
+    } else {
+      $alias = str_split($_SESSION['username']);
+      $alias = join("*", $alias);
+    }
+
+    // Proses upload file
+    $files = $_FILES['files'];
+    $fileCount = count($files['name']);
+    for ($i = 0; $i < $fileCount; $i++) {
+      $fileName = mysqli_real_escape_string($konek, $files['name'][$i]);
+      $fileType = mysqli_real_escape_string($konek, $files['type'][$i]);
+      $fileSize = $files['size'][$i];
+      $fileTempName = $files['tmp_name'][$i];
+
+      // Simpan file ke folder upload
+      $uploadDir = 'assets/';
+      $filePath = $uploadDir . $fileName;
+      move_uploaded_file($fileTempName, $filePath);
+
+      // Simpan informasi file ke tabel `files`
+      $query = "INSERT INTO tb_files_aduan (id_file,name,size,type,path) VALUES ('','$fileName', '$fileSize', $fileType, '$filePath')";
+      mysqli_query($konek, $query);
+
+      // Ambil id file terakhir yang dimasukkan ke tabel `files`
+      $fileId = mysqli_insert_id($konek);
+
+      // Simpan hubungan antara file dan data diri ke tabel `file_relations`
+      $query = "INSERT INTO tb_aduan (id_aduan,file_id,pengirim,pesan,tgl_kejadian,lokasi,lampiran) VALUES ('',$fileId, '$alias', '$pesan', '$tgl_kejadian', '$lokasi','$fileName')";
+      $result = mysqli_query($konek, $query);
+    }
+
+    // memeriksa apakah data berhasil ditambahkan
+    if ($result) {
+      echo "<script>alert('Aduan berhasil dikirim!');</script>";
+    } else {
+      echo "<script>alert('Aduan gagal dikirim, mohon ulangi lagi!');</script>";
+    }
+
+    // Tutup koneksi ke database MySQL
+    mysqli_close($conn);
+}
+?>
+
+
+
 <!-- Main Content -->
 <div class="main-content">
   <section class="section">
@@ -26,30 +81,29 @@
                     <div class="mb-3">
                     </div>
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Judul dan Isi Laporan Anda">
+                      <input type="text" class="form-control" id="pesan" name="pesan" placeholder="Ketik Judul dan Isi Laporan Anda">
                     </div>
                     <div class="mb-3">
-                      <input type="date" class="form-control" id="tanggal_laporan" placeholder="Pilih Tanggal Kejadian">
+                      <input type="date" class="form-control" id="tgl_kejadian" name="tgl_kejadian" placeholder="Pilih Tanggal Kejadian">
                     </div>
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Lokasi Kejadian">
+                      <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Ketik Lokasi Kejadian">
                     </div>       
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile" name="files[]" multiple>
-                      <label class="custom-file-label" for="customFile">Upload Lampiran</label>
+                      <input type="file" class="form-control" name="files[]" multiple>
                     </div>
 
                     <hr>
                     <div class="form-group">
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" id="jk" value="">
-                          <label class="form-check-label" for="jk">Anonim</label>
+                          <input class="form-check-input" type="radio" id="anonim" value="anonim" name="alias">
+                          <label class="form-check-label" for="anonim">Anonim</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" id="jk" value="">
-                          <label class="form-check-label" for="jk">Rahasia</label>
+                          <input class="form-check-input" type="radio" id="rahasia" value="rahasia" name="alias">
+                          <label class="form-check-label" for="rahasia">Rahasia</label>
                         </div>
-                      <button type="submit" class="btn btn-danger btn-lg">
+                      <button type="submit" class="btn btn-danger btn-lg" name="submit">
                         LAPOR!
                       </button>
                     </div>
