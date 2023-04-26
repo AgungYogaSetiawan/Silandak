@@ -12,31 +12,33 @@ if (isset($_POST['submit'])) {
       $alias = str_split($_SESSION['username']);
       $alias = join("*", $alias);
     }
+    $limit = 10 * 1024 * 1024;
+    $ekstensi =  array('png','jpg','jpeg','pdf');
 
     // Proses upload file
     $files = $_FILES['files'];
     $fileCount = count($files['name']);
     for ($i = 0; $i < $fileCount; $i++) {
       $fileName = mysqli_real_escape_string($konek, $files['name'][$i]);
-      $fileType = mysqli_real_escape_string($konek, $files['type'][$i]);
+      $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
       $fileSize = $files['size'][$i];
       $fileTempName = $files['tmp_name'][$i];
+      if($fileSize > $limit) {
+        echo "<script>alert('Ukuran file terlalu besar!');</script>";
+      } else {
+        if(!in_array($fileType, $ekstensi)) {
+          echo "<script>alert('Tipe file salah!');</script>";
+        } else {
+          // Simpan file ke folder upload
+          $uploadDir = 'assets/';
+          $filePath = $uploadDir . $fileName;
+          move_uploaded_file($fileTempName, $filePath);
 
-      // Simpan file ke folder upload
-      $uploadDir = 'assets/';
-      $filePath = $uploadDir . $fileName;
-      move_uploaded_file($fileTempName, $filePath);
-
-      // Simpan informasi file ke tabel `files`
-      $query = "INSERT INTO tb_files_aduan (id_file,name,size,type,path) VALUES ('','$fileName', '$fileSize', $fileType, '$filePath')";
-      mysqli_query($konek, $query);
-
-      // Ambil id file terakhir yang dimasukkan ke tabel `files`
-      $fileId = mysqli_insert_id($konek);
-
-      // Simpan hubungan antara file dan data diri ke tabel `file_relations`
-      $query = "INSERT INTO tb_aduan (id_aduan,file_id,pengirim,pesan,tgl_kejadian,lokasi,lampiran) VALUES ('',$fileId, '$alias', '$pesan', '$tgl_kejadian', '$lokasi','$fileName')";
-      $result = mysqli_query($konek, $query);
+          // Simpan hubungan antara file dan data diri ke tabel `file_relations`
+          $query = "INSERT INTO tb_aduan (id_aduan,pengirim,pesan,tgl_kejadian,lokasi,lampiran) VALUES ('', '$alias', '$pesan', '$tgl_kejadian', '$lokasi','$fileName')";
+          $result = mysqli_query($konek, $query);
+        }
+      }
     }
 
     // memeriksa apakah data berhasil ditambahkan
@@ -91,6 +93,7 @@ if (isset($_POST['submit'])) {
                     </div>       
                     <div class="custom-file">
                       <input type="file" class="form-control" name="files[]" multiple>
+                      <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                     </div>
 
                     <hr>
