@@ -16,6 +16,8 @@
                 <thead>
                     <tr>
                     <th>No</th>
+                    <th>Tanggal</th>
+                    <th>Pengirim</th>
                     <th>Judul dan Isi Laporan</th>
                     <th>Asal Pelapor</th>
                     <th>Lampiran</th>
@@ -38,9 +40,11 @@
                         while($row = $result->fetch_assoc()) {
                         echo '<tr>';
                         echo '<td>'.$no++.'</td>';
+                        echo '<td>'.$row['tgl'].'</td>';
+                        echo '<td>'.$row['pengirim'].'</td>';
                         echo '<td>'.$row['pesan'].'</td>';
                         echo '<td>'.$row['asal_pelapor'].'</td>';
-                        echo '<td>'.$row['lampiran'].'</td>';
+                        echo '<td><a href=assets/'.$row['lampiran'].'>'.$row['lampiran'].'</a></td>';
                         echo '</tr>';
                         }
                     } else {
