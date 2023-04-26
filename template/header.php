@@ -49,9 +49,11 @@
             <div class="d-sm-none d-lg-inline-block">Hi, <strong><?php echo $_SESSION['username'] ?></strong></div></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Anda login sebagai <?php echo $_SESSION['peran'] ?></div>
+                <?php if($_SESSION["peran"] == "warga"){ ?>
                 <a href="profile" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Profil
                 </a>
+                <?php } ?>
                 <?php if($_SESSION["peran"] == "admin kecamatan"){ ?>
                 <a href="pesan" class="dropdown-item has-icon">
                 <i class="far fa-envelope"></i> Pesan
