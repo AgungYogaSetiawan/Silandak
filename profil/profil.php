@@ -6,7 +6,7 @@ $result = mysqli_query($conn,$sql);
 $data = mysqli_fetch_array($result);
 
 if(isset($_POST['simpan'])){
-  $id_pemohon = htmlspecialchars($_POST['id_pemohon']);
+  $id_pemohon = $_POST['id_pemohon'];
   $kewarganegaraan = htmlspecialchars($_POST['kewarganegaraan']);
   $nama = htmlspecialchars($_POST['nama']);
   $nik = htmlspecialchars($_POST['nik']);
@@ -23,9 +23,40 @@ if(isset($_POST['simpan'])){
   $rw = htmlspecialchars($_POST['rw']);
   $alamat = htmlspecialchars($_POST['alamat']);
   $kode_pos = htmlspecialchars($_POST['kode_pos']);
-  $foto = htmlspecialchars($_POST['foto']);
+  $fotoLama = htmlspecialchars($_POST['fotoLama']);
+  $namaFile = $_FILES['foto']['name'];
+  $ukuranFile = $_FILES['foto']['size'];
+  $error = $_FILES['foto']['error'];
+  $tmpName = $_FILES['foto']['tmp_name'];
 
-  $sql = "UPDATE tb_pemohon SET kewarganegaraan = '$kewarganegaraan', nama = '$nama', nik = '$nik', no_hp = '$no_hp', pekerjaan = '$pekerjaan', tmpt_lahir = '$tmpt_lahir', tgl_lahir = '$tmgl_lahir', jk = '$jk', status = '$status', agama = '$agama', kelurahan = '$kelurahan', kecamatan = '$kecamatan', rt = '$rt', rw = '$rw', alamat = '$alamat', kode_pos = '$kode_pos', foto = '$foto' WHERE id_pemohon = '$id_pemohon'";
+  // cek apakah ada foto yang diupload
+  if($error === 4) {
+    echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
+  }
+
+  // cek apakah yang diupload adalah gambar
+  $ekstensi = ['jpg','jpeg','png'];
+  $ekstensiGambar = explode('.', $namaFile);
+  $ekstensiGambar = strtolower(end($ekstensiGambar));
+  if(!in_array($ekstensiGambar, $ekstensi)) {
+    echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
+  }
+
+  // cek ukuran
+  if($ukuranFile > 1000000) {
+    echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
+  }
+
+  move_uploaded_file($tmpName, 'assets/' . $namaFile);
+  // cek apakah edit foto baru
+  if($_FILES['foto']['error'] === 4) {
+    $foto = $fotoLama;
+  } else {
+    $foto = $namaFile;
+  }
+  
+
+  $sql = "UPDATE tb_pemohon SET kewarganegaraan = '$kewarganegaraan', nama = '$nama', nik = '$nik', no_hp = '$no_hp', pekerjaan = '$pekerjaan', tmpt_lahir = '$tmpt_lahir', tgl_lahir = '$tgl_lahir', jk = '$jk', status = '$status', agama = '$agama', kelurahan = '$kelurahan', kecamatan = '$kecamatan', rt = '$rt', rw = '$rw', alamat = '$alamat', kode_pos = '$kode_pos', foto = '$foto' WHERE id_pemohon = '$id_pemohon'";
   mysqli_query($conn, $sql);
 
   echo "<script>alert('Data Berhasil Disimpan');</script>";
@@ -49,27 +80,29 @@ if(isset($_POST['simpan'])){
               <div class="card-header text-danger"><h6>DATA PEMOHON</h6></div>
               <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
+                  <input type="hidden" id="id_user" name="id_user" value="<?php echo $data['id_user']; ?>" readonly>
+                  <input type="hidden" id="fotoLama" name="fotoLama" value="<?php echo $data['foto']; ?>" readonly>
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="kewarganegaraan">Kewarganegaraan</label>
-                      <input id="kewarganegaraan" type="text" class="form-control" name="kewarganegaraan">
+                      <input id="kewarganegaraan" type="text" class="form-control" name="kewarganegaraan" value="<?php echo $data['kewarganegaraan']; ?>">
                     </div>
                     <div class="form-group col-6">
                       <label for="nama">Nama Lengkap</label>
-                      <input id="nama" type="text" class="form-control" name="nama">
+                      <input id="nama" type="text" class="form-control" name="nama" value="<?php echo $data['nama']; ?>">
                     </div>
                   </div>
                   
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="nik">NIK</label>
-                      <input id="nik" type="number" class="form-control" name="nik">
+                      <input id="nik" type="number" class="form-control" name="nik" value="<?php echo $data['nik']; ?>">
                       <div class="invalid-feedback">
                     </div>
                   </div>
                     <div class="form-group col-6">
                       <label for="no_hp">No.Telepon</label>
-                      <input id="no_hp" type="number" class="form-control" name="no_hp">
+                      <input id="no_hp" type="number" class="form-control" name="no_hp" value="<?php echo $data['no_hp']; ?>">
                       <div class="invalid-feedback">
                       </div>
                     </div>
@@ -78,13 +111,13 @@ if(isset($_POST['simpan'])){
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="pekerjaan">Pekerjaan</label>
-                      <input id="pekerjaan" type="text" class="form-control" name="pekerjaan">
+                      <input id="pekerjaan" type="text" class="form-control" name="pekerjaan" value="<?php echo $data['pekerjaan']; ?>">
                       <div class="invalid-feedback">
                     </div>
                   </div>
                     <div class="form-group col-6">
                       <label for="tmpt_lahir">Tempat Lahir</label>
-                      <input id="tmpt_lahir" type="text" class="form-control" name="tmpt_lahir">
+                      <input id="tmpt_lahir" type="text" class="form-control" name="tmpt_lahir" value="<?php echo $data['tmpt_lahir']; ?>">
                       <div class="invalid-feedback">
                       </div>
                     </div>
@@ -93,18 +126,18 @@ if(isset($_POST['simpan'])){
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="tgl_lahir">Tanggal Lahir</label>
-                      <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir">
+                      <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir" value="<?php echo $data['tgl_lahir']; ?>">
                       <div class="invalid-feedback">
                     </div>
                   </div>
                     <div class="form-group col-6">
                       <label class="d-block" for="jk">Jenis Kelamin</label>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="jk" value="Laki-laki">
+                        <input class="form-check-input" type="radio" id="jk1" name="jk" value="Laki-laki" <?php echo ($data['jk'] == 'Laki-laki') ? " checked" : "" ?>>
                         <label class="form-check-label" for="jk">Laki-laki</label>
                       </div>
                       <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="jk" value="Perempuan">
+                        <input class="form-check-input" type="radio" id="jk2" name="jk" value="Perempuan" <?php echo ($data['jk'] == 'Perempuan') ? " checked" : "" ?>>
                         <label class="form-check-label" for="jk">Perempuan</label>
                       </div>
                     </div>
@@ -113,31 +146,32 @@ if(isset($_POST['simpan'])){
                   <div class="row">
                     <div class="form-group col-6">
                       <label>Status</label>
-                      <select class="form-control selectric">
-                        <option selected>--Pilih Status--</option>
-                        <option>Belum Kawin</option>
-                        <option>Sudah Kawin</option>
+                      <select class="form-control selectric" name="status">
+                        <option value="">--Pilih Status--</option>
+                        <option value="Belum Menikah" <?php echo ($data['status'] == 'Belum Menikah') ? " selected" : "" ?>>Belum Menikah</option>
+                        <option value="Sudah Menikah" <?php echo ($data['status'] == 'Sudah Menikah') ? " selected" : "" ?>>Sudah Menikah</option>
                       </select>
                     </div>
                     <div class="form-group col-6">
                       <label for="agama">Agama</label>
-                      <input id="agama" type="text" class="form-control" name="agama">
+                      <input id="agama" type="text" class="form-control" name="agama" value="<?php echo $data['agama'] ?>">
                       <div class="invalid-feedback">
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="form-group col-6">
-                      <label>Kelurahan</label>
-                      <select class="form-control selectric">
-                        <option selected>--Pilih Kelurahan--</option>
-                        <option>West Java</option>
+                      <label for="kelurahan">Kelurahan</label>
+                      <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>">
+                      <!-- <select class="form-control selectric">
+                        <option value="">--Pilih Kelurahan--</option>
+                        <option value="">West Java</option>
                         <option>East Java</option>
-                      </select>
+                      </select> -->
                     </div>
                     <div class="form-group col-6">
                       <label>Kecamatan</label>
-                      <select class="form-control selectric">
+                      <select class="form-control selectric" name="kecamatan">
                         <option selected>Banua Lawas</option>
                       </select>
                     </div>
@@ -146,13 +180,13 @@ if(isset($_POST['simpan'])){
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="rt">RT</label>
-                      <input id="rt" type="text" class="form-control" name="rt">
+                      <input id="rt" type="text" class="form-control" name="rt" value="<?php echo $data['rt'] ?>">
                       <div class="invalid-feedback">
                       </div>
                     </div>
                     <div class="form-group col-6">
                       <label for="rw">RW</label>
-                      <input id="rw" type="text" class="form-control" name="rw">
+                      <input id="rw" type="text" class="form-control" name="rw" value="<?php echo $data['rw'] ?>">
                       <div class="invalid-feedback">
                       </div>
                     </div>
@@ -160,20 +194,21 @@ if(isset($_POST['simpan'])){
 
                   <div class="row">
                     <div class="form-group col-6">
-                      <label>Alamat Domisili</label>
-                      <textarea class="form-control" name="alamat" id="alamat"></textarea>
+                      <label for="alamat">Alamat Domisili</label>
+                      <input id="alamat" type="text" class="form-control" name="alamat" value="<?php echo $data['alamat'] ?>">
                     </div>
                     <div class="form-group col-6">
                       <label for="kode_pos">Kode Pos</label>
-                      <input id="kode_pos" type="number" class="form-control" name="kode_pos">
+                      <input id="kode_pos" type="number" class="form-control" name="kode_pos" value="<?php echo $data['kode_pos'] ?>">
                       <div class="invalid-feedback">
                       </div>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label>Unggah Foto Profil</label>
+                    <label for="foto">Unggah Foto Profil</label>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile">
+                      <input type="file" class="custom-file-input" id="customFile" name="foto">
+                      <img src="assets/<?= $data['foto']; ?>" width="40"><br>
                       <label class="custom-file-label" for="customFile">Unggah Foto Profil</label>
                     </div>
                   </div>
