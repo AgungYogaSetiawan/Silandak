@@ -45,7 +45,21 @@
         <form class="form-inline ml-auto"></form>
         <ul class="navbar-nav navbar-right">
             <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+            <!-- merubah foto profil dari database -->
+            <?php
+            if($_SESSION["peran"] == "warga") {
+                $id = $_SESSION['id'];
+                $sql = "SELECT foto FROM tb_user WHERE id_user='$id'";
+                $result = mysqli_query($conn,$sql);
+                $data = mysqli_fetch_array($result);
+                $data = $data['foto'];
+            } else {
+                $data = "img/avatar/avatar-1.png";
+            }
+            
+            ?>
+            <!-- end kode -->
+            <img alt="image" src="assets/<?php echo $data; ?>" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block">Hi, <strong><?php echo $_SESSION['username'] ?></strong></div></a>
             <div class="dropdown-menu dropdown-menu-right">
                 <div class="dropdown-title">Anda login sebagai <?php echo $_SESSION['peran'] ?></div>

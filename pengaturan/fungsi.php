@@ -22,7 +22,7 @@ function registrasi($data){
   $password = password_hash($password, PASSWORD_DEFAULT);
 
   // tambahkan user ke database
-  mysqli_query($conn, "INSERT INTO tb_user VALUES('','$username','$password','$level')");
+  mysqli_query($conn, "INSERT INTO tb_user (id_user,username,password,level) VALUES('','$username','$password','$level')");
 
   return mysqli_affected_rows($conn);
 }

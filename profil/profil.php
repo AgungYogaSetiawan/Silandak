@@ -1,12 +1,11 @@
 <!-- kode php -->
 <?php
 $id = $_SESSION['id'];
-$sql = "SELECT * FROM tb_pemohon a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
+$sql = "SELECT * FROM tb_user WHERE id_user='$id'";
 $result = mysqli_query($conn,$sql);
 $data = mysqli_fetch_array($result);
 
 if(isset($_POST['simpan'])){
-  $id_pemohon = $_POST['id_pemohon'];
   $kewarganegaraan = htmlspecialchars($_POST['kewarganegaraan']);
   $nama = htmlspecialchars($_POST['nama']);
   $nik = htmlspecialchars($_POST['nik']);
@@ -29,34 +28,35 @@ if(isset($_POST['simpan'])){
   $error = $_FILES['foto']['error'];
   $tmpName = $_FILES['foto']['tmp_name'];
 
-  // cek apakah ada foto yang diupload
-  if($error === 4) {
-    echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
-  }
-
-  // cek apakah yang diupload adalah gambar
-  $ekstensi = ['jpg','jpeg','png'];
-  $ekstensiGambar = explode('.', $namaFile);
-  $ekstensiGambar = strtolower(end($ekstensiGambar));
-  if(!in_array($ekstensiGambar, $ekstensi)) {
-    echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
-  }
-
-  // cek ukuran
-  if($ukuranFile > 1000000) {
-    echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
-  }
+  
 
   move_uploaded_file($tmpName, 'assets/' . $namaFile);
   // cek apakah edit foto baru
   if($_FILES['foto']['error'] === 4) {
     $foto = $fotoLama;
   } else {
+    // cek apakah ada foto yang diupload
+    if($error === 4) {
+      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
+    }
+
+    // cek apakah yang diupload adalah gambar
+    $ekstensi = ['jpg','jpeg','png'];
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+    if(!in_array($ekstensiGambar, $ekstensi)) {
+      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
+    }
+
+    // cek ukuran
+    if($ukuranFile > 1000000) {
+      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
+    }
     $foto = $namaFile;
   }
   
 
-  $sql = "UPDATE tb_pemohon SET kewarganegaraan = '$kewarganegaraan', nama = '$nama', nik = '$nik', no_hp = '$no_hp', pekerjaan = '$pekerjaan', tmpt_lahir = '$tmpt_lahir', tgl_lahir = '$tgl_lahir', jk = '$jk', status = '$status', agama = '$agama', kelurahan = '$kelurahan', kecamatan = '$kecamatan', rt = '$rt', rw = '$rw', alamat = '$alamat', kode_pos = '$kode_pos', foto = '$foto' WHERE id_pemohon = '$id_pemohon'";
+  $sql = "UPDATE tb_user SET kewarganegaraan = '$kewarganegaraan', nama = '$nama', nik = '$nik', no_hp = '$no_hp', pekerjaan = '$pekerjaan', tmpt_lahir = '$tmpt_lahir', tgl_lahir = '$tgl_lahir', jk = '$jk', status = '$status', agama = '$agama', kelurahan = '$kelurahan', kecamatan = '$kecamatan', rt = '$rt', rw = '$rw', alamat = '$alamat', kode_pos = '$kode_pos', foto = '$foto' WHERE id_user = '$id'";
   mysqli_query($conn, $sql);
 
   echo "<script>alert('Data Berhasil Disimpan');</script>";
@@ -80,7 +80,6 @@ if(isset($_POST['simpan'])){
               <div class="card-header text-danger"><h6>DATA PEMOHON</h6></div>
               <div class="card-body">
                 <form method="POST" enctype="multipart/form-data">
-                  <input type="hidden" id="id_user" name="id_user" value="<?php echo $data['id_user']; ?>" readonly>
                   <input type="hidden" id="fotoLama" name="fotoLama" value="<?php echo $data['foto']; ?>" readonly>
                   <div class="row">
                     <div class="form-group col-6">
@@ -96,13 +95,13 @@ if(isset($_POST['simpan'])){
                   <div class="row">
                     <div class="form-group col-6">
                       <label for="nik">NIK</label>
-                      <input id="nik" type="number" class="form-control" name="nik" value="<?php echo $data['nik']; ?>">
+                      <input id="nik" type="text" class="form-control" name="nik" value="<?php echo $data['nik']; ?>">
                       <div class="invalid-feedback">
                     </div>
                   </div>
                     <div class="form-group col-6">
                       <label for="no_hp">No.Telepon</label>
-                      <input id="no_hp" type="number" class="form-control" name="no_hp" value="<?php echo $data['no_hp']; ?>">
+                      <input id="no_hp" type="text" class="form-control" name="no_hp" value="<?php echo $data['no_hp']; ?>">
                       <div class="invalid-feedback">
                       </div>
                     </div>
@@ -208,7 +207,7 @@ if(isset($_POST['simpan'])){
                     <label for="foto">Unggah Foto Profil</label>
                     <div class="custom-file">
                       <input type="file" class="custom-file-input" id="customFile" name="foto">
-                      <img src="assets/<?= $data['foto']; ?>" width="40"><br>
+                      <img src="assets/<?= $data['foto']; ?>" width="50"><br>
                       <label class="custom-file-label" for="customFile">Unggah Foto Profil</label>
                     </div>
                   </div>
