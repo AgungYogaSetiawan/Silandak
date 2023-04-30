@@ -38,9 +38,9 @@
                       <button type="submit" class="btn btn-success btn-md" name="ubah">
                         <i class="fas fa-save"></i> Simpan
                       </button>
-                      <a href="beranda" class="btn btn-danger btn-md">
+                      <button type="reset" class="btn btn-danger btn-md">
                         <i class="fas fa-window-close"></i> Batal
-                      </a>
+                      </button>
                     </div>
                 </form>
               </div>

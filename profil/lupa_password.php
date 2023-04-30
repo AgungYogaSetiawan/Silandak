@@ -34,6 +34,9 @@
                     <button type="submit" class="btn btn-success btn-md" name="ubah">
                       <i class="fas fa-paper-plane"></i> Kirim
                     </button>
+                    <button type="reset" class="btn btn-danger btn-md">
+                      <i class="fas fa-window-close"></i> Batal
+                    </button>
                   </div>
                 </form>
               </div>
