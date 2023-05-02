@@ -127,11 +127,9 @@ if(isset($_POST['kirim'])){
     // Simpan variabel array $data ke dalam session menggunakan fungsi $_SESSION.
     $_SESSION["data_temp"] = $data_temp;
 
-    // berikan notif berhasil dan arahkan ke beranda
-    if($_SESSION["data_temp"]){
-      echo "<script>alert('Pendaftaran Anda Gagal, Mohon ulangi kembali);</script>";
-      echo "<meta http-equiv='refresh' content='0;url=../index.php?page=beranda'>";
-    }
+    $_SESSION['message'] = "Data berhasil disimpan sementara";
+    header("Location: ../index.php?page=beranda");
+    exit;
     
     
 }
