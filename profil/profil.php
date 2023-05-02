@@ -206,9 +206,9 @@ if(isset($_POST['simpan'])){
                   <div class="form-group">
                     <label for="foto">Unggah Foto Profil</label>
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile" name="foto">
+                      <input type="file" class="form-control" name="foto">
                       <img src="assets/<?= $data['foto']; ?>" width="50"><br>
-                      <label class="custom-file-label" for="customFile">Unggah Foto Profil</label>
+                      <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                     </div>
                   </div>
 
