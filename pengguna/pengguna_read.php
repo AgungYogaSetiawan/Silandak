@@ -18,6 +18,23 @@
                     <th>No</th>
                     <th>Username</th>
                     <th>Level</th>
+                    <th>Kewarganegaraan</th>
+                    <th>Nama Lengkap</th>
+                    <th>NIK</th>
+                    <th>No Handphone</th>
+                    <th>Pekerjaan</th>
+                    <th>Tempat Lahir</th>
+                    <th>Tanggal Lahir</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Status</th>
+                    <th>Agama</th>
+                    <th>Kelurahan</th>
+                    <th>Kecamatan</th>
+                    <th>RT</th>
+                    <th>RW</th>
+                    <th>Alamat</th>
+                    <th>Kode Pos</th>
+                    <th>Foto Profil</th>
                     <th>Aksi</th>
                     </tr>
                 </thead>
@@ -30,6 +47,23 @@
                             <td><?php echo $no++ ?></td>
                             <td><?php echo $row["username"] ?></td>
                             <td><?php echo $row["level"] ?></td>
+                            <td><?php echo $row["kewarganegaraan"] ?></td>
+                            <td><?php echo $row["nama"] ?></td>
+                            <td><?php echo $row["nik"] ?></td>
+                            <td><?php echo $row["no_hp"] ?></td>
+                            <td><?php echo $row["pekerjaan"] ?></td>
+                            <td><?php echo $row["tmpt_lahir"] ?></td>
+                            <td><?php echo $row["tgl_lahir"] ?></td>
+                            <td><?php echo $row["jk"] ?></td>
+                            <td><?php echo $row["status"] ?></td>
+                            <td><?php echo $row["agama"] ?></td>
+                            <td><?php echo $row["kelurahan"] ?></td>
+                            <td><?php echo $row["kecamatan"] ?></td>
+                            <td><?php echo $row["rt"] ?></td>
+                            <td><?php echo $row["rw"] ?></td>
+                            <td><?php echo $row["alamat"] ?></td>
+                            <td><?php echo $row["kode_pos"] ?></td>
+                            <td><a href="assets/<?php echo $row["foto"] ?>" download><?php echo $row["foto"] ?></a></td>
                             <?php
                             echo "
                             <td>
