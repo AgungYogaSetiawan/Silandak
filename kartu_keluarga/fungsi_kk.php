@@ -3,7 +3,10 @@ session_start();
 $data_temp = array();
 include '../pengaturan/fungsi.php';
 if(isset($_POST['kirim'])){
+  date_default_timezone_set('Asia/Ujung_Pandang');
   $user_id = $_POST['user_id'];
+  $status = "Baru";
+  $tgl_waktu = date('d-M-Y');
   $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
   
   $file_buku_nikah = $_FILES['file_buku_nikah']['name'];
@@ -75,7 +78,7 @@ if(isset($_POST['kirim'])){
   }
 
     //Query input menginput data kedalam tabel kk
-    $sql = "INSERT INTO tb_kk (user_id,file_buku_nikah,file_ktp,file_ijazah,file_kk) VALUES ('$user_id','$file_buku_nikah','$file_ktp','$file_ijazah','$file_kk')";
+    $sql = "INSERT INTO tb_kk (user_id,file_buku_nikah,file_ktp,file_ijazah,file_kk,status_berkas,tgl) VALUES ('$user_id','$file_buku_nikah','$file_ktp','$file_ijazah','$file_kk','$status','$tgl_waktu')";
 
     //Mengeksekusi/menjalankan query diatas	
     $hasil = mysqli_query($conn,$sql);
