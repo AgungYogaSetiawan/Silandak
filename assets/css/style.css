@@ -133,6 +133,25 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
 .lead {
   line-height: 34px; }
 
+.badge-notif-new {
+  position:relative;
+}
+
+.badge-notif-new[data-badge-new]:after {
+  content:attr(data-badge-new);
+  position:absolute;
+  top:-1px;
+  right:-20px;
+  font-size:.7em;
+  background: #394EEA;
+  color:white;
+  width:18px;
+  height:18px;
+  text-align:center;
+  line-height:18px;
+  border-radius: 50%;
+}
+
 .badge-notif {
   position:relative;
 }
@@ -141,9 +160,9 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
   content:attr(data-badge);
   position:absolute;
   top:-1px;
-  right:-20px;
+  right:-40px;
   font-size:.7em;
-  background:#FF990D;
+  background: #FF990D;
   color:white;
   width:18px;
   height:18px;
@@ -160,28 +179,9 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
   content:attr(data-badge-done);
   position:absolute;
   top:-1px;
-  right:-40px;
-  font-size:.7em;
-  background: #35d35a;
-  color:white;
-  width:18px;
-  height:18px;
-  text-align:center;
-  line-height:18px;
-  border-radius: 50%;
-}
-
-.badge-notif-new {
-  position:relative;
-}
-
-.badge-notif-new[data-badge-new]:after {
-  content:attr(data-badge-new);
-  position:absolute;
-  top:-1px;
   right:-60px;
   font-size:.7em;
-  background: #394EEA;
+  background: #35d35a;
   color:white;
   width:18px;
   height:18px;

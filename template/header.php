@@ -147,8 +147,12 @@
                     $query = mysqli_query($conn, "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id' AND a.status_berkas='Selesai'");
                     //menampilkan data
                     $status_selesai = mysqli_num_rows($query);
+
+                    // menjumlahkan total permohonan
+                    $total_permohonan_baru = $status_baru;
+                    $total_permohonan_selesai = $status_selesai;
                     ?>
-                    <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-file"></i><span class="font-weight-bold">Permohonan <span class="badge-notif" data-badge="20"></span> <span class="badge-notif-done" data-badge-done="20"></span> <span class="badge-notif-new" data-badge-new="20"></span></span></a>
+                    <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-file"></i><span class="font-weight-bold">Permohonan <span class="badge-notif-new" data-badge-new="<?php echo $total_permohonan_baru ?>"></span> <span class="badge-notif" data-badge="<?php echo $total_permohonan_baru ?>"></span> <span class="badge-notif-done" data-badge-done="<?php echo $total_permohonan_selesai; ?>"></span></span></a>
                     <ul class="dropdown-menu">
                         <li class="nav-item"><a href="permohonankartukeluarga" class="nav-link">Kartu Keluarga <span class="badge badge-primary"><?php echo $status_baru ?></span> <span class="badge badge-warning"><?php echo $status_baru ?></span> <span class="badge badge-success"><?php echo $status_selesai ?></span></a></li>
                         <li class="nav-item"><a href="datakependudukan" class="nav-link">Akta Lahir <span class="badge badge-success">4</span></a></li>
