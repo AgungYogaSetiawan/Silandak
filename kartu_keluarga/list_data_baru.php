@@ -15,6 +15,7 @@
                   <table class="table table-striped" id="tabel">
                     <thead>
                       <tr>
+                        <th>No</th>
                         <th>Waktu</th>
                         <th>Nama</th>
                         <th>NIK</th>
@@ -25,15 +26,36 @@
                       </tr>
                     </thead>
                     <tbody>
+                      <?php
+                      $query = mysqli_query($conn, "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user");
+                      $no = 1;
+                      while($row = mysqli_fetch_array($query)) {
+                      ?>
                       <tr>
-                        <td>04 April 2023</td>
-                        <td>Create a mobile app</td>
-                        <td>6375494824923356</td>
-                        <td>142843737535</td>
-                        <td>086847343775</td>
-                        <td><div class="btn btn-primary btn-sm" disabled>Baru</div></td>
+                        <td><?php echo $no++ ?></td>
+                        <td><?php echo $row['tgl']; ?></td>
+                        <td><?php echo $row['nama']; ?></td>
+                        <td><?php echo $row['nik']; ?></td>
+                        <td><?php echo $row['nik']; ?></td>
+                        <td><?php echo $row['no_hp']; ?></td>
+                        <td>
+                        <?php
+                        if($row['status_berkas'] == 'Baru') {?>
+                          <div class="btn btn-primary" disabled><?php echo 'Baru' ?></div>
+                        <?php
+                        } else {?>
+                          <div class="btn btn-success" disabled><?php echo 'Selesai' ?></div>
+                        <?php
+                        }
+                        ?>
+                        </td>
                         <td><button class="btn btn-info" data-toggle="modal" data-target="#modalViewVerifKK"><i class="fas fa-search"></i></button></td>
                       </tr>
+                      <?php
+                      }
+                      ?>
+                        <!-- <td><div class="btn btn-success btn-sm">Completed</div></td>
+                        <td><button class="btn btn-info" data-toggle="modal" data-target="#modalLihatDataKK"><i class="fas fa-search"></i></button></td> -->
                     </tbody>
                   </table>
                 </div>
