@@ -50,7 +50,7 @@
                         }
                         ?>
                         </td>
-                        <td><button class="btn btn-info" data-toggle="modal" data-target="#modalLihatDataKK"><i class="fas fa-search"></i></button></td>
+                        <td><button class="btn btn-info btnview" data-toggle="modal" data-target="#modalLihatDataKK" data-id="<?php $row['id_kk']; ?>"><i class="fas fa-search"></i></button></td>
                       </tr>
                       <?php
                       }
@@ -68,3 +68,18 @@
     </div>
   </section>
 </div>
+<!-- <script>
+  $(function() {
+    $(".btnview").click(function() {
+      var id_kk = $(this).data('id_kk');
+      $("#user_id").val(id_kk);
+      $.ajax({
+        url: 'kartu_keluarga/kk_ajax.php?op=ambil_detail',
+        data: 'user_id=' + id_kk,
+        success: function(msg) {
+          $("#tabel").html(msg);
+        }
+      });
+    });
+  });
+</script> -->

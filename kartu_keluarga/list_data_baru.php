@@ -27,7 +27,7 @@
                     </thead>
                     <tbody>
                       <?php
-                      $query = mysqli_query($conn, "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user");
+                      $query = mysqli_query($conn, "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE status_berkas='Baru'");
                       $no = 1;
                       while($row = mysqli_fetch_array($query)) {
                       ?>
