@@ -150,5 +150,7 @@ if(isset($_POST['setuju'])) {
   if($hasil) {
     echo "<script>alert('Data berhasil disetujui!');</script>";
     echo "<meta http-equiv='refresh' content='0;url=../index.php?page=dataBaruKartuKeluarga'>";
+  } else {
+    echo "<script>alert('Terjadi kesalahan!');</script>";
   }
 }
