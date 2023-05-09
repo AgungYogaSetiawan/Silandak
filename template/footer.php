@@ -53,72 +53,7 @@
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#tabel').DataTable({
-            "language": {
-                "lengthMenu": "Tampilkan _MENU_ data per halaman",
-                "zeroRecords": "Data tidak ditemukan",
-                "info": "Menampilkan halaman _PAGE_ dari _PAGES_",
-                "infoEmpty": "Data belum tersedia",
-                "infoFiltered": "(filtered from _MAX_ total records)",
-                "search": "Cari:",
-                "paginate": {
-                    "previous": "Sebelumnya",
-                    "next": "Selanjutnya"
-                }
-            }
-        });
-    });
-</script>
-
-<!-- script show hide radio button -->
-<script>
-    const pengaduan = document.getElementById("pengaduan");
-    const aspirasi = document.getElementById("aspirasi");
-    const permintaan_informasi = document.getElementById("permintaan_informasi");
-    const radioButtons = document.getElementsByName("btnradio");
-
-    radioButtons.forEach((radio) => {
-        radio.addEventListener("change", () => {
-        if (radio.value === "pengaduan") {
-            pengaduan.style.display = "block";
-            aspirasi.style.display = "none";
-            permintaan_informasi.style.display = "none";
-        } else if (radio.value === "aspirasi") {
-            aspirasi.style.display = "block";
-            pengaduan.style.display = "none";
-            permintaan_informasi.style.display = "none";
-        } else if (radio.value === "permintaan_informasi") {
-            permintaan_informasi.style.display = "block";
-            pengaduan.style.display = "none";
-            aspirasi.style.display = "none";
-        }
-        });
-    });
-</script>
-
-<!-- script modal edit user -->
-<script type="text/javascript">
-
-$(document).ready(function(){
-    $('#edit_modal').on('show.bs.modal', function (e) {
-        var idx = $(e.relatedTarget).data('id');
-        //menggunakan fungsi ajax untuk pengambilan data
-            $.ajax({
-                type : 'post',
-                url : 'pengguna/pengguna_detail.php',
-                data :  'idx='+ idx,
-                success : function(data){
-                $('.hasil-data').html(data);//menampilkan data ke dalam modal
-                }
-            });
-        });
-});
-
-</script>
-<!-- end script modal edit user -->
-
+<script src="assets/js/function.js"></script>
 
 <!-- JS Libraies -->
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
