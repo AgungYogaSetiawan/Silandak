@@ -423,11 +423,8 @@
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-success btn-md" name="kirim">
-              <i class="fas fa-paper-plane"></i> Kirim
-            </button>
-            <button type="submit" class="btn btn-warning btn-md" name="simpan_sementara">
-              <i class="fas fa-save"></i> Simpan Sementara
+            <button type="submit" class="btn btn-success btn-md" name="ubah">
+              <i class="fas fa-save"></i> Simpan
             </button>
             <button type="reset" class="btn btn-danger btn-md">
               <i class="fas fa-window-close"></i> Batal
