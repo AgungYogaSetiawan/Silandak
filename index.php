@@ -44,6 +44,7 @@ switch ($page) {
     case 'edituser':
         include "pengguna/pengguna_edit.php";
         break;
+    // untuk kartu keluarga
     case 'permohonankartukeluarga':
         include "kartu_keluarga/permohonan_kk.php";
         break;
@@ -59,6 +60,26 @@ switch ($page) {
     case 'viewVerifKartuKeluarga':
         include "kartu_keluarga/view_verifikasi.php";
         break;
+    // end kartu keluarga
+
+    // akta kelahiran
+    case 'permohonanaktakelahiran':
+        include "akta_kelahiran/permohonan_akta_kelahiran.php";
+        break;
+    case 'dataBaruAktaKelahiran':
+        include "akta_kelahiran/list_data_baru.php";
+        break;
+    case 'dataProgressAktaKelahiran':
+        include "akta_kelahiran/list_data_progress.php";
+        break;
+    case 'dataSelesaiAktaKelahiran':
+        include "akta_kelahiran/list_data_selesai.php";
+        break;
+    case 'viewVerifAktaKelahiran':
+        include "akta_kelahiran/view_verifikasi.php";
+        break;
+    // end akta kelahiran
+
     case 'datakependudukan':
         include "laporan/data_kependudukan.php";
         break;

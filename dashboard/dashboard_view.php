@@ -18,7 +18,7 @@
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle='modal' data-target='#modalDaftarKK'><i class="fas fa-user-edit"></i> Daftar</button>
-              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratan'><i class="fas fa-scroll"></i> Persyaratan</button>
+              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratanKK'><i class="fas fa-scroll"></i> Persyaratan</button>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle='modal' data-target='#modalDaftarAktaLahir'><i class="fas fa-user-edit"></i> Daftar</button>
-              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratan'><i class="fas fa-scroll"></i> Persyaratan</button>
+              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratanAktaLahir'><i class="fas fa-scroll"></i> Persyaratan</button>
             </div>
           </div>
         </div>

@@ -4,6 +4,8 @@
 
 <?php include 'modal.php'; ?>
 <?php include 'kartu_keluarga/modalKK.php'; ?>
+<?php include 'akta_kelahiran/modal_akta_lahir.php'; ?>
+
 
 <footer class="main-footer">
     <div class="text-center">

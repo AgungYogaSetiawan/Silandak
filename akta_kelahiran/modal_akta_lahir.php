@@ -1,5 +1,5 @@
 <!-- Modal persyaratan -->
-<div class="modal fade" id="modalPersyaratan" tabindex="-1" role="dialog" aria-labelledby="modalPersyaratanLabel" aria-hidden="true">
+<div class="modal fade" id="modalPersyaratanAktaLahir" tabindex="-1" role="dialog" aria-labelledby="modalPersyaratanLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,9 +13,10 @@
             <div class="author-box">
             <ol>
               <li>Mengisi formulir data pemohon</li>
-              <li>Siapkan berkas persyaratan dengan hasil foto/scan buku nikah</li>
-              <li>Siapkan berkas persyaratan dengan hasil foto/scan ijazah pendidikan terakhir/sk kerja (jika ada)</li>
-              <li>Siapkan berkas persyaratan dengan hasil foto/scan kartu tanda pendudukan</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan permohonan akta lahir</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan surat keterangan lahir</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan buku nikah orang tua/SPTJM (misal nikah siri)</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan kartu keluarga</li>
             </ol>
             </div>
         </div>
@@ -27,13 +28,13 @@
 
 
 
-<!-- KARTU KELUARGA -->
-<!-- Modal daftar kartu keluarga -->
-<div class="modal fade" id="modalDaftarKK" tabindex="-1" role="dialog" aria-labelledby="modalDaftarKKLabel" aria-hidden="true">
+<!-- AKTA LAHIR -->
+<!-- modal daftar akta lahir -->
+<div class="modal fade" id="modalDaftarAktaLahir" tabindex="-1" role="dialog" aria-labelledby="modalDaftarAktaLahirLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalDaftarKKLabel">Form Pendaftaran Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalDaftarAktaLahirLabel">Form Pendaftaran Akta Lahir</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -41,7 +42,7 @@
       <hr>
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
-        <form method="POST" action="kartu_keluarga/fungsi_kk.php" enctype="multipart/form-data" role="form">
+        <form method="POST" action="akta_kelahiran/fungsi_akta_lahir.php" enctype="multipart/form-data" role="form">
           <?php
           $id = $_SESSION['id'];
           $sql = "SELECT * FROM tb_user WHERE id_user='$id'";
@@ -174,36 +175,36 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
+            <label>Upload Foto/Scan Surat Permohonan Akta Lahir</label>
+            <div class="custom-file">
+              <input type="file" class="form-control" name="file_akta_lahir">
+              <?php
+              if (isset($data_temp['file_akta_lahir'])) {
+                echo '<p>File yang diunggah: ' . $data_temp['file_akta_lahir'] . '</p>';
+              }
+              ?>
+              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Surat Keterangan Lahir</label>
+            <div class="custom-file">
+              <input type="file" class="form-control" name="file_ket_lahir">
+              <?php
+              if (isset($data_temp['file_ket_lahir'])) {
+                echo '<p>File yang diunggah: ' . $data_temp['file_ket_lahir'] . '</p>';
+              }
+              ?>
+              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Buku Nikah Orang Tua/SPTJM (misal nikah siri)</label>
             <div class="custom-file">
               <input type="file" class="form-control" name="file_buku_nikah">
               <?php
               if (isset($data_temp['file_buku_nikah'])) {
                 echo '<p>File yang diunggah: ' . $data_temp['file_buku_nikah'] . '</p>';
-              }
-              ?>
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ktp">
-              <?php
-              if (isset($data_temp['file_ktp'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_ktp'] . '</p>';
-              }
-              ?>
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ijazah">
-              <?php
-              if (isset($data_temp['file_ijazah'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_ijazah'] . '</p>';
               }
               ?>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
@@ -237,14 +238,15 @@
     </div>
   </div>
 </div>
-<!-- end modal daftar kartu keluarga -->
+<!-- end modal daftar akta lahir -->
+<!-- END AKTA LAHIR -->
 
 <!-- Modal lihat data kartu keluarga -->
-<div class="modal fade" id="modalLihatDataKK" tabindex="-1" role="dialog" aria-labelledby="modalLihatDataKKLabel" aria-hidden="true">
+<div class="modal fade" id="modalLihatDataAktaLahir" tabindex="-1" role="dialog" aria-labelledby="modalLihatDataAktaLahirLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLihatDataKKLabel">Permohonan Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalLihatDataAktaLahirLabel">Permohonan Kartu Keluarga</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -255,7 +257,7 @@
         <form method="POST">
           <?php
           $id = $_SESSION['id'];
-          $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
+          $sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
           $result = mysqli_query($conn,$sql);
           $data = mysqli_fetch_array($result);
           ?>
@@ -385,29 +387,29 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
+            <label>Upload Foto/Scan Permohonan Akta Lahir</label>
+            <div class="custom-file">
+              <input type="file" class="form-control" name="file_akta_lahir">
+              <p class="text-dark">File yang diunggah: <?php echo $data['file_akta_lahir']; ?></p>
+              <img src="assets/<?php echo $data['file_akta_lahir'] ?>" width="100">
+              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Surat Keterangan Lahir</label>
+            <div class="custom-file">
+              <input type="file" class="form-control" name="file_ket_lahir">
+              <p class="text-dark">File yang diunggah: <?php echo $data['file_ket_lahir']; ?></p>
+              <img src="assets/<?php echo $data['file_ket_lahir'] ?>" width="100">
+              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Buku Nikah Orang Tua/SPTJM (misal nikah siri)</label>
             <div class="custom-file">
               <input type="file" class="form-control" name="file_buku_nikah">
               <p class="text-dark">File yang diunggah: <?php echo $data['file_buku_nikah']; ?></p>
               <img src="assets/<?php echo $data['file_buku_nikah'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ktp">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ktp']; ?></p>
-              <img src="assets/<?php echo $data['file_ktp'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ijazah">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ijazah']; ?></p>
-              <img src="assets/<?php echo $data['file_ijazah'] ?>" width="100">
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -439,11 +441,11 @@
 <!-- end modal lihat kartu keluarga -->
 
 <!-- Modal view verif baru kartu keluarga -->
-<div class="modal fade" id="modalViewVerifKK" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifKKLabel" aria-hidden="true">
+<div class="modal fade" id="modalViewVerifAktaLahir" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifAktaLahirLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalViewVerifKKLabel">Form Pendaftaran Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalViewVerifAktaLahirLabel">Form Pendaftaran Kartu Keluarga</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -674,11 +676,11 @@
 <!-- end modal view verif baru kartu keluarga -->
 
 <!-- Modal view data progress kartu keluarga -->
-<div class="modal fade" id="modalViewVerifProgressKK" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifProgressKKLabel" aria-hidden="true">
+<div class="modal fade" id="modalViewVerifProgressAktaLahir" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifProgressAktaLahirLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalViewVerifProgressKKLabel">Form Pendaftaran Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalViewVerifProgressAktaLahirLabel">Form Pendaftaran Kartu Keluarga</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -857,11 +859,11 @@
 <!-- end modal view data progress kartu keluarga -->
 
 <!-- Modal view data selesai kartu keluarga -->
-<div class="modal fade" id="modalViewVerifSelesaiKK" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifSelesaiKKLabel" aria-hidden="true">
+<div class="modal fade" id="modalViewVerifSelesaiAktaLahir" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifSelesaiAktaLahirLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalViewVerifSelesaiKKLabel">Form Pendaftaran Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalViewVerifSelesaiAktaLahirLabel">Form Pendaftaran Kartu Keluarga</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
