@@ -442,7 +442,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalViewVerifAktaLahirLabel">Form Pendaftaran Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalViewVerifAktaLahirLabel">Form Pendaftaran Akta Kelahiran</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -451,11 +451,11 @@
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
           <?php
-          $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+          $sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user";
           $result = mysqli_query($conn,$sql);
           $data = mysqli_fetch_array($result);
           ?>
-          <form method="post" action="kartu_keluarga/fungsi_kk.php" enctype="multipart/form-data" role="form">
+          <form method="post" action="akta_kelahiran/fungsi_akta_lahir.php" enctype="multipart/form-data" role="form">
           <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_kk']; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
@@ -582,29 +582,29 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
+            <label>Upload Foto/Scan Permohonan Akta Lahir</label>
+            <div class="custom-file">
+              <input type="file" class="form-control" name="file_akta_lahir">
+              <p class="text-dark">File yang diunggah: <?php echo $data['file_akta_lahir']; ?></p>
+              <img src="assets/<?php echo $data['file_akta_lahir'] ?>" width="100">
+              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Surat Keterangan Lahir</label>
+            <div class="custom-file">
+              <input type="file" class="form-control" name="file_ket_lahir">
+              <p class="text-dark">File yang diunggah: <?php echo $data['file_ket_lahir']; ?></p>
+              <img src="assets/<?php echo $data['file_ket_lahir'] ?>" width="100">
+              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Buku Nikah Orang Tua/SPTJM (misal nikah siri)</label>
             <div class="custom-file">
               <input type="file" class="form-control" name="file_buku_nikah">
               <p class="text-dark">File yang diunggah: <?php echo $data['file_buku_nikah']; ?></p>
               <img src="assets/<?php echo $data['file_buku_nikah'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ktp">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ktp']; ?></p>
-              <img src="assets/<?php echo $data['file_ktp'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ijazah">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ijazah']; ?></p>
-              <img src="assets/<?php echo $data['file_ijazah'] ?>" width="100">
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -638,7 +638,7 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
           <?php
-          $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+          $sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user";
           $result = mysqli_query($conn,$sql);
           echo "<table class='table table-striped' id='tabel'>";
           echo "<thead>";

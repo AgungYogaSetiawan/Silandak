@@ -144,7 +144,7 @@ if(isset($_POST['setuju'])) {
   $keterangan = htmlspecialchars($_POST['keterangan']);
   $status_berkas = "Selesai";
   
-  $sql = "UPDATE tb_akta lahir SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_lahir = '$id'";
+  $sql = "UPDATE tb_akta_lahir SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_lahir = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
