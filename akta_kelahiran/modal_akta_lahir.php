@@ -254,7 +254,7 @@
       <hr>
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
-        <form method="POST">
+        <form method="POST" action="akta_kelahiran/fungsi_akta_lahir.php" enctype="multipart/form-data" role="form">
           <?php
           $id = $_SESSION['id'];
           $sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
@@ -262,6 +262,10 @@
           $data = mysqli_fetch_array($result);
           ?>
           <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_user']; ?>" readonly>
+          <input type="hidden" id="fotoLamaAL" name="fotoLamaAL" value="<?php echo $data['file_akta_lahir']; ?>" readonly>
+          <input type="hidden" id="fotoLamaKL" name="fotoLamaKL" value="<?php echo $data['file_ket_lahir']; ?>" readonly>
+          <input type="hidden" id="fotoLamaBK" name="fotoLamaBK" value="<?php echo $data['file_buku_nikah']; ?>" readonly>
+          <input type="hidden" id="fotoLamaKK" name="fotoLamaKK" value="<?php echo $data['file_kk']; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
               <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -456,7 +460,7 @@
           $data = mysqli_fetch_array($result);
           ?>
           <form method="post" action="akta_kelahiran/fungsi_akta_lahir.php" enctype="multipart/form-data" role="form">
-          <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_kk']; ?>" readonly>
+          <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_lahir']; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
               <label for="kewarganegaraan">Kewarganegaraan</label>

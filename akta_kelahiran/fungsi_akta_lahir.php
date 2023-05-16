@@ -157,12 +157,76 @@ if(isset($_POST['setuju'])) {
 
 
 // koding ubah data
-$sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+$sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user";
 $result = mysqli_query($conn,$sql);
 $data = mysqli_fetch_array($result);
 $baru = $data['status_berkas'];
-$id = $data['id_kk'];
+$id = $data['id_lahir'];
 if(isset($_POST['ubah']) and $baru === 'Baru') {
+  // foto akta lahir
+  $fotoLamaAL = htmlspecialchars($_POST['fotoLamaAL']);
+  $namaFileAL = $_FILES['file_akta_lahir']['name'];
+  $ukuranFileAL = $_FILES['file_akta_lahir']['size'];
+  $errorAL = $_FILES['file_akta_lahir']['error'];
+  $tmpNameAL = $_FILES['file_akta_lahir']['tmp_name'];
+
+  move_uploaded_file($tmpNameAL, '../assets/' . $namaFileAL);
+  // cek apakah edit foto baru
+  if($_FILES['file_akta_lahir']['error'] === 4) {
+    $fotoAL = $fotoLamaAL;
+  } else {
+    // cek apakah ada foto yang diupload
+    if($errorAL === 4) {
+      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
+    }
+
+    // cek apakah yang diupload adalah gambar
+    $ekstensiAL = ['jpg','jpeg','png'];
+    $ekstensiGambarAL = explode('.', $namaFileAL);
+    $ekstensiGambarAL = strtolower(end($ekstensiGambarAL));
+    if(!in_array($ekstensiGambarAL, $ekstensiAL)) {
+      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
+    }
+
+    // cek ukuran
+    if($ukuranFileAL > 1000000) {
+      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
+    }
+    $fotoAL = $namaFileAL;
+  }
+
+  // foto ket lahir
+  $fotoLamaKL = htmlspecialchars($_POST['fotoLamaKL']);
+  $namaFileKL = $_FILES['file_ket_lahir']['name'];
+  $ukuranFileKL = $_FILES['file_ket_lahir']['size'];
+  $errorKL = $_FILES['file_ket_lahir']['error'];
+  $tmpNameKL = $_FILES['file_ket_lahir']['tmp_name'];
+
+  move_uploaded_file($tmpNameKL, '../assets/' . $namaFileKL);
+  // cek apakah edit foto baru
+  if($_FILES['file_ket_lahir']['error'] === 4) {
+    $fotoKL = $fotoLamaKL;
+  } else {
+    // cek apakah ada foto yang diupload
+    if($errorKL === 4) {
+      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
+    }
+
+    // cek apakah yang diupload adalah gambar
+    $ekstensiKL = ['jpg','jpeg','png'];
+    $ekstensiGambarKL = explode('.', $namaFileKL);
+    $ekstensiGambarKL = strtolower(end($ekstensiGambarKL));
+    if(!in_array($ekstensiGambarKL, $ekstensiKL)) {
+      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
+    }
+
+    // cek ukuran
+    if($ukuranFileKL > 1000000) {
+      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
+    }
+    $fotoKL = $namaFileKL;
+  }
+
   // foto buku nikah
   $fotoLamaBK = htmlspecialchars($_POST['fotoLamaBK']);
   $namaFileBK = $_FILES['file_buku_nikah']['name'];
@@ -195,71 +259,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     $fotoBK = $namaFileBK;
   }
 
-  // foto IJAZAH
-  $fotoLamaIJ = htmlspecialchars($_POST['fotoLamaIJ']);
-  $namaFileIJ = $_FILES['file_ijazah']['name'];
-  $ukuranFileIJ = $_FILES['file_ijazah']['size'];
-  $errorIJ = $_FILES['file_ijazah']['error'];
-  $tmpNameIJ = $_FILES['file_ijazah']['tmp_name'];
-
-  move_uploaded_file($tmpNameIJ, '../assets/' . $namaFileIJ);
-  // cek apakah edit foto baru
-  if($_FILES['file_ijazah']['error'] === 4) {
-    $fotoIJ = $fotoLamaIJ;
-  } else {
-    // cek apakah ada foto yang diupload
-    if($errorIJ === 4) {
-      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
-    }
-
-    // cek apakah yang diupload adalah gambar
-    $ekstensiIJ = ['jpg','jpeg','png'];
-    $ekstensiGambarIJ = explode('.', $namaFileIJ);
-    $ekstensiGambarIJ = strtolower(end($ekstensiGambarIJ));
-    if(!in_array($ekstensiGambarIJ, $ekstensiIJ)) {
-      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
-    }
-
-    // cek ukuran
-    if($ukuranFileIJ > 1000000) {
-      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
-    }
-    $fotoIJ = $namaFileIJ;
-  }
-
-  // foto KTP
-  $fotoLamaKTP = htmlspecialchars($_POST['fotoLamaKTP']);
-  $namaFileKTP = $_FILES['file_ktp']['name'];
-  $ukuranFileKTP = $_FILES['file_ktp']['size'];
-  $errorKTP = $_FILES['file_ktp']['error'];
-  $tmpNameKTP = $_FILES['file_ktp']['tmp_name'];
-
-  move_uploaded_file($tmpNameKTP, '../assets/' . $namaFileKTP);
-  // cek apakah edit foto baru
-  if($_FILES['file_ktp']['error'] === 4) {
-    $fotoKTP = $fotoLamaKTP;
-  } else {
-    // cek apakah ada foto yang diupload
-    if($errorKTP === 4) {
-      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
-    }
-
-    // cek apakah yang diupload adalah gambar
-    $ekstensiKTP = ['jpg','jpeg','png'];
-    $ekstensiGambarKTP = explode('.', $namaFileKTP);
-    $ekstensiGambarKTP = strtolower(end($ekstensiGambarKTP));
-    if(!in_array($ekstensiGambarKTP, $ekstensiKTP)) {
-      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
-    }
-
-    // cek ukuran
-    if($ukuranFileKTP > 1000000) {
-      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
-    }
-    $fotoKTP = $namaFileKTP;
-  }
-
-  // foto KK
+  // foto kk
   $fotoLamaKK = htmlspecialchars($_POST['fotoLamaKK']);
   $namaFileKK = $_FILES['file_kk']['name'];
   $ukuranFileKK = $_FILES['file_kk']['size'];
@@ -291,17 +291,17 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     $fotoKK = $namaFileKK;
   }
 
-  $sql = "UPDATE tb_kk SET file_buku_nikah = '$fotoBK', file_ijazah = '$fotoIJ', file_ktp = '$fotoKTP', file_kk = '$fotoKK' WHERE id_kk = '$id'";
+  $sql = "UPDATE tb_akta_lahir SET file_akta_lahir = '$fotoAL', file_ket_lahir = '$fotoKL', file_buku_nikah = '$fotoBK', file_kk = '$fotoKK' WHERE id_lahir = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
     echo "<script>alert('Data berhasil diubah!');</script>";
-    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonankartukeluarga'>";
+    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonanaktakelahiran'>";
   } else {
     echo "<script>alert('Terjadi kesalahan!');</script>";
-    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonankartukeluarga'>";
+    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonanaktakelahiran'>";
   }
 } else if(isset($_POST['ubah']) and $baru === 'Selesai') {
   echo "<script>alert('Data sudah di acc, tidak bisa diubah!');</script>";
-  echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonankartukeluarga'>";
+  echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonanaktakelahiran'>";
 }
