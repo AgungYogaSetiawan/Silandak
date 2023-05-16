@@ -239,10 +239,10 @@ $total_selesai_admin = $status_selesai_admin + $status_selesai_admin_lahir;
                 </li>
                 <!-- list data baru -->
                 <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-folder-plus"></i><span class="font-weight-bold">Data Baru <span class="badge-notif-new" data-badge-new="<?= $total_permohonan_baru_admin ?>"></span></a>
+                    <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-folder-plus"></i><span class="font-weight-bold">Data Baru <span class="badge-notif-new" data-badge-new="<?= $total_baru_admin ?>"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"><a href='dataBaruKartuKeluarga' class='nav-link text-dark'>Kartu Keluarga <span class="badge badge-primary"><?= $status_baru_admin ?></span> <span class="badge badge-warning"><?= $status_baru_admin ?></span> <span class="badge badge-success"><?= $status_selesai_admin ?></span></a></li>
-                        <li class="dropdown-item"><a href="dataBaruAktaKelahiran" class="nav-link text-dark">Akta Lahir <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
+                        <li class="dropdown-item"><a href="dataBaruAktaKelahiran" class="nav-link text-dark">Akta Lahir <span class="badge badge-primary"><?= $status_baru_admin_lahir ?></span> <span class="badge badge-warning"><?= $status_baru_admin_lahir ?></span> <span class="badge badge-success"><?= $status_selesai_admin_lahir ?></span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Surat Pindah <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Akta Kematian <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Surat Pindah Datang <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
@@ -253,10 +253,10 @@ $total_selesai_admin = $status_selesai_admin + $status_selesai_admin_lahir;
 
                 <!-- data in progress -->
                 <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-tasks"></i><span class="font-weight-bold">In Progress <span class="badge-notif" data-badge="<?= $total_permohonan_baru_admin ?>"></span></a>
+                    <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-tasks"></i><span class="font-weight-bold">In Progress <span class="badge-notif" data-badge="<?= $total_baru_admin ?>"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"><a href='dataProgressKartuKeluarga' class='nav-link text-dark'>Kartu Keluarga <span class='badge badge-primary'><?= $status_baru_admin ?></span> <span class='badge badge-warning'><?= $status_baru_admin ?></span> <span class='badge badge-success'><?= $status_selesai_admin ?></span></a></li>
-                        <li class="dropdown-item"><a href="dataProgressAktaKelahiran" class="nav-link text-dark ">Akta Lahir <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
+                        <li class="dropdown-item"><a href="dataProgressAktaKelahiran" class="nav-link text-dark ">Akta Lahir <span class="badge badge-primary"><?= $status_baru_admin_lahir ?></span> <span class="badge badge-warning"><?= $status_baru_admin_lahir ?></span> <span class="badge badge-success"><?= $status_selesai_admin_lahir ?></span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark ">Surat Pindah <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark ">Akta Kematian <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark ">Surat Pindah Datang <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
@@ -267,10 +267,10 @@ $total_selesai_admin = $status_selesai_admin + $status_selesai_admin_lahir;
 
                 <!-- data selesai -->
                 <li class="nav-item dropdown">
-                    <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-clipboard-check"></i><span class="font-weight-bold">Data Selesai <span class="badge-notif-done" data-badge-done="<?= $total_permohonan_selesai_admin ?>"></span></a>
+                    <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i class="fas fa-clipboard-check"></i><span class="font-weight-bold">Data Selesai <span class="badge-notif-done" data-badge-done="<?= $total_selesai_admin ?>"></span></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item"><a href='dataSelesaiKartuKeluarga' class='nav-link text-dark'>Kartu Keluarga <span class="badge badge-primary"><?= $status_baru_admin ?></span> <span class="badge badge-warning"><?= $status_baru_admin ?></span> <span class="badge badge-success"><?= $status_selesai_admin ?></span></a></li>
-                        <li class="dropdown-item"><a href="dataSelesaiAktaKelahiran" class="nav-link text-dark">Akta Lahir <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
+                        <li class="dropdown-item"><a href="dataSelesaiAktaKelahiran" class="nav-link text-dark">Akta Lahir <span class="badge badge-primary"><?= $status_baru_admin_lahir ?></span> <span class="badge badge-warning"><?= $status_baru_admin_lahir ?></span> <span class="badge badge-success"><?= $status_selesai_admin_lahir ?></span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Surat Pindah <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Akta Kematian <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
                         <li class="dropdown-item"><a href="datakependudukan" class="nav-link text-dark">Surat Pindah Datang <span class="badge badge-primary">4</span> <span class="badge badge-warning">4</span> <span class="badge badge-success">4</span></a></li>
