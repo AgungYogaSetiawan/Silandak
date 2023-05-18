@@ -80,6 +80,24 @@ switch ($page) {
         break;
     // end akta kelahiran
 
+    // surat pindah
+    case 'permohonansuratpindah':
+        include "surat_pindah/permohonan_sp.php";
+        break;
+    case 'dataBaruSuratPindah':
+        include "surat_pindah/list_data_baru.php";
+        break;
+    case 'dataProgressSuratPindah':
+        include "surat_pindah/list_data_progress.php";
+        break;
+    case 'dataSelesaiSuratPindah':
+        include "surat_pindah/list_data_selesai.php";
+        break;
+    case 'viewVerifSuratPindah':
+        include "surat_pindah/view_verifikasi.php";
+        break;
+    // end surat pindah
+
     case 'datakependudukan':
         include "laporan/data_kependudukan.php";
         break;

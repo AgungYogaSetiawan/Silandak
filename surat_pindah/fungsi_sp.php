@@ -9,11 +9,17 @@ if(isset($_POST['kirim'])){
   $tgl_waktu = date('d-M-Y');
   $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
   
-  $file_buku_nikah = $_FILES['file_buku_nikah']['name'];
-  $pdf_buku_nikah = explode('.', $file_buku_nikah);
-  $ekstensi_buku_nikah = strtolower(end($pdf_buku_nikah));
-  $ukuran_buku_nikah = $_FILES['file_buku_nikah']['size'];
-  $file_tmp_buku_nikah = $_FILES['file_buku_nikah']['tmp_name'];
+  $file_kp = $_FILES['file_kp']['name'];
+  $pdf_kp = explode('.', $file_kp);
+  $ekstensi_kp = strtolower(end($pdf_kp));
+  $ukuran_kp = $_FILES['file_kp']['size'];
+  $file_tmp_kp = $_FILES['file_kp']['tmp_name'];
+
+  $file_kk = $_FILES['file_kk']['name'];
+  $pdf_kk = explode('.', $file_kk);
+  $ekstensi_kk = strtolower(end($pdf_kk));
+  $ukuran_kk = $_FILES['file_kk']['size'];
+  $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
   
   $file_ktp = $_FILES['file_ktp']['name'];
   $pdf_ktp = explode('.', $file_ktp);
@@ -21,22 +27,10 @@ if(isset($_POST['kirim'])){
   $ukuran_ktp = $_FILES['file_ktp']['size'];
   $file_tmp_ktp = $_FILES['file_ktp']['tmp_name'];
 
-  $file_ijazah = $_FILES['file_ijazah']['name'];
-  $pdf_ijazah = explode('.', $file_ijazah);
-  $ekstensi_ijazah = strtolower(end($pdf_ijazah));
-  $ukuran_ijazah = $_FILES['file_ijazah']['size'];
-  $file_tmp_ijazah = $_FILES['file_ijazah']['tmp_name'];
-
-  $file_kk = $_FILES['file_kk']['name'];
-  $pdf_kk = explode('.', $file_kk);
-  $ekstensi_kk = strtolower(end($pdf_kk));
-  $ukuran_kk = $_FILES['file_kk']['size'];
-  $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
-
-  // koding cek upload file buku_nikah
-  if(in_array($ekstensi_buku_nikah, $ekstensi_diperbolehkan) === true){
-    if($ukuran_buku_nikah < 1044070){ 
-      move_uploaded_file($file_tmp_buku_nikah, '../assets/'.$file_buku_nikah);
+  // koding cek upload file ket pindah
+  if(in_array($ekstensi_kp, $ekstensi_diperbolehkan) === true){
+    if($ukuran_kp < 1044070){ 
+      move_uploaded_file($file_tmp_kp, '../assets/'.$file_kp);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
     }
@@ -48,17 +42,6 @@ if(isset($_POST['kirim'])){
   if(in_array($ekstensi_ktp, $ekstensi_diperbolehkan) === true){
     if($ukuran_ktp < 1044070){ 
       move_uploaded_file($file_tmp_ktp, '../assets/'.$file_ktp);
-    } else{
-        echo 'UKURAN FILE TERLALU BESAR!';
-    }
-  } else{
-      echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN!';
-  }
-
-  // koding cek upload file ijazah
-  if(in_array($ekstensi_ijazah, $ekstensi_diperbolehkan) === true){
-    if($ukuran_ijazah < 1044070){ 
-      move_uploaded_file($file_tmp_ijazah, '../assets/'.$file_ijazah);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
     }
@@ -78,7 +61,7 @@ if(isset($_POST['kirim'])){
   }
 
     //Query input menginput data kedalam tabel kk
-    $sql = "INSERT INTO tb_kk (user_id,file_buku_nikah,file_ktp,file_ijazah,file_kk,status_berkas,tgl) VALUES ('$user_id','$file_buku_nikah','$file_ktp','$file_ijazah','$file_kk','$status','$tgl_waktu')";
+    $sql = "INSERT INTO tb_surat_pindah (user_id,file_kp,file_kk,file_ktp,status_berkas,tgl) VALUES ('$user_id','$file_kp','$file_kk','$file_ktp','$status','$tgl_waktu')";
 
     //Mengeksekusi/menjalankan query diatas	
     $hasil = mysqli_query($conn,$sql);
@@ -96,11 +79,17 @@ if(isset($_POST['kirim'])){
     $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
     
-    $file_buku_nikah = $_FILES['file_buku_nikah']['name'];
-    $pdf_buku_nikah = explode('.', $file_buku_nikah);
-    $ekstensi_buku_nikah = strtolower(end($pdf_buku_nikah));
-    $ukuran_buku_nikah = $_FILES['file_buku_nikah']['size'];
-    $file_tmp_buku_nikah = $_FILES['file_buku_nikah']['tmp_name'];
+    $file_kp = $_FILES['file_kp']['name'];
+    $pdf_kp = explode('.', $file_kp);
+    $ekstensi_kp = strtolower(end($pdf_kp));
+    $ukuran_kp = $_FILES['file_kp']['size'];
+    $file_tmp_kp = $_FILES['file_kp']['tmp_name'];
+
+    $file_kk = $_FILES['file_kk']['name'];
+    $pdf_kk = explode('.', $file_kk);
+    $ekstensi_kk = strtolower(end($pdf_kk));
+    $ukuran_kk = $_FILES['file_kk']['size'];
+    $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
     
     $file_ktp = $_FILES['file_ktp']['name'];
     $pdf_ktp = explode('.', $file_ktp);
@@ -108,23 +97,10 @@ if(isset($_POST['kirim'])){
     $ukuran_ktp = $_FILES['file_ktp']['size'];
     $file_tmp_ktp = $_FILES['file_ktp']['tmp_name'];
 
-    $file_ijazah = $_FILES['file_ijazah']['name'];
-    $pdf_ijazah = explode('.', $file_ijazah);
-    $ekstensi_ijazah = strtolower(end($pdf_ijazah));
-    $ukuran_ijazah = $_FILES['file_ijazah']['size'];
-    $file_tmp_ijazah = $_FILES['file_ijazah']['tmp_name'];
-
-    $file_kk = $_FILES['file_kk']['name'];
-    $pdf_kk = explode('.', $file_kk);
-    $ekstensi_kk = strtolower(end($pdf_kk));
-    $ukuran_kk = $_FILES['file_kk']['size'];
-    $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
-
     // simpan data ke array
     $data_temp["user_id"] = $user_id;
-    $data_temp["file_buku_nikah"] = $file_buku_nikah;
+    $data_temp["file_kp"] = $file_kp;
     $data_temp["file_ktp"] = $file_ktp;
-    $data_temp["file_ijazah"] = $file_ijazah;
     $data_temp["file_kk"] = $file_kk;
 
     // Simpan variabel array $data ke dalam session menggunakan fungsi $_SESSION.
@@ -137,14 +113,14 @@ if(isset($_POST['kirim'])){
 } 
 
 if(isset($_POST['setuju'])) {
-  $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+  $sql = "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user";
   $result = mysqli_query($conn,$sql);
   $data = mysqli_fetch_array($result);
-  $id = $data['id_kk'];
+  $id = $data['id_sp'];
   $keterangan = htmlspecialchars($_POST['keterangan']);
   $status_berkas = "Selesai";
   
-  $sql = "UPDATE tb_kk SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_kk = '$id'";
+  $sql = "UPDATE tb_surat_pindah SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_kk = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {

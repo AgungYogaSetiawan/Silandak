@@ -8,7 +8,7 @@
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <div class="card card-danger">
               <div class="card-header">
-                <h4 class="text-danger">Pengurusan Kartu Keluarga</h4>
+                <h4 class="text-danger">Pengurusan Surat Pindah</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -28,7 +28,7 @@
                     <tbody>
                       <?php
                       $sesi = $_SESSION['id'];
-                      $query = mysqli_query($conn, "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$sesi'");
+                      $query = mysqli_query($conn, "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$sesi'");
                       $no = 1;
                       while($row = mysqli_fetch_array($query)) {
                       ?>
