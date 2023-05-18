@@ -1,9 +1,9 @@
 <!-- Modal persyaratan -->
-<div class="modal fade" id="modalPersyaratan" tabindex="-1" role="dialog" aria-labelledby="modalPersyaratanLabel" aria-hidden="true">
+<div class="modal fade" id="modalPersyaratanSuratPindah" tabindex="-1" role="dialog" aria-labelledby="modalPersyaratanSuratPindahLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalPersyaratanLabel">Persyaratan dan Ketentuan</h5>
+        <h5 class="modal-title" id="modalPersyaratanSuratPindahLabel">Persyaratan dan Ketentuan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -13,8 +13,8 @@
             <div class="author-box">
             <ol>
               <li>Mengisi formulir data pemohon</li>
-              <li>Siapkan berkas persyaratan dengan hasil foto/scan buku nikah</li>
-              <li>Siapkan berkas persyaratan dengan hasil foto/scan ijazah pendidikan terakhir/sk kerja (jika ada)</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan surat keterangan pindah</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan kartu keluarga</li>
               <li>Siapkan berkas persyaratan dengan hasil foto/scan kartu tanda pendudukan</li>
             </ol>
             </div>
@@ -27,13 +27,13 @@
 
 
 
-<!-- KARTU KELUARGA -->
-<!-- Modal daftar kartu keluarga -->
-<div class="modal fade" id="modalDaftarKK" tabindex="-1" role="dialog" aria-labelledby="modalDaftarKKLabel" aria-hidden="true">
+<!-- surat pindah -->
+<!-- Modal daftar surat pindah -->
+<div class="modal fade" id="modalDaftarSuratPindah" tabindex="-1" role="dialog" aria-labelledby="modalDaftarSuratPindahLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalDaftarKKLabel">Form Pendaftaran Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalDaftarSuratPindahLabel">Form Pendaftaran Surat Pindah</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -41,7 +41,7 @@
       <hr>
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
-        <form method="POST" action="kartu_keluarga/fungsi_kk.php" enctype="multipart/form-data" role="form">
+        <form method="POST" action="surat_pindah/fungsi_sp.php" enctype="multipart/form-data" role="form">
           <?php
           $id = $_SESSION['id'];
           $sql = "SELECT * FROM tb_user WHERE id_user='$id'";
@@ -174,36 +174,12 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
+            <label>Upload Foto/Scan Surat Keterangan Pindah</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_buku_nikah">
+              <input type="file" class="form-control" name="file_kp">
               <?php
-              if (isset($data_temp['file_buku_nikah'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_buku_nikah'] . '</p>';
-              }
-              ?>
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ktp">
-              <?php
-              if (isset($data_temp['file_ktp'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_ktp'] . '</p>';
-              }
-              ?>
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ijazah">
-              <?php
-              if (isset($data_temp['file_ijazah'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_ijazah'] . '</p>';
+              if (isset($data_temp['file_kp'])) {
+                echo '<p>File yang diunggah: ' . $data_temp['file_kp'] . '</p>';
               }
               ?>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
@@ -216,6 +192,18 @@
               <?php
               if (isset($data_temp['file_kk'])) {
                 echo '<p>File yang diunggah: ' . $data_temp['file_kk'] . '</p>';
+              }
+              ?>
+              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
+            <div class="custom-file">
+              <input type="file" class="form-control" name="file_ktp">
+              <?php
+              if (isset($data_temp['file_ktp'])) {
+                echo '<p>File yang diunggah: ' . $data_temp['file_ktp'] . '</p>';
               }
               ?>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
@@ -237,7 +225,7 @@
     </div>
   </div>
 </div>
-<!-- end modal daftar kartu keluarga -->
+<!-- end modal daftar surat pindah -->
 
 <!-- Modal lihat data kartu keluarga -->
 <div class="modal fade" id="modalLihatDataKK" tabindex="-1" role="dialog" aria-labelledby="modalLihatDataKKLabel" aria-hidden="true">

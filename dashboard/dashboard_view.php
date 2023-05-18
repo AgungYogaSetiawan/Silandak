@@ -48,7 +48,7 @@
             </div>
             <div class="card-footer">
               <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarSuratPindah"><i class="fas fa-user-edit"></i> Daftar</button>
-              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratan'><i class="fas fa-scroll"></i> Persyaratan</button>
+              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratanSuratPindah'><i class="fas fa-scroll"></i> Persyaratan</button>
             </div>
           </div>
         </div>
