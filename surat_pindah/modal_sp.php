@@ -419,11 +419,11 @@
 <!-- end modal lihat kartu keluarga -->
 
 <!-- Modal view verif baru kartu keluarga -->
-<div class="modal fade" id="modalViewVerifKK" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifKKLabel" aria-hidden="true">
+<div class="modal fade" id="modalViewVerifSuratPindah" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifSuratPindahLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalViewVerifKKLabel">Form Pendaftaran Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalViewVerifSuratPindahLabel">Form Pendaftaran Surat Pindah</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -432,12 +432,12 @@
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
           <?php
-          $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+          $sql = "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user";
           $result = mysqli_query($conn,$sql);
           $data = mysqli_fetch_array($result);
           ?>
-          <form method="post" action="kartu_keluarga/fungsi_kk.php" enctype="multipart/form-data" role="form">
-          <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_kk']; ?>" readonly>
+          <form method="post" action="surat_pindah/fungsi_sp.php" enctype="multipart/form-data" role="form">
+          <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_sp']; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
               <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -563,29 +563,11 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
+            <label>Upload Foto/Scan Surat Keterangan Pindah</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_buku_nikah">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_buku_nikah']; ?></p>
-              <img src="assets/<?php echo $data['file_buku_nikah'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ktp">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ktp']; ?></p>
-              <img src="assets/<?php echo $data['file_ktp'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ijazah">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ijazah']; ?></p>
-              <img src="assets/<?php echo $data['file_ijazah'] ?>" width="100">
+              <input type="file" class="form-control" name="file_kp">
+              <p class="text-dark">File yang diunggah: <?php echo $data['file_kp']; ?></p>
+              <img src="assets/<?php echo $data['file_kp'] ?>" width="100">
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -595,6 +577,15 @@
               <input type="file" class="form-control" name="file_kk">
               <p class="text-dark">File yang diunggah: <?php echo $data['file_kk']; ?></p>
               <img src="assets/<?php echo $data['file_kk'] ?>" width="100">
+              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
+            <div class="custom-file">
+              <input type="file" class="form-control" name="file_ktp">
+              <p class="text-dark">File yang diunggah: <?php echo $data['file_ktp']; ?></p>
+              <img src="assets/<?php echo $data['file_ktp'] ?>" width="100">
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -619,7 +610,7 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
           <?php
-          $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+          $sql = "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user";
           $result = mysqli_query($conn,$sql);
           echo "<table class='table table-striped' id='tabel'>";
           echo "<thead>";

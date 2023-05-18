@@ -140,11 +140,12 @@ if(isset($_POST['kirim'])){
 } 
 
 // koding jika disetujui
-if(isset($_POST['setuju'])) {
-  $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
-  $result = mysqli_query($conn,$sql);
-  $data = mysqli_fetch_array($result);
-  $id = $data['id_kk'];
+$sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+$result = mysqli_query($conn,$sql);
+$data = mysqli_fetch_array($result);
+$baru = $data['status_berkas'];
+$id = $data['id_kk'];
+if(isset($_POST['setuju']) and $baru === 'Baru') {
   $keterangan = htmlspecialchars($_POST['keterangan']);
   $status_berkas = "Selesai";
   
@@ -153,10 +154,13 @@ if(isset($_POST['setuju'])) {
 
   if($hasil) {
     echo "<script>alert('Data berhasil disetujui!');</script>";
-    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=dataBaruKartuKeluarga'>";
+    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=dataSelesaiKartuKeluarga'>";
   } else {
     echo "<script>alert('Terjadi kesalahan!');</script>";
   }
+} else if(isset($_POST['setuju']) and $baru === 'Selesai') {
+  echo "<script>alert('Data sudah di acc, tidak bisa diubah!');</script>";
+  echo "<meta http-equiv='refresh' content='0;url=../index.php?page=dataSelesaiKartuKeluarga'>";
 }
 
 
