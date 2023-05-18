@@ -130,3 +130,122 @@ if(isset($_POST['setuju'])) {
     echo "<script>alert('Terjadi kesalahan!');</script>";
   }
 }
+
+
+// koding ubah data
+$sql = "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user";
+$result = mysqli_query($conn,$sql);
+$data = mysqli_fetch_array($result);
+$baru = $data['status_berkas'];
+$id = $data['id_sp'];
+if(isset($_POST['ubah']) and $baru === 'Baru') {
+  // foto ket pindah
+  $fotoLamaKP = htmlspecialchars($_POST['fotoLamaKP']);
+  $namaFileKP = $_FILES['file_kp']['name'];
+  $ukuranFileKP = $_FILES['file_kp']['size'];
+  $errorKP = $_FILES['file_kp']['error'];
+  $tmpNameKP = $_FILES['file_kp']['tmp_name'];
+
+  move_uploaded_file($tmpNameKP, '../assets/' . $namaFileKP);
+  // cek apakah edit foto baru
+  if($_FILES['file_kp']['error'] === 4) {
+    $fotoKP = $fotoLamaKP;
+  } else {
+    // cek apakah ada foto yang diupload
+    if($errorKP === 4) {
+      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
+    }
+
+    // cek apakah yang diupload adalah gambar
+    $ekstensiKP = ['jpg','jpeg','png'];
+    $ekstensiGambarKP = explode('.', $namaFileKP);
+    $ekstensiGambarKP = strtolower(end($ekstensiGambarKP));
+    if(!in_array($ekstensiGambarKP, $ekstensiKP)) {
+      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
+    }
+
+    // cek ukuran
+    if($ukuranFileKP > 1000000) {
+      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
+    }
+    $fotoKP = $namaFileKP;
+  }
+
+  // foto KTP
+  $fotoLamaKTP = htmlspecialchars($_POST['fotoLamaKTP']);
+  $namaFileKTP = $_FILES['file_ktp']['name'];
+  $ukuranFileKTP = $_FILES['file_ktp']['size'];
+  $errorKTP = $_FILES['file_ktp']['error'];
+  $tmpNameKTP = $_FILES['file_ktp']['tmp_name'];
+
+  move_uploaded_file($tmpNameKTP, '../assets/' . $namaFileKTP);
+  // cek apakah edit foto baru
+  if($_FILES['file_ktp']['error'] === 4) {
+    $fotoKTP = $fotoLamaKTP;
+  } else {
+    // cek apakah ada foto yang diupload
+    if($errorKTP === 4) {
+      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
+    }
+
+    // cek apakah yang diupload adalah gambar
+    $ekstensiKTP = ['jpg','jpeg','png'];
+    $ekstensiGambarKTP = explode('.', $namaFileKTP);
+    $ekstensiGambarKTP = strtolower(end($ekstensiGambarKTP));
+    if(!in_array($ekstensiGambarKTP, $ekstensiKTP)) {
+      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
+    }
+
+    // cek ukuran
+    if($ukuranFileKTP > 1000000) {
+      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
+    }
+    $fotoKTP = $namaFileKTP;
+  }
+
+  // foto KK
+  $fotoLamaKK = htmlspecialchars($_POST['fotoLamaKK']);
+  $namaFileKK = $_FILES['file_kk']['name'];
+  $ukuranFileKK = $_FILES['file_kk']['size'];
+  $errorKK = $_FILES['file_kk']['error'];
+  $tmpNameKK = $_FILES['file_kk']['tmp_name'];
+
+  move_uploaded_file($tmpNameKK, '../assets/' . $namaFileKK);
+  // cek apakah edit foto baru
+  if($_FILES['file_kk']['error'] === 4) {
+    $fotoKK = $fotoLamaKK;
+  } else {
+    // cek apakah ada foto yang diupload
+    if($errorKK === 4) {
+      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
+    }
+
+    // cek apakah yang diupload adalah gambar
+    $ekstensiKK = ['jpg','jpeg','png'];
+    $ekstensiGambarKK = explode('.', $namaFileKK);
+    $ekstensiGambarKK = strtolower(end($ekstensiGambarKK));
+    if(!in_array($ekstensiGambarKK, $ekstensiKK)) {
+      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
+    }
+
+    // cek ukuran
+    if($ukuranFileKK > 1000000) {
+      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
+    }
+    $fotoKK = $namaFileKK;
+  }
+
+  $sql = "UPDATE tb_surat_pindah SET file_kp = '$fotoKP', file_kk = '$fotoKK', file_ktp = '$fotoKTP' WHERE id_sp = '$id'";
+  $hasil = mysqli_query($conn, $sql);
+
+  if($hasil) {
+    echo "<script>alert('Data berhasil diubah!');</script>";
+    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonansuratpindah'>";
+  } else {
+    echo "<script>alert('Terjadi kesalahan!');</script>";
+    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonansuratpindah'>";
+  }
+} else if(isset($_POST['ubah']) and $baru === 'Selesai') {
+  echo "<script>alert('Data sudah di acc, tidak bisa diubah!');</script>";
+  echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonansuratpindah'>";
+}

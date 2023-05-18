@@ -50,7 +50,7 @@
                         }
                         ?>
                         </td>
-                        <td><button class="btn btn-info btnview" data-toggle="modal" data-target="#modalLihatDataKK" data-id="<?php $row['id_kk']; ?>"><i class="fas fa-search"></i></button></td>
+                        <td><button class="btn btn-info btnview" data-toggle="modal" data-target="#modalLihatDataSuratPindah" data-id="<?php $row['id_sp']; ?>"><i class="fas fa-search"></i></button></td>
                       </tr>
                       <?php
                       }
