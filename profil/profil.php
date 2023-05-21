@@ -57,7 +57,7 @@ if(isset($_POST['simpan'])){
   
 
   $sql = "UPDATE tb_user SET kewarganegaraan = '$kewarganegaraan', nama = '$nama', nik = '$nik', no_hp = '$no_hp', pekerjaan = '$pekerjaan', tmpt_lahir = '$tmpt_lahir', tgl_lahir = '$tgl_lahir', jk = '$jk', status = '$status', agama = '$agama', kelurahan = '$kelurahan', kecamatan = '$kecamatan', rt = '$rt', rw = '$rw', alamat = '$alamat', kode_pos = '$kode_pos', foto = '$foto' WHERE id_user = '$id'";
-  mysqli_query($conn, $sql);
+  $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
     echo "<script>alert('Data Berhasil Disimpan');</script>";
