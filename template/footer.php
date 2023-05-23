@@ -6,6 +6,13 @@
 <?php include 'kartu_keluarga/modalKK.php'; ?>
 <?php include 'akta_kelahiran/modal_akta_lahir.php'; ?>
 <?php include 'surat_pindah/modal_sp.php'; ?>
+<?php include 'akta_kematian/modal_akta_kematian.php'; ?>
+<?php include 'surat_pindah_datang/modal_spd.php'; ?>
+<?php include 'biodata_wni/modal_wni.php'; ?>
+<?php include 'rekam_ktp/modal_rekam_ktp.php'; ?>
+
+
+
 
 
 <footer class="main-footer">
