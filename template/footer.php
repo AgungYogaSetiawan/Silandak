@@ -2,7 +2,6 @@
     <i class="fa fa-exclamation"></i>
 </button> -->
 
-<?php include 'modal.php'; ?>
 <?php include 'kartu_keluarga/modalKK.php'; ?>
 <?php include 'akta_kelahiran/modal_akta_lahir.php'; ?>
 <?php include 'surat_pindah/modal_sp.php'; ?>

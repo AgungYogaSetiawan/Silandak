@@ -1,5 +1,5 @@
 <!-- Modal persyaratan -->
-<div class="modal fade" id="modalPersyaratan" tabindex="-1" role="dialog" aria-labelledby="modalPersyaratanLabel" aria-hidden="true">
+<div class="modal fade" id="modalPersyaratanAK" tabindex="-1" role="dialog" aria-labelledby="modalPersyaratanLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,9 +13,8 @@
             <div class="author-box">
             <ol>
               <li>Mengisi formulir data pemohon</li>
-              <li>Siapkan berkas persyaratan dengan hasil foto/scan buku nikah</li>
-              <li>Siapkan berkas persyaratan dengan hasil foto/scan ijazah pendidikan terakhir/sk kerja (jika ada)</li>
-              <li>Siapkan berkas persyaratan dengan hasil foto/scan kartu tanda pendudukan</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan surat keterangan kepala desa atau rumah sakit</li>
+              <li>Siapkan berkas persyaratan dengan hasil foto/scan kartu keluarga</li>
             </ol>
             </div>
         </div>
@@ -26,14 +25,13 @@
 <!-- end modal persyaratan -->
 
 
-
 <!-- KARTU KELUARGA -->
 <!-- Modal daftar kartu keluarga -->
-<div class="modal fade" id="modalDaftarKK" tabindex="-1" role="dialog" aria-labelledby="modalDaftarKKLabel" aria-hidden="true">
+<div class="modal fade" id="modalDaftarAK" tabindex="-1" role="dialog" aria-labelledby="modalDaftarAKLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalDaftarKKLabel">Form Pendaftaran Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalDaftarAKLabel">Form Pendaftaran Akta Kematian</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -41,7 +39,7 @@
       <hr>
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
-        <form method="POST" action="kartu_keluarga/fungsi_kk.php" enctype="multipart/form-data" role="form">
+        <form method="POST" action="akta_kematian/fungsi_akta_kematian.php" enctype="multipart/form-data" role="form">
           <?php
           $id = $_SESSION['id'];
           $sql = "SELECT * FROM tb_user WHERE id_user='$id'";
@@ -174,36 +172,12 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
+            <label>Upload Foto/Scan SK Kepala Desa atau Rumah Sakit</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_buku_nikah">
+              <input type="file" class="form-control" name="file_sk">
               <?php
-              if (isset($data_temp['file_buku_nikah'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_buku_nikah'] . '</p>';
-              }
-              ?>
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ktp">
-              <?php
-              if (isset($data_temp['file_ktp'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_ktp'] . '</p>';
-              }
-              ?>
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ijazah">
-              <?php
-              if (isset($data_temp['file_ijazah'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_ijazah'] . '</p>';
+              if (isset($data_temp['file_sk'])) {
+                echo '<p>File yang diunggah: ' . $data_temp['file_sk'] . '</p>';
               }
               ?>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
@@ -252,7 +226,7 @@
       <hr>
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
-        <form method="POST">
+        <form method="POST" action="kartu_keluarga/fungsi_kk.php" enctype="multipart/form-data" role="form">
           <?php
           $id = $_SESSION['id'];
           $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
@@ -260,6 +234,10 @@
           $data = mysqli_fetch_array($result);
           ?>
           <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_user']; ?>" readonly>
+          <input type="hidden" id="fotoLamaBK" name="fotoLamaBK" value="<?php echo $data['file_buku_nikah']; ?>" readonly>
+          <input type="hidden" id="fotoLamaIJ" name="fotoLamaIJ" value="<?php echo $data['file_ijazah']; ?>" readonly>
+          <input type="hidden" id="fotoLamaKTP" name="fotoLamaKTP" value="<?php echo $data['file_ktp']; ?>" readonly>
+          <input type="hidden" id="fotoLamaKK" name="fotoLamaKK" value="<?php echo $data['file_ktp']; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
               <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -421,11 +399,8 @@
             </div>
           </div>
           <div class="form-group">
-            <button type="submit" class="btn btn-success btn-md" name="kirim">
-              <i class="fas fa-paper-plane"></i> Kirim
-            </button>
-            <button type="submit" class="btn btn-warning btn-md" name="simpan_sementara">
-              <i class="fas fa-save"></i> Simpan Sementara
+            <button type="submit" class="btn btn-success btn-md" name="ubah">
+              <i class="fas fa-save"></i> Simpan
             </button>
             <button type="reset" class="btn btn-danger btn-md">
               <i class="fas fa-window-close"></i> Batal

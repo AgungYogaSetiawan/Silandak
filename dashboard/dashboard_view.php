@@ -62,8 +62,8 @@
               <p>Akta Kematian merupakan bukti sah berupa akta otentik yang dibuat dan diterbitkan oleh Dinas Kependudukan dan Pencatatan Sipil, sebagai bukti tertulis terkait pencatatan kematian seseorang.</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarAktaKematian"><i class="fas fa-user-edit"></i> Daftar</button>
-              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratan'><i class="fas fa-scroll"></i> Persyaratan</button>
+              <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarAK"><i class="fas fa-user-edit"></i> Daftar</button>
+              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratanAK'><i class="fas fa-scroll"></i> Persyaratan</button>
             </div>
           </div>
         </div>
