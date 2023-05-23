@@ -136,37 +136,37 @@ switch ($page) {
 
     // biodata wni
     case 'permohonanbiodatawni':
-        include "rekam_ktp/permohonan_rekam_ktp.php";
+        include "biodata_wni/permohonan_wni.php";
         break;
     case 'dataBaruBiodataWNI':
-        include "rekam_ktp/list_data_baru.php";
+        include "biodata_wni/list_data_baru.php";
         break;
     case 'dataProgressBiodataWNI':
-        include "rekam_ktp/list_data_progress.php";
+        include "biodata_wni/list_data_progress.php";
         break;
     case 'dataSelesaiBiodataWNI':
-        include "rekam_ktp/list_data_selesai.php";
+        include "biodata_wni/list_data_selesai.php";
         break;
     case 'viewVerifBiodataWNI':
-        include "rekam_ktp/view_verifikasi.php";
+        include "biodata_wni/view_verifikasi.php";
         break;
     // end biodata wni
 
     // rekam ktp
     case 'permohonanrekamktp':
-        include "biodata_wni/permohonan_wni.php";
+        include "rekam_ktp/permohonan_rekam_ktp.php";
         break;
     case 'dataBaruRekamKTP':
-        include "biodata_wni/list_data_baru.php";
+        include "rekam_ktp/list_data_baru.php";
         break;
     case 'dataProgressRekamKTP':
-        include "biodata_wni/list_data_progress.php";
+        include "rekam_ktp/list_data_progress.php";
         break;
     case 'dataSelesaiRekamKTP':
-        include "biodata_wni/list_data_selesai.php";
+        include "rekam_ktp/list_data_selesai.php";
         break;
     case 'viewVerifRekamKTP':
-        include "biodata_wni/view_verifikasi.php";
+        include "rekam_ktp/view_verifikasi.php";
         break;
     // end rekam ktp
 

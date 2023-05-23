@@ -8,7 +8,7 @@
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <div class="card card-danger">
               <div class="card-header">
-                <h4 class="text-danger">Pengurusan Kartu Keluarga</h4>
+                <h4 class="text-danger">Pengurusan Biodata WNI</h4>
               </div>
               <div class="card-body">
                 <div class="table-responsive">
@@ -28,7 +28,7 @@
                     <tbody>
                       <?php
                       $sesi = $_SESSION['id'];
-                      $query = mysqli_query($conn, "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$sesi'");
+                      $query = mysqli_query($conn, "SELECT * FROM tb_bio_wni a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$sesi'");
                       $no = 1;
                       while($row = mysqli_fetch_array($query)) {
                       ?>
@@ -50,7 +50,7 @@
                         }
                         ?>
                         </td>
-                        <td><button class="btn btn-info btnview" data-toggle="modal" data-target="#modalLihatDataKK" data-id="<?php $row['id_kk']; ?>"><i class="fas fa-search"></i></button></td>
+                        <td><button class="btn btn-info btnview" data-toggle="modal" data-target="#modalLihatDataWNI" data-id="<?php $row['id_bio']; ?>"><i class="fas fa-search"></i></button></td>
                       </tr>
                       <?php
                       }
