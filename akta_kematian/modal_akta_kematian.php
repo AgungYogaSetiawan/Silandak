@@ -25,8 +25,8 @@
 <!-- end modal persyaratan -->
 
 
-<!-- KARTU KELUARGA -->
-<!-- Modal daftar kartu keluarga -->
+<!-- akta kematian -->
+<!-- Modal daftar akta kematian -->
 <div class="modal fade" id="modalDaftarAK" tabindex="-1" role="dialog" aria-labelledby="modalDaftarAKLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -211,14 +211,14 @@
     </div>
   </div>
 </div>
-<!-- end modal daftar kartu keluarga -->
+<!-- end modal daftar akta kematian -->
 
-<!-- Modal lihat data kartu keluarga -->
-<div class="modal fade" id="modalLihatDataKK" tabindex="-1" role="dialog" aria-labelledby="modalLihatDataKKLabel" aria-hidden="true">
+<!-- Modal lihat data akta kematian -->
+<div class="modal fade" id="modalLihatDataAK" tabindex="-1" role="dialog" aria-labelledby="modalLihatDataAKLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalLihatDataKKLabel">Permohonan Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalLihatDataAKLabel">Permohonan Akta Kematian</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -226,18 +226,16 @@
       <hr>
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
-        <form method="POST" action="kartu_keluarga/fungsi_kk.php" enctype="multipart/form-data" role="form">
+        <form method="POST" action="akta_kematian/fungsi_akta_kematian.php" enctype="multipart/form-data" role="form">
           <?php
           $id = $_SESSION['id'];
-          $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
+          $sql = "SELECT * FROM tb_kematian a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
           $result = mysqli_query($conn,$sql);
           $data = mysqli_fetch_array($result);
           ?>
           <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_user']; ?>" readonly>
-          <input type="hidden" id="fotoLamaBK" name="fotoLamaBK" value="<?php echo $data['file_buku_nikah']; ?>" readonly>
-          <input type="hidden" id="fotoLamaIJ" name="fotoLamaIJ" value="<?php echo $data['file_ijazah']; ?>" readonly>
-          <input type="hidden" id="fotoLamaKTP" name="fotoLamaKTP" value="<?php echo $data['file_ktp']; ?>" readonly>
-          <input type="hidden" id="fotoLamaKK" name="fotoLamaKK" value="<?php echo $data['file_ktp']; ?>" readonly>
+          <input type="hidden" id="fotoLamaSK" name="fotoLamaSK" value="<?php echo $data['file_sk']; ?>" readonly>
+          <input type="hidden" id="fotoLamaKK" name="fotoLamaKK" value="<?php echo $data['file_kk']; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
               <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -363,29 +361,11 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
+            <label>Upload Foto/Scan SK Rumah Sakit atau Kepala Desa</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_buku_nikah">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_buku_nikah']; ?></p>
-              <img src="assets/<?php echo $data['file_buku_nikah'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ktp">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ktp']; ?></p>
-              <img src="assets/<?php echo $data['file_ktp'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ijazah">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ijazah']; ?></p>
-              <img src="assets/<?php echo $data['file_ijazah'] ?>" width="100">
+              <input type="file" class="form-control" name="file_sk">
+              <p class="text-dark">File yang diunggah: <?php echo $data['file_sk']; ?></p>
+              <img src="assets/<?php echo $data['file_sk'] ?>" width="100">
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -411,14 +391,14 @@
     </div>
   </div>
 </div>
-<!-- end modal lihat kartu keluarga -->
+<!-- end modal lihat akta kematian -->
 
-<!-- Modal view verif baru kartu keluarga -->
-<div class="modal fade" id="modalViewVerifKK" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifKKLabel" aria-hidden="true">
+<!-- Modal view verif baru akta kematian -->
+<div class="modal fade" id="modalViewVerifAK" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifAKLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalViewVerifKKLabel">Form Pendaftaran Kartu Keluarga</h5>
+        <h5 class="modal-title" id="modalViewVerifAKLabel">Form Pendaftaran Akta Kematian</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -427,12 +407,12 @@
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
           <?php
-          $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+          $sql = "SELECT * FROM tb_kematian a INNER JOIN tb_user b ON a.user_id = b.id_user";
           $result = mysqli_query($conn,$sql);
           $data = mysqli_fetch_array($result);
           ?>
-          <form method="post" action="kartu_keluarga/fungsi_kk.php" enctype="multipart/form-data" role="form">
-          <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_kk']; ?>" readonly>
+          <form method="post" action="akta_kematian/fungsi_akta_kematian.php" enctype="multipart/form-data" role="form">
+          <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_ak']; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
               <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -558,29 +538,11 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
           <div class="form-group">
-            <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
+            <label>Upload Foto/Scan SK Rumah Sakit atau Kepala Desa</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_buku_nikah">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_buku_nikah']; ?></p>
-              <img src="assets/<?php echo $data['file_buku_nikah'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ktp">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ktp']; ?></p>
-              <img src="assets/<?php echo $data['file_ktp'] ?>" width="100">
-              <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
-            <div class="custom-file">
-              <input type="file" class="form-control" name="file_ijazah">
-              <p class="text-dark">File yang diunggah: <?php echo $data['file_ijazah']; ?></p>
-              <img src="assets/<?php echo $data['file_ijazah'] ?>" width="100">
+              <input type="file" class="form-control" name="file_sk">
+              <p class="text-dark">File yang diunggah: <?php echo $data['file_sk']; ?></p>
+              <img src="assets/<?php echo $data['file_sk'] ?>" width="100">
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -614,7 +576,7 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
           <?php
-          $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+          $sql = "SELECT * FROM tb_kematian a INNER JOIN tb_user b ON a.user_id = b.id_user";
           $result = mysqli_query($conn,$sql);
           echo "<table class='table table-striped' id='tabel'>";
           echo "<thead>";
@@ -646,9 +608,9 @@
     </div>
   </div>
 </div>
-<!-- end modal view verif baru kartu keluarga -->
+<!-- end modal view verif baru akta kematian -->
 
-<!-- Modal view data progress kartu keluarga -->
+<!-- Modal view data progress akta kematian -->
 <div class="modal fade" id="modalViewVerifProgressKK" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifProgressKKLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -829,9 +791,9 @@
     </div>
   </div>
 </div>
-<!-- end modal view data progress kartu keluarga -->
+<!-- end modal view data progress akta kematian -->
 
-<!-- Modal view data selesai kartu keluarga -->
+<!-- Modal view data selesai akta kematian -->
 <div class="modal fade" id="modalViewVerifSelesaiKK" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifSelesaiKKLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -1012,5 +974,5 @@
     </div>
   </div>
 </div>
-<!-- end modal view data selesai kartu keluarga -->
-<!-- END KARTU KELUARGA -->
+<!-- end modal view data selesai akta kematian -->
+<!-- END akta kematian -->

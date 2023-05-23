@@ -262,7 +262,7 @@
           <input type="hidden" id="fotoLamaBK" name="fotoLamaBK" value="<?php echo $data['file_buku_nikah']; ?>" readonly>
           <input type="hidden" id="fotoLamaIJ" name="fotoLamaIJ" value="<?php echo $data['file_ijazah']; ?>" readonly>
           <input type="hidden" id="fotoLamaKTP" name="fotoLamaKTP" value="<?php echo $data['file_ktp']; ?>" readonly>
-          <input type="hidden" id="fotoLamaKK" name="fotoLamaKK" value="<?php echo $data['file_ktp']; ?>" readonly>
+          <input type="hidden" id="fotoLamaKK" name="fotoLamaKK" value="<?php echo $data['file_kk']; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
               <label for="kewarganegaraan">Kewarganegaraan</label>
