@@ -98,6 +98,78 @@ switch ($page) {
         break;
     // end surat pindah
 
+    // akta kematian
+    case 'permohonanaktakematian':
+        include "akta_kematian/permohonan_akta_kematian.php";
+        break;
+    case 'dataBaruAktaKematian':
+        include "akta_kematian/list_data_baru.php";
+        break;
+    case 'dataProgressAktaKematian':
+        include "akta_kematian/list_data_progress.php";
+        break;
+    case 'dataSelesaiAktaKematian':
+        include "akta_kematian/list_data_selesai.php";
+        break;
+    case 'viewVerifAktaKematian':
+        include "akta_kematian/view_verifikasi.php";
+        break;
+    // end akta kematian
+
+    // surat pindah datang
+    case 'permohonansuratpindahdatang':
+        include "surat_pindah_datang/permohonan_spd.php";
+        break;
+    case 'dataBaruSuratPindahDatang':
+        include "surat_pindah_datang/list_data_baru.php";
+        break;
+    case 'dataProgressSuratPindahDatang':
+        include "surat_pindah_datang/list_data_progress.php";
+        break;
+    case 'dataSelesaiSuratPindahDatang':
+        include "surat_pindah_datang/list_data_selesai.php";
+        break;
+    case 'viewVerifSuratPindahDatang':
+        include "surat_pindah_datang/view_verifikasi.php";
+        break;
+    // end surat pindah datang
+
+    // biodata wni
+    case 'permohonanbiodatawni':
+        include "rekam_ktp/permohonan_rekam_ktp.php";
+        break;
+    case 'dataBaruBiodataWNI':
+        include "rekam_ktp/list_data_baru.php";
+        break;
+    case 'dataProgressBiodataWNI':
+        include "rekam_ktp/list_data_progress.php";
+        break;
+    case 'dataSelesaiBiodataWNI':
+        include "rekam_ktp/list_data_selesai.php";
+        break;
+    case 'viewVerifBiodataWNI':
+        include "rekam_ktp/view_verifikasi.php";
+        break;
+    // end biodata wni
+
+    // rekam ktp
+    case 'permohonanrekamktp':
+        include "biodata_wni/permohonan_wni.php";
+        break;
+    case 'dataBaruRekamKTP':
+        include "biodata_wni/list_data_baru.php";
+        break;
+    case 'dataProgressRekamKTP':
+        include "biodata_wni/list_data_progress.php";
+        break;
+    case 'dataSelesaiRekamKTP':
+        include "biodata_wni/list_data_selesai.php";
+        break;
+    case 'viewVerifRekamKTP':
+        include "biodata_wni/view_verifikasi.php";
+        break;
+    // end rekam ktp
+
     case 'datakependudukan':
         include "laporan/data_kependudukan.php";
         break;
