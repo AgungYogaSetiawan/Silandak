@@ -11,11 +11,11 @@ if(isset($_POST['kirim'])){
   $tgl_waktu = date('d-M-Y');
   $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
   
-  $file_buku_nikah = $_FILES['file_buku_nikah']['name'];
-  $pdf_buku_nikah = explode('.', $file_buku_nikah);
-  $ekstensi_buku_nikah = strtolower(end($pdf_buku_nikah));
-  $ukuran_buku_nikah = $_FILES['file_buku_nikah']['size'];
-  $file_tmp_buku_nikah = $_FILES['file_buku_nikah']['tmp_name'];
+  $file_kp = $_FILES['file_kp']['name'];
+  $pdf_kp = explode('.', $file_kp);
+  $ekstensi_kp = strtolower(end($pdf_kp));
+  $ukuran_kp = $_FILES['file_kp']['size'];
+  $file_tmp_kp = $_FILES['file_kp']['tmp_name'];
   
   $file_ktp = $_FILES['file_ktp']['name'];
   $pdf_ktp = explode('.', $file_ktp);
@@ -23,22 +23,10 @@ if(isset($_POST['kirim'])){
   $ukuran_ktp = $_FILES['file_ktp']['size'];
   $file_tmp_ktp = $_FILES['file_ktp']['tmp_name'];
 
-  $file_ijazah = $_FILES['file_ijazah']['name'];
-  $pdf_ijazah = explode('.', $file_ijazah);
-  $ekstensi_ijazah = strtolower(end($pdf_ijazah));
-  $ukuran_ijazah = $_FILES['file_ijazah']['size'];
-  $file_tmp_ijazah = $_FILES['file_ijazah']['tmp_name'];
-
-  $file_kk = $_FILES['file_kk']['name'];
-  $pdf_kk = explode('.', $file_kk);
-  $ekstensi_kk = strtolower(end($pdf_kk));
-  $ukuran_kk = $_FILES['file_kk']['size'];
-  $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
-
-  // koding cek upload file buku_nikah
-  if(in_array($ekstensi_buku_nikah, $ekstensi_diperbolehkan) === true){
-    if($ukuran_buku_nikah < 1044070){ 
-      move_uploaded_file($file_tmp_buku_nikah, '../assets/'.$file_buku_nikah);
+  // koding cek upload file keterangan pindah
+  if(in_array($ekstensi_kp, $ekstensi_diperbolehkan) === true){
+    if($ukuran_kp < 1044070){ 
+      move_uploaded_file($file_tmp_kp, '../assets/'.$file_kp);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
     }
@@ -57,30 +45,8 @@ if(isset($_POST['kirim'])){
       echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN!';
   }
 
-  // koding cek upload file ijazah
-  if(in_array($ekstensi_ijazah, $ekstensi_diperbolehkan) === true){
-    if($ukuran_ijazah < 1044070){ 
-      move_uploaded_file($file_tmp_ijazah, '../assets/'.$file_ijazah);
-    } else{
-        echo 'UKURAN FILE TERLALU BESAR!';
-    }
-  } else{
-      echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN!';
-  }
-
-  // koding cek upload file kk
-  if(in_array($ekstensi_kk, $ekstensi_diperbolehkan) === true){
-    if($ukuran_kk < 1044070){ 
-      move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
-    } else{
-        echo 'UKURAN FILE TERLALU BESAR!';
-    }
-  } else{
-      echo 'EKSTENSI FILE YANG DI UPLOAD TIDAK DI PERBOLEHKAN!';
-  }
-
     //Query input menginput data kedalam tabel kk
-    $sql = "INSERT INTO tb_kk (user_id,file_buku_nikah,file_ktp,file_ijazah,file_kk,status_berkas,tgl) VALUES ('$user_id','$file_buku_nikah','$file_ktp','$file_ijazah','$file_kk','$status','$tgl_waktu')";
+    $sql = "INSERT INTO tb_pindah_datang (user_id,file_kp,file_ktp,status_berkas,tgl) VALUES ('$user_id','$file_kp','$file_ktp','$status','$tgl_waktu')";
 
     //Mengeksekusi/menjalankan query diatas	
     $hasil = mysqli_query($conn,$sql);
@@ -99,11 +65,11 @@ if(isset($_POST['kirim'])){
     $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
     
-    $file_buku_nikah = $_FILES['file_buku_nikah']['name'];
-    $pdf_buku_nikah = explode('.', $file_buku_nikah);
-    $ekstensi_buku_nikah = strtolower(end($pdf_buku_nikah));
-    $ukuran_buku_nikah = $_FILES['file_buku_nikah']['size'];
-    $file_tmp_buku_nikah = $_FILES['file_buku_nikah']['tmp_name'];
+    $file_kp = $_FILES['file_kp']['name'];
+    $pdf_kp = explode('.', $file_kp);
+    $ekstensi_kp = strtolower(end($pdf_kp));
+    $ukuran_kp = $_FILES['file_kp']['size'];
+    $file_tmp_kp = $_FILES['file_kp']['tmp_name'];
     
     $file_ktp = $_FILES['file_ktp']['name'];
     $pdf_ktp = explode('.', $file_ktp);
@@ -111,24 +77,10 @@ if(isset($_POST['kirim'])){
     $ukuran_ktp = $_FILES['file_ktp']['size'];
     $file_tmp_ktp = $_FILES['file_ktp']['tmp_name'];
 
-    $file_ijazah = $_FILES['file_ijazah']['name'];
-    $pdf_ijazah = explode('.', $file_ijazah);
-    $ekstensi_ijazah = strtolower(end($pdf_ijazah));
-    $ukuran_ijazah = $_FILES['file_ijazah']['size'];
-    $file_tmp_ijazah = $_FILES['file_ijazah']['tmp_name'];
-
-    $file_kk = $_FILES['file_kk']['name'];
-    $pdf_kk = explode('.', $file_kk);
-    $ekstensi_kk = strtolower(end($pdf_kk));
-    $ukuran_kk = $_FILES['file_kk']['size'];
-    $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
-
     // simpan data ke array
     $data_temp["user_id"] = $user_id;
-    $data_temp["file_buku_nikah"] = $file_buku_nikah;
+    $data_temp["file_kp"] = $file_kp;
     $data_temp["file_ktp"] = $file_ktp;
-    $data_temp["file_ijazah"] = $file_ijazah;
-    $data_temp["file_kk"] = $file_kk;
 
     // Simpan variabel array $data ke dalam session menggunakan fungsi $_SESSION.
     $_SESSION["data_temp"] = $data_temp;
@@ -140,101 +92,69 @@ if(isset($_POST['kirim'])){
 } 
 
 // koding jika disetujui
-$sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+$sql = "SELECT * FROM tb_pindah_datang a INNER JOIN tb_user b ON a.user_id = b.id_user";
 $result = mysqli_query($conn,$sql);
 $data = mysqli_fetch_array($result);
 $baru = $data['status_berkas'];
-$id = $data['id_kk'];
+$id = $data['id_pd'];
 if(isset($_POST['setuju']) and $baru === 'Baru') {
   $keterangan = htmlspecialchars($_POST['keterangan']);
   $status_berkas = "Selesai";
   
-  $sql = "UPDATE tb_kk SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_kk = '$id'";
+  $sql = "UPDATE tb_pindah_datang SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_pd = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
     echo "<script>alert('Data berhasil disetujui!');</script>";
-    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=dataSelesaiKartuKeluarga'>";
+    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=dataSelesaiSuratPindahDatang'>";
   } else {
     echo "<script>alert('Terjadi kesalahan!');</script>";
   }
 } else if(isset($_POST['setuju']) and $baru === 'Selesai') {
   echo "<script>alert('Data sudah di acc, tidak bisa diubah!');</script>";
-  echo "<meta http-equiv='refresh' content='0;url=../index.php?page=dataSelesaiKartuKeluarga'>";
+  echo "<meta http-equiv='refresh' content='0;url=../index.php?page=dataSelesaiSuratPindahDatang'>";
 }
 
 
 
 
 // koding ubah data
-$sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user";
+$sql = "SELECT * FROM tb_pindah_datang a INNER JOIN tb_user b ON a.user_id = b.id_user";
 $result = mysqli_query($conn,$sql);
 $data = mysqli_fetch_array($result);
 $baru = $data['status_berkas'];
-$id = $data['id_kk'];
+$id = $data['id_pd'];
 if(isset($_POST['ubah']) and $baru === 'Baru') {
-  // foto buku nikah
-  $fotoLamaBK = htmlspecialchars($_POST['fotoLamaBK']);
-  $namaFileBK = $_FILES['file_buku_nikah']['name'];
-  $ukuranFileBK = $_FILES['file_buku_nikah']['size'];
-  $errorBK = $_FILES['file_buku_nikah']['error'];
-  $tmpNameBK = $_FILES['file_buku_nikah']['tmp_name'];
+  // foto keterangan pindah
+  $fotoLamaKP = htmlspecialchars($_POST['fotoLamaKP']);
+  $namaFileKP = $_FILES['file_kp']['name'];
+  $ukuranFileKP = $_FILES['file_kp']['size'];
+  $errorKP = $_FILES['file_kp']['error'];
+  $tmpNameKP = $_FILES['file_kp']['tmp_name'];
 
-  move_uploaded_file($tmpNameBK, '../assets/' . $namaFileBK);
+  move_uploaded_file($tmpNameKP, '../assets/' . $namaFileKP);
   // cek apakah edit foto baru
-  if($_FILES['file_buku_nikah']['error'] === 4) {
-    $fotoBK = $fotoLamaBK;
+  if($_FILES['file_kp']['error'] === 4) {
+    $fotoKP = $fotoLamaKP;
   } else {
     // cek apakah ada foto yang diupload
-    if($errorBK === 4) {
+    if($errorKP === 4) {
       echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiBK = ['jpg','jpeg','png'];
-    $ekstensiGambarBK = explode('.', $namaFileBK);
-    $ekstensiGambarBK = strtolower(end($ekstensiGambarBK));
-    if(!in_array($ekstensiGambarBK, $ekstensiBK)) {
+    $ekstensiKP = ['jpg','jpeg','png'];
+    $ekstensiGambarKP = explode('.', $namaFileKP);
+    $ekstensiGambarKP = strtolower(end($ekstensiGambarKP));
+    if(!in_array($ekstensiGambarKP, $ekstensiKP)) {
       echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
     }
 
     // cek ukuran
-    if($ukuranFileBK > 1000000) {
+    if($ukuranFileKP > 1000000) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
-    $fotoBK = $namaFileBK;
-  }
-
-  // foto IJAZAH
-  $fotoLamaIJ = htmlspecialchars($_POST['fotoLamaIJ']);
-  $namaFileIJ = $_FILES['file_ijazah']['name'];
-  $ukuranFileIJ = $_FILES['file_ijazah']['size'];
-  $errorIJ = $_FILES['file_ijazah']['error'];
-  $tmpNameIJ = $_FILES['file_ijazah']['tmp_name'];
-
-  move_uploaded_file($tmpNameIJ, '../assets/' . $namaFileIJ);
-  // cek apakah edit foto baru
-  if($_FILES['file_ijazah']['error'] === 4) {
-    $fotoIJ = $fotoLamaIJ;
-  } else {
-    // cek apakah ada foto yang diupload
-    if($errorIJ === 4) {
-      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
-    }
-
-    // cek apakah yang diupload adalah gambar
-    $ekstensiIJ = ['jpg','jpeg','png'];
-    $ekstensiGambarIJ = explode('.', $namaFileIJ);
-    $ekstensiGambarIJ = strtolower(end($ekstensiGambarIJ));
-    if(!in_array($ekstensiGambarIJ, $ekstensiIJ)) {
-      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
-    }
-
-    // cek ukuran
-    if($ukuranFileIJ > 1000000) {
-      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
-    }
-    $fotoIJ = $namaFileIJ;
+    $fotoKP = $namaFileKP;
   }
 
   // foto KTP
@@ -269,49 +189,17 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     $fotoKTP = $namaFileKTP;
   }
 
-  // foto KK
-  $fotoLamaKK = htmlspecialchars($_POST['fotoLamaKK']);
-  $namaFileKK = $_FILES['file_kk']['name'];
-  $ukuranFileKK = $_FILES['file_kk']['size'];
-  $errorKK = $_FILES['file_kk']['error'];
-  $tmpNameKK = $_FILES['file_kk']['tmp_name'];
-
-  move_uploaded_file($tmpNameKK, '../assets/' . $namaFileKK);
-  // cek apakah edit foto baru
-  if($_FILES['file_kk']['error'] === 4) {
-    $fotoKK = $fotoLamaKK;
-  } else {
-    // cek apakah ada foto yang diupload
-    if($errorKK === 4) {
-      echo "<script>alert('Pilih gambar terlebih dahulu!');</script>";
-    }
-
-    // cek apakah yang diupload adalah gambar
-    $ekstensiKK = ['jpg','jpeg','png'];
-    $ekstensiGambarKK = explode('.', $namaFileKK);
-    $ekstensiGambarKK = strtolower(end($ekstensiGambarKK));
-    if(!in_array($ekstensiGambarKK, $ekstensiKK)) {
-      echo "<script>alert('Yang anda upload bukan gambar, mohon upload gambar!');</script>";
-    }
-
-    // cek ukuran
-    if($ukuranFileKK > 1000000) {
-      echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
-    }
-    $fotoKK = $namaFileKK;
-  }
-
-  $sql = "UPDATE tb_kk SET file_buku_nikah = '$fotoBK', file_ijazah = '$fotoIJ', file_ktp = '$fotoKTP', file_kk = '$fotoKK' WHERE id_kk = '$id'";
+  $sql = "UPDATE tb_pindah_datang SET file_kp= '$fotoKP', file_ktp = '$fotoKTP' WHERE id_pd = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
     echo "<script>alert('Data berhasil diubah!');</script>";
-    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonankartukeluarga'>";
+    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonansuratpindahdatang'>";
   } else {
     echo "<script>alert('Terjadi kesalahan!');</script>";
-    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonankartukeluarga'>";
+    echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonansuratpindahdatang'>";
   }
 } else if(isset($_POST['ubah']) and $baru === 'Selesai') {
   echo "<script>alert('Data sudah di acc, tidak bisa diubah!');</script>";
-  echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonankartukeluarga'>";
+  echo "<meta http-equiv='refresh' content='0;url=../index.php?page=permohonansuratpindahdatang'>";
 }
