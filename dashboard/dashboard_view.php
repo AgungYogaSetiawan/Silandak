@@ -77,8 +77,8 @@
               <p>Surat Keterangan Pindah Datang digunakan sebagai dasar proses perekaman dalam data base kependudukan, perubahan KK bagi kepala/anggota keluarga yang tidak pindah dan proses Penerbitan KK/KTP di alamat baru.</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarSuratPindahDatang"><i class="fas fa-user-edit"></i> Daftar</button>
-              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratan'><i class="fas fa-scroll"></i> Persyaratan</button>
+              <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarSPD"><i class="fas fa-user-edit"></i> Daftar</button>
+              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratanSPD'><i class="fas fa-scroll"></i> Persyaratan</button>
             </div>
           </div>
         </div>
