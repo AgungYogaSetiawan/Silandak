@@ -107,8 +107,8 @@
               <p>Data biometric adalah data penduduk yang disertai dengan ciri-ciri tubuh berupa sidik jari, iris mata dan wajah. Dengan selesainya penginputan dan proses identifikasi data penduduk, maka output yang dihasilkan tersimpan dalam cip, gunanya untuk menyimpan biodata, sidik jari dan tanda tangan.</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarRekamKTP"><i class="fas fa-user-edit"></i> Daftar</button>
-              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratan'><i class="fas fa-scroll"></i> Persyaratan</button>
+              <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarKTP"><i class="fas fa-user-edit"></i> Daftar</button>
+              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratanKTP'><i class="fas fa-scroll"></i> Persyaratan</button>
             </div>
           </div>
         </div>
