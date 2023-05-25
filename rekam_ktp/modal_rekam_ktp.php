@@ -384,7 +384,8 @@
       <div class="modal-body" id="bodydetail">
         <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
           <?php
-          $sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user";
+          $id = $_SESSION['id'];
+          $sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
           $result = mysqli_query($conn,$sql);
           $data = mysqli_fetch_array($result);
           ?>
@@ -544,7 +545,8 @@
           <hr>
           <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
           <?php
-          $sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user";
+          $id = $_SESSION['id'];
+          $sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
           $result = mysqli_query($conn,$sql);
           echo "<table class='table table-striped' id='tabel'>";
           echo "<thead>";
