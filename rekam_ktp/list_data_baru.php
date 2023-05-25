@@ -49,7 +49,7 @@
                         }
                         ?>
                         </td>
-                        <td><button class="btn btn-info" data-toggle="modal" data-target="#modalViewVerifKTP"><i class="fas fa-search"></i></button></td>
+                        <td><a href="?page=detailKTP&id_ktp=<?php echo $row['user_id'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a></td>
                       </tr>
                       <?php
                       }
@@ -67,3 +67,39 @@
     </div>
   </section>
 </div>
+
+<!-- Modal view verif baru rekam ktp -->
+<div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="modalViewVerifKTPLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalViewVerifKTPLabel">Form Pendaftaran Rekam KTP</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <hr>
+      <div class="modal-body" id="bodydetail">
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal view verif baru rekam ktp -->
+
+<script>
+$(document).ready(function(){
+	$('.btnktp').click(function(){
+		var data_id = $(this).data("id_ktp")
+		$.ajax({
+			url: "rekam_ktp/detail.php",
+			method: "POST",
+			data: {data_id: data_id},
+			success: function(data){
+				$("#bodydetail").html(data)
+				$("#show").modal('show')
+			}
+		})
+	})
+})
+</script>

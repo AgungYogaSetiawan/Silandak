@@ -1,2 +1,3 @@
-RewriteEngine on
-RewriteRule ^([a-zA-Z]+)$ index.php?page=$1
+# RewriteEngine on
+# RewriteRule ^([a-zA-Z]+)$ index.php?page=$1
+# RewriteRule ^([a-zA-Z]+)$ index.php?id_ktp=$1

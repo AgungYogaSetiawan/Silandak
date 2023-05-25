@@ -41,7 +41,7 @@
         </div>
         <div class="nav-collapse">
             <ul class="navbar-nav">
-                <li class="nav-item active h6 mt-2"><a href="beranda" class="nav-link">Aplikasi Pelayanan Online Kecamatan Banua Lawas</a></li>
+                <!-- <li class="nav-item active h6 mt-2"><a href="beranda" class="nav-link">Aplikasi Pelayanan Online Kecamatan Banua Lawas</a></li> -->
             </ul>
         </div>
         <form class="form-inline ml-auto"></form>

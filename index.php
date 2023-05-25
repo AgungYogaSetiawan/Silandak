@@ -168,6 +168,9 @@ switch ($page) {
     case 'viewVerifRekamKTP':
         include "rekam_ktp/view_verifikasi.php";
         break;
+    case 'detailKTP':
+        include "rekam_ktp/detail.php";
+        break;
     // end rekam ktp
 
     case 'datakependudukan':
