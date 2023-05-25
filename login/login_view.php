@@ -67,7 +67,7 @@ if(isset($_POST["login"])){
         $_SESSION['username'] = $username;
         $_SESSION['peran'] = "admin kecamatan";
         // alihkan ke menu warga
-        echo "<script>alert('Login Berhasil! Selamat datang=$username');</script>";
+        echo "<script>alert('Login Berhasil Selamat datang $username');</script>";
         echo "<meta http-equiv='refresh' content='0;url=../index.php?page=adminkecamatan'>";
         exit;
       } else if($row["level"] == "admin desa"){
@@ -75,7 +75,7 @@ if(isset($_POST["login"])){
         $_SESSION['username'] = $username;
         $_SESSION['peran'] = "admin desa";
         // alihkan ke menu warga
-        echo "<script>alert('Login Berhasil! Selamat datang=$username');</script>";
+        echo "<script>alert('Login Berhasil Selamat datang $username');</script>";
         echo "<meta http-equiv='refresh' content='0;url=../index.php?page=admindesa'>";
         exit;
       }
