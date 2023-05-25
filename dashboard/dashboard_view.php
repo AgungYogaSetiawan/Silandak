@@ -92,8 +92,8 @@
               <p>Biodata WNI tidak terdapat masa berlaku dan merupakan salah satu dokumen administrasi kependudukan atau identitas penduduk dalam bentuk fisik kertas bukan blangko seperti KTP.</p>
             </div>
             <div class="card-footer">
-              <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarBiodataWNI"><i class="fas fa-user-edit"></i> Daftar</button>
-              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratan'><i class="fas fa-scroll"></i> Persyaratan</button>
+              <button class="btn btn-success" data-toggle="modal" data-target="#modalDaftarWNI"><i class="fas fa-user-edit"></i> Daftar</button>
+              <button class="btn btn-primary" data-toggle='modal' data-target='#modalPersyaratanWNI'><i class="fas fa-scroll"></i> Persyaratan</button>
             </div>
           </div>
         </div>
