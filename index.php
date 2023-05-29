@@ -44,6 +44,7 @@ switch ($page) {
     case 'edituser':
         include "pengguna/pengguna_edit.php";
         break;
+
     // untuk kartu keluarga
     case 'permohonankartukeluarga':
         include "kartu_keluarga/permohonan_kk.php";
@@ -59,6 +60,9 @@ switch ($page) {
         break;
     case 'viewVerifKartuKeluarga':
         include "kartu_keluarga/view_verifikasi.php";
+        break;
+    case 'detailKK':
+        include "kartu_keluarga/detail.php";
         break;
     // end kartu keluarga
 
@@ -78,6 +82,9 @@ switch ($page) {
     case 'viewVerifAktaKelahiran':
         include "akta_kelahiran/view_verifikasi.php";
         break;
+    case 'detailAK':
+        include "akta_kelahiran/detail.php";
+        break;
     // end akta kelahiran
 
     // surat pindah
@@ -95,6 +102,9 @@ switch ($page) {
         break;
     case 'viewVerifSuratPindah':
         include "surat_pindah/view_verifikasi.php";
+        break;
+    case 'detailSP':
+        include "surat_pindah/detail.php";
         break;
     // end surat pindah
 
@@ -114,6 +124,9 @@ switch ($page) {
     case 'viewVerifAktaKematian':
         include "akta_kematian/view_verifikasi.php";
         break;
+    case 'detailAKM':
+        include "akta_kematian/detail.php";
+        break;
     // end akta kematian
 
     // surat pindah datang
@@ -132,6 +145,9 @@ switch ($page) {
     case 'viewVerifSuratPindahDatang':
         include "surat_pindah_datang/view_verifikasi.php";
         break;
+    case 'detailSPD':
+        include "surat_pindah_datang/detail.php";
+        break;
     // end surat pindah datang
 
     // biodata wni
@@ -149,6 +165,9 @@ switch ($page) {
         break;
     case 'viewVerifBiodataWNI':
         include "biodata_wni/view_verifikasi.php";
+        break;
+    case 'detailWNI':
+        include "biodata_wni/detail.php";
         break;
     // end biodata wni
 

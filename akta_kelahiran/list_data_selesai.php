@@ -49,7 +49,7 @@
                         }
                         ?>
                         </td>
-                        <td><button class="btn btn-info" data-toggle="modal" data-target="#modalViewVerifAktaLahir"><i class="fas fa-search"></i></button></td>
+                        <td><a href="?page=detailAK&id_lahir=<?php echo $row['user_id'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a></td>
                       </tr>
                       <?php
                       }

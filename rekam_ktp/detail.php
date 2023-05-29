@@ -9,7 +9,7 @@ $id = $row['id_ktp'];
 if(isset($_POST['setuju']) and $baru === 'Baru') {
   $keterangan = htmlspecialchars($_POST['keterangan']);
   $status_berkas = "Selesai";
-  
+    
   $sql = "UPDATE tb_rekam_ktp SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_ktp = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
