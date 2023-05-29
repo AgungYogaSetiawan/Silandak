@@ -1,27 +1,27 @@
 <?php
 // koding jika disetujui
-$idktp = $_GET['id_ktp'];
-$sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idktp'";
+$idkk = $_GET['id_kk'];
+$sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idkk'";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
 $baru = $row['status_berkas'];
-$id = $row['id_ktp'];
+$id = $row['id_kk'];
 if(isset($_POST['setuju']) and $baru === 'Baru') {
   $keterangan = htmlspecialchars($_POST['keterangan']);
   $status_berkas = "Selesai";
     
-  $sql = "UPDATE tb_rekam_ktp SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_ktp = '$id'";
+  $sql = "UPDATE tb_kk SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_kk = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
     echo "<script>alert('Data berhasil disetujui!');</script>";
-    echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiRekamKTP'>";
+    echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiKartuKeluarga'>";
   } else {
     echo "<script>alert('Terjadi kesalahan!');</script>";
   }
 } else if(isset($_POST['setuju']) and $baru === 'Selesai') {
   echo "<script>alert('Data sudah di acc, tidak bisa diubah!');</script>";
-  echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiRekamKTP'>";
+  echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiKartuKeluarga'>";
 }
 ?>
 
@@ -39,7 +39,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <form method="post" enctype="multipart/form-data" role="form">
-              <input type="hidden" id="id_ktp" name="id_ktp" value="<?php echo $row['id_ktp']; ?>" readonly>
+              <input type="hidden" id="id_kk" name="id_kk" value="<?php echo $row['id_kk']; ?>" readonly>
               <div class="row">
                 <div class="form-group col-6">
                   <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -164,6 +164,33 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
               </div>
               <hr>
               <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
+                <div class="form-group">
+                <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
+                <div class="custom-file">
+                  <input type="file" class="form-control" name="file_buku_nikah">
+                  <p class="text-dark">File yang diunggah: <?php echo $row['file_buku_nikah']; ?></p>
+                  <img src="assets/<?php echo $row['file_buku_nikah'] ?>" width="100">
+                  <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
+                <div class="custom-file">
+                  <input type="file" class="form-control" name="file_ktp">
+                  <p class="text-dark">File yang diunggah: <?php echo $row['file_ktp']; ?></p>
+                  <img src="assets/<?php echo $row['file_ktp'] ?>" width="100">
+                  <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
+                <div class="custom-file">
+                  <input type="file" class="form-control" name="file_ijazah">
+                  <p class="text-dark">File yang diunggah: <?php echo $row['file_ijazah']; ?></p>
+                  <img src="assets/<?php echo $row['file_ijazah'] ?>" width="100">
+                  <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+                </div>
+              </div>
               <div class="form-group">
                 <label>Upload Foto/Scan Kartu Keluarga</label>
                 <div class="custom-file">
@@ -195,7 +222,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
                 <?php
                 // $id = $_SESSION['id'];
-                $sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idktp'";
+                $sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idkk'";
                 $result = mysqli_query($conn,$sql);
                 echo "<table class='table table-striped' id='tabel'>";
                 echo "<thead>";
