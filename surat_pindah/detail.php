@@ -1,27 +1,27 @@
 <?php
 // koding jika disetujui
-$idktp = $_GET['id_ktp'];
-$sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idktp'";
+$idsp = $_GET['id_sp'];
+$sql = "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idsp'";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
 $baru = $row['status_berkas'];
-$id = $row['id_ktp'];
+$id = $row['id_sp'];
 if(isset($_POST['setuju']) and $baru === 'Baru') {
   $keterangan = htmlspecialchars($_POST['keterangan']);
   $status_berkas = "Selesai";
     
-  $sql = "UPDATE tb_rekam_ktp SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_ktp = '$id'";
+  $sql = "UPDATE tb_surat_pindah SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_sp = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
     echo "<script>alert('Data berhasil disetujui!');</script>";
-    echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiRekamKTP'>";
+    echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiSuratPindah'>";
   } else {
     echo "<script>alert('Terjadi kesalahan!');</script>";
   }
 } else if(isset($_POST['setuju']) and $baru === 'Selesai') {
   echo "<script>alert('Data sudah di acc, tidak bisa diubah!');</script>";
-  echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiRekamKTP'>";
+  echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiSuratPindah'>";
 }
 ?>
 
@@ -165,11 +165,29 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
               <hr>
               <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
               <div class="form-group">
+                <label>Upload Foto/Scan Surat Keterangan Pindah</label>
+                <div class="custom-file">
+                  <input type="file" class="form-control" name="file_kp">
+                  <p class="text-dark">File yang diunggah: <?php echo $row['file_kp']; ?></p>
+                  <img src="assets/<?php echo $row['file_kp'] ?>" width="100">
+                  <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+                </div>
+              </div>
+              <div class="form-group">
                 <label>Upload Foto/Scan Kartu Keluarga</label>
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_kk">
                   <p class="text-dark">File yang diunggah: <?php echo $row['file_kk']; ?></p>
                   <img src="assets/<?php echo $row['file_kk'] ?>" width="100">
+                  <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
+                <div class="custom-file">
+                  <input type="file" class="form-control" name="file_ktp">
+                  <p class="text-dark">File yang diunggah: <?php echo $row['file_ktp']; ?></p>
+                  <img src="assets/<?php echo $row['file_ktp'] ?>" width="100">
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -195,7 +213,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
                 <?php
                 // $id = $_SESSION['id'];
-                $sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idktp'";
+                $sql = "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idsp'";
                 $result = mysqli_query($conn,$sql);
                 echo "<table class='table table-striped' id='tabel'>";
                 echo "<thead>";

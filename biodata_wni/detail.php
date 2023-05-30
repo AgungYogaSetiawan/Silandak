@@ -1,27 +1,27 @@
 <?php
 // koding jika disetujui
-$idktp = $_GET['id_ktp'];
-$sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idktp'";
+$idbio = $_GET['id_bio'];
+$sql = "SELECT * FROM tb_bio_wni a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idbio'";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
 $baru = $row['status_berkas'];
-$id = $row['id_ktp'];
+$id = $row['id_bio'];
 if(isset($_POST['setuju']) and $baru === 'Baru') {
   $keterangan = htmlspecialchars($_POST['keterangan']);
   $status_berkas = "Selesai";
     
-  $sql = "UPDATE tb_rekam_ktp SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_ktp = '$id'";
+  $sql = "UPDATE tb_bio_wni SET keterangan = '$keterangan', status_berkas = '$status_berkas' WHERE id_bio = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
     echo "<script>alert('Data berhasil disetujui!');</script>";
-    echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiRekamKTP'>";
+    echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiBiodataWNI'>";
   } else {
     echo "<script>alert('Terjadi kesalahan!');</script>";
   }
 } else if(isset($_POST['setuju']) and $baru === 'Selesai') {
   echo "<script>alert('Data sudah di acc, tidak bisa diubah!');</script>";
-  echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiRekamKTP'>";
+  echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiBiodataWNI'>";
 }
 ?>
 
@@ -39,7 +39,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <form method="post" enctype="multipart/form-data" role="form">
-              <input type="hidden" id="id_ktp" name="id_ktp" value="<?php echo $row['id_ktp']; ?>" readonly>
+              <input type="hidden" id="id_bio" name="id_bio" value="<?php echo $row['id_bio']; ?>" readonly>
               <div class="row">
                 <div class="form-group col-6">
                   <label for="kewarganegaraan">Kewarganegaraan</label>
@@ -195,7 +195,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
                 <?php
                 // $id = $_SESSION['id'];
-                $sql = "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idktp'";
+                $sql = "SELECT * FROM tb_bio_wni a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idbio'";
                 $result = mysqli_query($conn,$sql);
                 echo "<table class='table table-striped' id='tabel'>";
                 echo "<thead>";
