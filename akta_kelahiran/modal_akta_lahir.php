@@ -179,8 +179,10 @@
             <div class="custom-file">
               <input type="file" class="form-control" name="file_akta_lahir">
               <?php
-              if (isset($data_temp['file_akta_lahir'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_akta_lahir'] . '</p>';
+              if (isset($_SESSION['file_akta_lahir'])) {
+                $fileName = $_SESSION['file_akta_lahir'];
+                echo '<p>File yang diunggah: ' . $fileName . '</p>';
+                echo '<img src="assets/' . $fileName . '" width="100">';
               }
               ?>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
@@ -191,8 +193,10 @@
             <div class="custom-file">
               <input type="file" class="form-control" name="file_ket_lahir">
               <?php
-              if (isset($data_temp['file_ket_lahir'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_ket_lahir'] . '</p>';
+              if (isset($_SESSION['file_ket_lahir'])) {
+                $fileName = $_SESSION['file_ket_lahir'];
+                echo '<p>File yang diunggah: ' . $fileName . '</p>';
+                echo '<img src="assets/' . $fileName . '" width="100">';
               }
               ?>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
@@ -203,8 +207,10 @@
             <div class="custom-file">
               <input type="file" class="form-control" name="file_buku_nikah">
               <?php
-              if (isset($data_temp['file_buku_nikah'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_buku_nikah'] . '</p>';
+              if (isset($_SESSION['file_buku_nikah'])) {
+                $fileName = $_SESSION['file_buku_nikah'];
+                echo '<p>File yang diunggah: ' . $fileName . '</p>';
+                echo '<img src="assets/' . $fileName . '" width="100">';
               }
               ?>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
@@ -215,8 +221,10 @@
             <div class="custom-file">
               <input type="file" class="form-control" name="file_kk">
               <?php
-              if (isset($data_temp['file_kk'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_kk'] . '</p>';
+              if (isset($_SESSION['file_kk'])) {
+                $fileName = $_SESSION['file_kk'];
+                echo '<p>File yang diunggah: ' . $fileName . '</p>';
+                echo '<img src="assets/' . $fileName . '" width="100">';
               }
               ?>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>

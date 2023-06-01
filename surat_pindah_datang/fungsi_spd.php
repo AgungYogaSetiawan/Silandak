@@ -70,20 +70,24 @@ if(isset($_POST['kirim'])){
     $ekstensi_kp = strtolower(end($pdf_kp));
     $ukuran_kp = $_FILES['file_kp']['size'];
     $file_tmp_kp = $_FILES['file_kp']['tmp_name'];
+    move_uploaded_file($file_tmp_kp, '../assets/'.$file_kp);
     
     $file_ktp = $_FILES['file_ktp']['name'];
     $pdf_ktp = explode('.', $file_ktp);
     $ekstensi_ktp = strtolower(end($pdf_ktp));
     $ukuran_ktp = $_FILES['file_ktp']['size'];
     $file_tmp_ktp = $_FILES['file_ktp']['tmp_name'];
+    move_uploaded_file($file_tmp_ktp, '../assets/'.$file_ktp);
 
     // simpan data ke array
-    $data_temp["user_id"] = $user_id;
-    $data_temp["file_kp"] = $file_kp;
-    $data_temp["file_ktp"] = $file_ktp;
+    // $data_temp["user_id"] = $user_id;
+    // $data_temp["file_kp"] = $file_kp;
+    // $data_temp["file_ktp"] = $file_ktp;
 
     // Simpan variabel array $data ke dalam session menggunakan fungsi $_SESSION.
-    $_SESSION["data_temp"] = $data_temp;
+    $_SESSION["file_kp"] = $file_kp;
+    $_SESSION["file_ktp"] = $file_ktp;
+
 
     $_SESSION['message'] = "Data berhasil disimpan sementara";
     header("Location: ../index.php?page=beranda");

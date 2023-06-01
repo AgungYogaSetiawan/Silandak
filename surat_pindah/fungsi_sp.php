@@ -76,7 +76,7 @@ if(isset($_POST['kirim'])){
       echo "<meta http-equiv='refresh' content='0;url=../index.php?page=beranda'>";
     }  
 } else if(isset($_POST["simpan_sementara"])) {
-    $user_id = $_POST['user_id'];
+    // $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
     
     $file_kp = $_FILES['file_kp']['name'];
@@ -84,27 +84,33 @@ if(isset($_POST['kirim'])){
     $ekstensi_kp = strtolower(end($pdf_kp));
     $ukuran_kp = $_FILES['file_kp']['size'];
     $file_tmp_kp = $_FILES['file_kp']['tmp_name'];
+    move_uploaded_file($file_tmp_kp, '../assets/'.$file_kp);
 
     $file_kk = $_FILES['file_kk']['name'];
     $pdf_kk = explode('.', $file_kk);
     $ekstensi_kk = strtolower(end($pdf_kk));
     $ukuran_kk = $_FILES['file_kk']['size'];
     $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+    move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
     
     $file_ktp = $_FILES['file_ktp']['name'];
     $pdf_ktp = explode('.', $file_ktp);
     $ekstensi_ktp = strtolower(end($pdf_ktp));
     $ukuran_ktp = $_FILES['file_ktp']['size'];
     $file_tmp_ktp = $_FILES['file_ktp']['tmp_name'];
+    move_uploaded_file($file_tmp_ktp, '../assets/'.$file_ktp);
 
     // simpan data ke array
-    $data_temp["user_id"] = $user_id;
-    $data_temp["file_kp"] = $file_kp;
-    $data_temp["file_ktp"] = $file_ktp;
-    $data_temp["file_kk"] = $file_kk;
+    // $data_temp["user_id"] = $user_id;
+    // $data_temp["file_kp"] = $file_kp;
+    // $data_temp["file_ktp"] = $file_ktp;
+    // $data_temp["file_kk"] = $file_kk;
 
     // Simpan variabel array $data ke dalam session menggunakan fungsi $_SESSION.
-    $_SESSION["data_temp"] = $data_temp;
+    $_SESSION["file_kp"] = $file_kp;
+    $_SESSION["file_kk"] = $file_kk;
+    $_SESSION["file_ktp"] = $file_ktp;
+
 
     $_SESSION['message'] = "Data berhasil disimpan sementara";
     header("Location: ../index.php?page=beranda");

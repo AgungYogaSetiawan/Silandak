@@ -175,10 +175,13 @@
             <div class="custom-file">
               <input type="file" class="form-control" name="file_kk">
               <?php
-              if (isset($data_temp['file_kk'])) {
-                echo '<p>File yang diunggah: ' . $data_temp['file_kk'] . '</p>';
+              if (isset($_SESSION['file_name'])) {
+                $fileName = $_SESSION['file_name'];
+                echo '<p>File yang diunggah: ' . $fileName . '</p>';
+                echo '<img src="assets/' . $fileName . '" width="100">';
               }
               ?>
+              
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>

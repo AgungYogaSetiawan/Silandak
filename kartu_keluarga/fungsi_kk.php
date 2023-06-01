@@ -96,7 +96,7 @@ if(isset($_POST['kirim'])){
     }  
 // koding simpan sementara
 } else if(isset($_POST["simpan_sementara"])) {
-    $user_id = $_POST['user_id'];
+    // $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
     
     $file_buku_nikah = $_FILES['file_buku_nikah']['name'];
@@ -104,34 +104,44 @@ if(isset($_POST['kirim'])){
     $ekstensi_buku_nikah = strtolower(end($pdf_buku_nikah));
     $ukuran_buku_nikah = $_FILES['file_buku_nikah']['size'];
     $file_tmp_buku_nikah = $_FILES['file_buku_nikah']['tmp_name'];
+    move_uploaded_file($file_tmp_buku_nikah, '../assets/' . $file_buku_nikah);
+
     
     $file_ktp = $_FILES['file_ktp']['name'];
     $pdf_ktp = explode('.', $file_ktp);
     $ekstensi_ktp = strtolower(end($pdf_ktp));
     $ukuran_ktp = $_FILES['file_ktp']['size'];
     $file_tmp_ktp = $_FILES['file_ktp']['tmp_name'];
+    move_uploaded_file($file_tmp_ktp, '../assets/' . $file_ktp);
+
 
     $file_ijazah = $_FILES['file_ijazah']['name'];
     $pdf_ijazah = explode('.', $file_ijazah);
     $ekstensi_ijazah = strtolower(end($pdf_ijazah));
     $ukuran_ijazah = $_FILES['file_ijazah']['size'];
     $file_tmp_ijazah = $_FILES['file_ijazah']['tmp_name'];
+    move_uploaded_file($file_tmp_ijazah, '../assets/' . $file_ijazah); 
 
     $file_kk = $_FILES['file_kk']['name'];
     $pdf_kk = explode('.', $file_kk);
     $ekstensi_kk = strtolower(end($pdf_kk));
     $ukuran_kk = $_FILES['file_kk']['size'];
     $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+    move_uploaded_file($file_tmp_kk, '../assets/' . $file_kk);
 
     // simpan data ke array
-    $data_temp["user_id"] = $user_id;
-    $data_temp["file_buku_nikah"] = $file_buku_nikah;
-    $data_temp["file_ktp"] = $file_ktp;
-    $data_temp["file_ijazah"] = $file_ijazah;
-    $data_temp["file_kk"] = $file_kk;
+    // $data_temp["user_id"] = $user_id;
+    // $data_temp["file_buku_nikah"] = $file_buku_nikah;
+    // $data_temp["file_ktp"] = $file_ktp;
+    // $data_temp["file_ijazah"] = $file_ijazah;
+    // $data_temp["file_kk"] = $file_kk;
 
     // Simpan variabel array $data ke dalam session menggunakan fungsi $_SESSION.
-    $_SESSION["data_temp"] = $data_temp;
+    $_SESSION["file_buku_nikah"] = $file_buku_nikah;
+    $_SESSION["file_ktp"] = $file_ktp;
+    $_SESSION["file_ijazah"] = $file_ijazah;
+    $_SESSION["file_kk"] = $file_kk;
+
 
     $_SESSION['message'] = "Data berhasil disimpan sementara";
     header("Location: ../index.php?page=beranda");

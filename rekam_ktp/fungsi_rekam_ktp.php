@@ -45,7 +45,7 @@ if(isset($_POST['kirim'])){
     }  
 // koding simpan sementara
 } else if(isset($_POST["simpan_sementara"])) {
-    $user_id = $_POST['user_id'];
+    // $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
 
     $file_kk = $_FILES['file_kk']['name'];
@@ -53,13 +53,14 @@ if(isset($_POST['kirim'])){
     $ekstensi_kk = strtolower(end($pdf_kk));
     $ukuran_kk = $_FILES['file_kk']['size'];
     $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+    move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
 
     // simpan data ke array
-    $data_temp["user_id"] = $user_id;
-    $data_temp["file_kk"] = $file_kk;
+    // $data_temp["user_id"] = $user_id;
+    // $data_temp["file_kk"] = $file_kk;
 
     // Simpan variabel array $data ke dalam session menggunakan fungsi $_SESSION.
-    $_SESSION["data_temp"] = $data_temp;
+    $_SESSION["file_name"] = $file_kk;
 
     $_SESSION['message'] = "Data berhasil disimpan sementara";
     header("Location: ../index.php?page=beranda");
