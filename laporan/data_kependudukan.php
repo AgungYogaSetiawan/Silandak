@@ -11,7 +11,7 @@
                 <h4 class="text-danger">Data Kependudukan</h4>
             </div>
             <div class="card-body">
-            <a href="#" class="btn btn-primary btn-md mb-4"><i class="fas fa-plus"></i> Tambah Data</a>
+            <a href="?page=tambahdatakependudukan" class="btn btn-primary btn-md mb-4"><i class="fas fa-plus"></i> Tambah Data</a>
             <div class="table-responsive">
                 <table class="table table-hover table-bordered">
                     <thead>

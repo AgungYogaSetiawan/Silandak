@@ -195,6 +195,15 @@ switch ($page) {
     case 'datakependudukan':
         include "laporan/data_kependudukan.php";
         break;
+    case 'tambahdatakependudukan':
+        include "laporan/tambah_penduduk.php";
+        break;
+    case 'editdatakependudukan':
+        include "laporan/edit_penduduk.php";
+        break;
+    case 'hapusdatakependudukan':
+        include "laporan/hapus_penduduk.php";
+        break;
     case 'lapor':
         include "pengaduan/lapor_view.php";
         break;
