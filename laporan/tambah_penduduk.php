@@ -1,4 +1,38 @@
+<?php
 
+
+if(isset($_POST['tambah'])){
+    // $id_penduduk =  $_POST['id_penduduk'];
+    $desa =  htmlspecialchars($_POST['desa']);
+    $l_awal =  htmlspecialchars($_POST['l_awal']);
+    $p_awal = htmlspecialchars($_POST['p_awal']);
+    $tot_awal =  htmlspecialchars($_POST['tot_awal']);
+    $jml_kk_awal =  htmlspecialchars($_POST['jml_kk_awal']);
+    $l_lahir =  htmlspecialchars($_POST['l_lahir']);
+    $p_lahir =  htmlspecialchars($_POST['p_lahir']);
+    $tot_lahir =  htmlspecialchars($_POST['tot_lahir']);
+    $l_mati = htmlspecialchars($_POST['l_mati']);
+    $p_mati = htmlspecialchars($_POST['p_mati']);
+    $tot_mati = htmlspecialchars($_POST['tot_mati']);
+    $l_datang = htmlspecialchars($_POST['l_datang']);
+    $p_datang = htmlspecialchars($_POST['p_datang']);
+    $tot_datang = htmlspecialchars($_POST['tot_datang']);
+    $l_pindah = htmlspecialchars($_POST['l_pindah']);
+    $p_pindah = htmlspecialchars($_POST['p_pindah']);
+    $tot_pindah = htmlspecialchars($_POST['tot_pindah']);
+    $l_akhir = htmlspecialchars($_POST['l_akhir']);
+    $p_akhir = htmlspecialchars($_POST['p_akhir']);
+    $tot_akhir = htmlspecialchars($_POST['tot_akhir']);
+    $jml_kk_akhir = htmlspecialchars($_POST['jml_kk_akhir']);
+
+    // menyimpan data ke tabel
+    $sql = "INSERT INTO tb_penduduk (id_penduduk,desa,l_awal,p_awal,tot_awal,jml_kk_awal,l_lahir,p_lahir,tot_lahir,l_mati,p_mati,tot_mati,l_datang,p_datang,tot_datang,l_pindah,p_pindah,tot_pindah,l_akhir,p_akhir,tot_akhir,jml_kk_akhir) VALUES ('','$desa','$l_awal','$p_awal','$tot_awal','$jml_kk_awal','$l_lahir','$p_lahir','$tot_lahir','$l_mati','$p_mati','$tot_mati','$l_datang','$p_datang','$tot_datang','$l_pindah','$p_pindah','$tot_pindah','$l_akhir','$p_akhir','$tot_akhir','$jml_kk_akhir')";
+    mysqli_query($conn,$sql);
+    
+    echo "<script>alert('Data Berhasil Ditambahkan');</script>";
+    echo "<meta http-equiv='refresh' content='0;url=index.php?page=datakependudukan'>";
+}
+?>
 
 
 
@@ -91,8 +125,8 @@
                   <input id="l_pindah" type="number" class="form-control" name="l_pindah">
                 </div>
                 <div class="form-group col-6">
-                  <label for="p_datang">Jumlah Pindah Perempuan Bulan Ini</label>
-                  <input id="p_datang" type="number" class="form-control" name="p_datang">
+                  <label for="p_pindah">Jumlah Pindah Perempuan Bulan Ini</label>
+                  <input id="p_pindah" type="number" class="form-control" name="p_pindah">
                 </div>
               </div>
               <div class="row">
