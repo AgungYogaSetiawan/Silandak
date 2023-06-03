@@ -74,38 +74,46 @@
                     </tr>
                     </thead>
                     <tbody>
+                        <?php
+                        $query = mysqli_query($conn, "SELECT * FROM tb_penduduk");
+                        $no = 1;
+                        while($row = mysqli_fetch_array($query)) {
+                        ?>
                         <tr>
-                            <td align="center">1</td>
-                            <td align="center">Banua Rantau</td>
-                            <td align="center">4814</td>
-                            <td align="center">4900</td>
-                            <td align="center">9174</td>
-                            <td align="center">3050</td>
-                            <td align="center">5</td>
-                            <td align="center">7</td>
-                            <td align="center">12</td>
-                            <td align="center">6</td>
-                            <td align="center">4</td>
-                            <td align="center">10</td>
-                            <td align="center">4</td>
-                            <td align="center">7</td>
-                            <td align="center">11</td>
-                            <td align="center">5</td>
-                            <td align="center">4</td>
-                            <td align="center">9</td>
-                            <td align="center">4812</td>
-                            <td align="center">4906</td>
-                            <td align="center">9718</td>
-                            <td align="center">3056</td>
+                            <td align="center"><?php echo $no++; ?></td>
+                            <td align="center"><?php echo $row['desa']; ?></td>
+                            <td align="center"><?php echo $row['l_awal']; ?></td>
+                            <td align="center"><?php echo $row['p_awal']; ?></td>
+                            <td align="center"><?php echo $row['tot_awal']; ?></td>
+                            <td align="center"><?php echo $row['jml_kk_awal']; ?></td>
+                            <td align="center"><?php echo $row['l_lahir']; ?></td>
+                            <td align="center"><?php echo $row['p_lahir']; ?></td>
+                            <td align="center"><?php echo $row['tot_lahir']; ?></td>
+                            <td align="center"><?php echo $row['l_mati']; ?></td>
+                            <td align="center"><?php echo $row['p_mati']; ?></td>
+                            <td align="center"><?php echo $row['tot_mati']; ?></td>
+                            <td align="center"><?php echo $row['l_datang']; ?></td>
+                            <td align="center"><?php echo $row['p_datang']; ?></td>
+                            <td align="center"><?php echo $row['tot_datang']; ?></td>
+                            <td align="center"><?php echo $row['l_pindah']; ?></td>
+                            <td align="center"><?php echo $row['p_pindah']; ?></td>
+                            <td align="center"><?php echo $row['tot_pindah']; ?></td>
+                            <td align="center"><?php echo $row['l_akhir']; ?></td>
+                            <td align="center"><?php echo $row['p_akhir']; ?></td>
+                            <td align="center"><?php echo $row['tot_akhir']; ?></td>
+                            <td align="center"><?php echo $row['jml_kk_akhir']; ?></td>
                             <td>
                                 <div class='btn-row'>
                                     <div class='btn-group'>
-                                        <a href='#' class='btn btn-warning btn-md mr-2'><i class='fas fa-user-edit'></i></a>
-                                        <a href='#' class='btn btn-danger btn-md'><i class='fas fa-trash'></i></a>
+                                        <a href="?page=editdatakependudukan&id_penduduk=<?php echo $row['id_penduduk'] ?>" class='btn btn-warning btn-md mr-2'><i class='fas fa-user-edit'></i></a>
+                                        <a href="?page=hapusdatakependudukan&id_penduduk=<?php echo $row['id_penduduk'] ?>" class='btn btn-danger btn-md'><i class='fas fa-trash'></i></a>
                                     </div>
                                 </div>
                             </td>
                         </tr>
+                        <?php
+                        }
+                        ?>
                     </tbody>
                 </table>
             </div>

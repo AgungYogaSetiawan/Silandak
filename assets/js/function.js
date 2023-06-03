@@ -168,3 +168,55 @@ $(document).ready(function(){
 // <!-- end script hide/show repass password -->
 
 
+// script hitung total penduduk awal bulan
+function hitungJmlAwal() {
+    var l_awal = parseFloat(document.getElementById("l_awal").value);
+    var p_awal = parseFloat(document.getElementById("p_awal").value);
+    var result = l_awal + p_awal;
+    document.getElementById('tot_awal').value = result;
+}
+
+
+// script hitung total penduduk lahir
+function hitungJmlLahir() {
+    var l_lahir = parseFloat(document.getElementById("l_lahir").value);
+    var p_lahir = parseFloat(document.getElementById("p_lahir").value);
+    var result = l_lahir + p_lahir;
+    document.getElementById('tot_lahir').value = result;
+}
+
+
+// script hitung total penduduk mati
+function hitungJmlMati() {
+    var l_mati = parseFloat(document.getElementById("l_mati").value);
+    var p_mati = parseFloat(document.getElementById("p_mati").value);
+    var result = l_mati + p_mati;
+    document.getElementById('tot_mati').value = result;
+}
+
+
+// script hitung total penduduk datang
+function hitungJmlDatang() {
+    var l_datang = parseFloat(document.getElementById("l_datang").value);
+    var p_datang = parseFloat(document.getElementById("p_datang").value);
+    var result = l_datang + p_datang;
+    document.getElementById('tot_datang').value = result;
+}
+
+
+// script hitung total penduduk pindah
+function hitungJmlPindah() {
+    var l_pindah = parseFloat(document.getElementById("l_pindah").value);
+    var p_pindah = parseFloat(document.getElementById("p_pindah").value);
+    var result = l_pindah + p_pindah;
+    document.getElementById('tot_pindah').value = result;
+}
+
+
+// script hitung total penduduk akhir bulan
+function hitungJmlAkhir() {
+    var l_akhir = parseFloat(document.getElementById("l_akhir").value);
+    var p_akhir = parseFloat(document.getElementById("p_akhir").value);
+    var result = l_akhir + p_akhir;
+    document.getElementById('tot_akhir').value = result;
+}
