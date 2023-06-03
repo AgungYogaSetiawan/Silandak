@@ -62,8 +62,47 @@
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.4.1/js/responsive.bootstrap.min.js"></script>
+<!-- sweet alert js -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Fungsi custom script js -->
 <script src="assets/js/function.js"></script>
+
+<?php if(@$_SESSION['sukses']){ ?>
+            <script>
+                Swal.fire({            
+                    icon: 'success',                   
+                    title: 'Sukses',    
+                    text: 'data berhasil dihapus',                        
+                    timer: 3000,                                
+                    showConfirmButton: false
+                })
+            </script>
+    <!-- jangan lupa untuk menambahkan unset agar sweet alert tidak muncul lagi saat di refresh -->
+    <?php unset($_SESSION['sukses']); } ?>
+    
+    
+        <!-- di bawah ini adalah script untuk konfirmasi hapus data dengan sweet alert  -->
+        <script>
+            $('.alert_hapus').on('click',function(){
+                var getLink = $(this).attr('href');
+                Swal.fire({
+                    title: "Yakin hapus data?",            
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Ya',
+                    cancelButtonColor: '#3085d6',
+                    cancelButtonText: "Batal"
+                
+                }).then(result => {
+                    //jika klik ya maka arahkan ke proses.php
+                    if(result.isConfirmed){
+                        window.location.href = getLink
+                    }
+                })
+                return false;
+            });
+        </script>
 
 <!-- JS Libraies -->
 <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
