@@ -106,7 +106,7 @@
                                 <div class='btn-row'>
                                     <div class='btn-group'>
                                         <a href="?page=editdatakependudukan&id_penduduk=<?php echo $row['id_penduduk'] ?>" class='btn btn-warning btn-md mr-2'><i class='fas fa-user-edit'></i></a>
-                                        <a href="?page=hapusdatakependudukan&id_penduduk=<?php echo $row['id_penduduk'] ?>" class='btn btn-danger btn-md'><i class='fas fa-trash alert_hapus'></i></a>
+                                        <a href="?page=hapusdatakependudukan&id_penduduk=<?php echo $row['id_penduduk'] ?>" class='btn btn-danger btn-md' onclick="return confirm('Anda yakin mau menghapus data ini?');"><i class='fas fa-trash'></i></a>
                                     </div>
                                 </div>
                             </td>
