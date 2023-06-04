@@ -75,8 +75,16 @@
                     </thead>
                     <tbody>
                         <?php
-                        $query = mysqli_query($conn, "SELECT * FROM tb_penduduk");
-                        $no = 1;
+                        $batas = 10;
+                        $halaman = isset($_GET['halaman'])?(int)$_GET['halaman'] : 1;
+                        $halaman_awal = ($halaman>1) ? ($halaman * $batas) - $batas : 0;	
+                        $previous = $halaman - 1;
+                        $next = $halaman + 1;
+                        $no = $halaman_awal + 1;
+                        $query = mysqli_query($conn, "SELECT * FROM tb_penduduk LIMIT $halaman_awal, $batas");
+                        $query_halaman = mysqli_query($conn, "SELECT * FROM tb_penduduk");
+                        $jumlah_data = mysqli_num_rows($query_halaman);
+				        $total_halaman = ceil($jumlah_data / $batas);
                         while($row = mysqli_fetch_array($query)) {
                         ?>
                         <tr>
@@ -116,6 +124,23 @@
                         ?>
                     </tbody>
                 </table>
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                            <a class="page-link" <?php if($halaman > 1){ echo "href='?page=datakependudukan&halaman=$previous'"; } ?>>Previous</a>
+                        </li>
+                        <?php 
+                        for($x=1;$x<=$total_halaman;$x++){
+                            ?> 
+                            <li class="page-item"><a class="page-link" href="?page=datakependudukan&halaman=<?php echo $x ?>"><?php echo $x; ?></a></li>
+                            <?php
+                        }
+                        ?>				
+                        <li class="page-item">
+                            <a  class="page-link" <?php if($halaman < $total_halaman) { echo "href='?page=datakependudukan&halaman=$next'"; } ?>>Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             </div>
         </div>
