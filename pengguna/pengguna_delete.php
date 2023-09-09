@@ -1,7 +1,8 @@
 <?php
+include '../pengaturan/koneksi.php';
 $id = $_GET['id'];
 if (isset($id)) {
-    $q = "delete from pengguna where id='$id'";
+    $q = "delete from tb_user where id_user='$id'";
     $exe = mysqli_query($konek, $q);
     if ($exe) {
         echo "<script>alert('Data pengguna berhasil dihapus!');</script>";

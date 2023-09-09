@@ -1,9 +1,8 @@
 <!-- Main Content -->
 <div class="main-content">
   <section class="section">
-
     <div class="section-body">
-      <div class="mt-5">
+      <div class="mt-3">
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <div class="card card-danger">
@@ -31,10 +30,12 @@
                       $query = mysqli_query($conn, "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$sesi'");
                       $no = 1;
                       while($row = mysqli_fetch_array($query)) {
+                      setlocale(LC_TIME, 'id_ID');
+                      $tanggal_format = strftime('%d %B %Y', strtotime($row['tgl']));
                       ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $row['tgl']; ?></td>
+                        <td><?php echo $tanggal_format; ?></td>
                         <td><?php echo $row['nama']; ?></td>
                         <td><?php echo $row['nik']; ?></td>
                         <td><?php echo $row['nik']; ?></td>
@@ -50,7 +51,7 @@
                         }
                         ?>
                         </td>
-                        <td><button class="btn btn-info btnview" data-toggle="modal" data-target="#modalLihatDataKK" data-id="<?php $row['id_kk']; ?>"><i class="fas fa-search"></i></button></td>
+                        <td><a href="?page=viewKK&id_kk=<?php echo $row['id_kk'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a></td>
                       </tr>
                       <?php
                       }
@@ -68,6 +69,7 @@
     </div>
   </section>
 </div>
+
 <!-- <script>
   $(function() {
     $(".btnview").click(function() {
@@ -83,3 +85,32 @@
     });
   });
 </script> -->
+<script>
+  function getIDKK(id_kk) {
+    // Buat objek XMLHttpRequest
+    var xhr = new XMLHttpRequest();
+
+    // Tetapkan tindakan yang akan diambil setelah permintaan selesai
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Tangkap respons dari server
+            var response = xhr.responseText;
+
+            // Tampung nilai id_kk ke dalam variabel PHP di sisi server
+            <?php
+                if (isset($_POST['id_kk'])) {
+                    $id_kk_php = $_POST['id_kk'];
+                }
+            ?>
+        }
+    };
+
+    // Konfigurasi permintaan
+    xhr.open("POST", "modalKK.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    // Kirim data ke server
+    xhr.send("id_kk=" + id_kk);
+}
+
+</script>

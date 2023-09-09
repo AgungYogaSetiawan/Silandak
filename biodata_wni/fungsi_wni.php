@@ -102,7 +102,6 @@ $data = mysqli_fetch_array($result);
 $baru = $data['status_berkas'];
 $id = $data['id_bio'];
 if(isset($_POST['ubah']) and $baru === 'Baru') {
-
   // foto KK
   $fotoLamaKK = htmlspecialchars($_POST['fotoLamaKK']);
   $namaFileKK = $_FILES['file_kk']['name'];

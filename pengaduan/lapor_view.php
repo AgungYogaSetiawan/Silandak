@@ -45,9 +45,25 @@ if (isset($_POST['submit_aduan'])) {
 
     // memeriksa apakah data berhasil ditambahkan
     if ($result) {
-      echo "<script>alert('Aduan berhasil dikirim!');</script>";
+      $script = "
+            Swal.fire({
+                icon: 'success',
+                title: 'Aduan anda telah terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
     } else {
-      echo "<script>alert('Aduan gagal dikirim, mohon ulangi lagi!');</script>";
+      $script = "
+            Swal.fire({
+                icon: 'error',
+                title: 'Aduan anda gagal terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
     }
 
     // Tutup koneksi ke database MySQL
@@ -102,9 +118,25 @@ if (isset($_POST['submit_aspirasi'])) {
 
     // memeriksa apakah data berhasil ditambahkan
     if ($result) {
-      echo "<script>alert('Aspirasi berhasil dikirim!');</script>";
+      $script = "
+            Swal.fire({
+                icon: 'success',
+                title: 'Aspirasi anda berhasil terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
     } else {
-      echo "<script>alert('Aspirasi gagal dikirim, mohon ulangi lagi!');</script>";
+      $script = "
+            Swal.fire({
+                icon: 'error',
+                title: 'Aspirasi anda gagal terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
     }
 
     // Tutup koneksi ke database MySQL
@@ -158,9 +190,25 @@ if (isset($_POST['submit_informasi'])) {
 
     // memeriksa apakah data berhasil ditambahkan
     if ($result) {
-      echo "<script>alert('Permintaan informasi berhasil dikirim!');</script>";
+      $script = "
+            Swal.fire({
+                icon: 'success',
+                title: 'Informasi anda berhasil terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
     } else {
-      echo "<script>alert('Permintaan informasi gagal dikirim, mohon ulangi lagi!');</script>";
+      $script = "
+            Swal.fire({
+                icon: 'error',
+                title: 'Informasi anda gagal terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
     }
 
     // Tutup koneksi ke database MySQL
@@ -175,9 +223,8 @@ if (isset($_POST['submit_informasi'])) {
 <!-- Main Content -->
 <div class="main-content">
   <section class="section">
-
     <div class="section-body">
-      <div class="mt-5">
+      <div class="mt-3">
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <div class="card card-danger container">

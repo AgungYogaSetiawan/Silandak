@@ -1,7 +1,7 @@
 <?php
 // koding jika disetujui
 $idkk = $_GET['id_kk'];
-$sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idkk'";
+$sql = "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.id_kk='$idkk'";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
 $baru = $row['status_berkas'];
@@ -35,7 +35,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
   <section class="section">
 
     <div class="section-body">
-      <div class="mt-5">
+      <div class="mt-3">
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <form method="post" enctype="multipart/form-data" role="form">
@@ -120,12 +120,16 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
               <div class="row">
                 <div class="form-group col-6">
                   <label for="kelurahan">Kelurahan</label>
-                  <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $row['kelurahan'] ?>">
-                  <!-- <select class="form-control selectric">
-                    <option value="">--Pilih Kelurahan--</option>
-                    <option value="">West Java</option>
-                    <option>East Java</option>
-                  </select> -->
+                  <!-- <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $row['kelurahan'] ?>"> -->
+                  <select class="form-control" name="kelurahan">
+                      <option>--Pilih Desa--</option>
+                      <?php
+                      $res = mysqli_query($conn,"SELECT * FROM tb_penduduk");
+                      while($rows = mysqli_fetch_array($res)){?> 
+                      <option value="<?php echo $rows['desa']?>" <?php if($row["kelurahan"] == $rows['desa']){echo "SELECTED";} ?>><?php echo $rows['desa']?></option>
+                      <?php } 
+                      ?>
+                  </select>
                 </div>
                 <div class="form-group col-6">
                   <label>Kecamatan</label>
@@ -169,7 +173,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_buku_nikah">
                   <p class="text-dark">File yang diunggah: <?php echo $row['file_buku_nikah']; ?></p>
-                  <img src="assets/<?php echo $row['file_buku_nikah'] ?>" width="100">
+                  <a href="assets/<?php echo $row['file_buku_nikah'] ?>"><img src="assets/<?php echo $row['file_buku_nikah'] ?>" width="100"></a>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -178,7 +182,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_ktp">
                   <p class="text-dark">File yang diunggah: <?php echo $row['file_ktp']; ?></p>
-                  <img src="assets/<?php echo $row['file_ktp'] ?>" width="100">
+                  <a href="assets/<?php echo $row['file_ktp'] ?>"><img src="assets/<?php echo $row['file_ktp'] ?>" width="100"></a>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -187,7 +191,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_ijazah">
                   <p class="text-dark">File yang diunggah: <?php echo $row['file_ijazah']; ?></p>
-                  <img src="assets/<?php echo $row['file_ijazah'] ?>" width="100">
+                  <a href="assets/<?php echo $row['file_ijazah'] ?>"><img src="assets/<?php echo $row['file_ijazah'] ?>" width="100"></a>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -196,7 +200,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_kk">
                   <p class="text-dark">File yang diunggah: <?php echo $row['file_kk']; ?></p>
-                  <img src="assets/<?php echo $row['file_kk'] ?>" width="100">
+                  <a href="assets/<?php echo $row['file_kk'] ?>"><img src="assets/<?php echo $row['file_kk'] ?>" width="100"></a>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -213,7 +217,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                   <button type="submit" class="btn btn-danger btn-md" name="tolak">
                     <i class="fas fa-user-edit"></i> Ditolak
                   </button>
-                  <a href="dataBaruKartuKeluarga" class="btn btn-info btn-md">
+                  <a href="?page=dataBaruKartuKeluarga" class="btn btn-info btn-md">
                     <i class="fas fa-window-close"></i> Batal
                   </a>
                 </div>

@@ -1,10 +1,8 @@
 <!-- Main Content -->
 <div class="main-content">
   <section class="section">
-    
-
     <div class="section-body">
-      <div class="mt-5">
+      <div class="mt-3">
         <div class="row">
           <div class="col-12 col-sm-12 col-lg-12">
             <div class="card author-box card-danger">

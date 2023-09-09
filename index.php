@@ -64,6 +64,9 @@ switch ($page) {
     case 'detailKK':
         include "kartu_keluarga/detail.php";
         break;
+    case 'viewKK':
+        include "kartu_keluarga/viewKK.php";
+        break;
     // end kartu keluarga
 
     // akta kelahiran
@@ -84,6 +87,9 @@ switch ($page) {
         break;
     case 'detailAK':
         include "akta_kelahiran/detail.php";
+        break;
+    case 'viewAK':
+        include "akta_kelahiran/viewAK.php";
         break;
     // end akta kelahiran
 
@@ -106,6 +112,9 @@ switch ($page) {
     case 'detailSP':
         include "surat_pindah/detail.php";
         break;
+    case 'viewSP':
+        include "surat_pindah/viewSP.php";
+        break;
     // end surat pindah
 
     // akta kematian
@@ -126,6 +135,9 @@ switch ($page) {
         break;
     case 'detailAKM':
         include "akta_kematian/detail.php";
+        break;
+    case 'viewAKM':
+        include "akta_kematian/viewAKM.php";
         break;
     // end akta kematian
 
@@ -148,6 +160,9 @@ switch ($page) {
     case 'detailSPD':
         include "surat_pindah_datang/detail.php";
         break;
+    case 'viewSPD':
+        include "surat_pindah_datang/viewSPD.php";
+        break;
     // end surat pindah datang
 
     // biodata wni
@@ -169,6 +184,9 @@ switch ($page) {
     case 'detailWNI':
         include "biodata_wni/detail.php";
         break;
+    case 'viewWNI':
+        include "biodata_wni/viewWNI.php";
+        break;
     // end biodata wni
 
     // rekam ktp
@@ -189,6 +207,9 @@ switch ($page) {
         break;
     case 'detailKTP':
         include "rekam_ktp/detail.php";
+        break;
+    case 'viewKTP':
+        include "rekam_ktp/viewKTP.php";
         break;
     // end rekam ktp
 

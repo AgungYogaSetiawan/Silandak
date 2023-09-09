@@ -1,9 +1,8 @@
 <!-- Main Content -->
 <div class="main-content">
 <section class="section">
-
 <div class="section-body">
-    <div class="mt-5">
+    <div class="mt-3">
     <div class="row">
         <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
         <div class="card card-danger">
@@ -38,11 +37,13 @@
                     if ($result->num_rows > 0) {
                         $no = 1;
                         while($row = $result->fetch_assoc()) {
+                        setlocale(LC_TIME, 'id_ID');
+                        $tanggal_format = strftime('%d %B %Y', strtotime($row['tgl_kejadian']));
                         echo '<tr>';
                         echo '<td>'.$no++.'</td>';
                         echo '<td>'.$row['pengirim'].'</td>';
                         echo '<td>'.$row['pesan'].'</td>';
-                        echo '<td>'.$row['tgl_kejadian'].'</td>';
+                        echo '<td>'.$tanggal_format.'</td>';
                         echo '<td>'.$row['lokasi'].'</td>';
                         echo '<td><a href=assets/'.$row['lampiran'].'>'.$row['lampiran'].'</a></td>';
                         echo '</tr>';

@@ -1,4 +1,7 @@
 <?php
+
+// use function PHPSTORM_META\map;
+
 $id = $_GET['id_penduduk'];
 $sql = "SELECT * FROM tb_penduduk WHERE id_penduduk='$id'";
 $result = mysqli_query($conn,$sql);
@@ -43,9 +46,8 @@ if(isset($_POST['simpan'])){
 <!-- Main Content -->
 <div class="main-content">
   <section class="section">
-
     <div class="section-body">
-      <div class="mt-5">
+      <div class="mt-3">
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <form method="post" enctype="multipart/form-data" role="form">
@@ -53,7 +55,44 @@ if(isset($_POST['simpan'])){
               <div class="row">
                 <div class="form-group col-6">
                   <label for="desa">Desa</label>
-                  <input id="desa" type="text" class="form-control" name="desa" value="<?php echo $row['desa']; ?>">
+                  <?php
+                        // Misalnya, Anda memiliki informasi desa yang login dalam variabel $desaLogin
+                        if($_SESSION['peran'] == 'admin desa'){
+                            $desaLogin = $_SESSION['kelurahan']; // Contoh desa yang login
+                        
+
+                            // Daftar semua opsi desa
+                            $daftarDesa = [
+                                "Bangkiling", "Bangkaling Raya", "Banua Lawas", "Banua Rantau", "Batang Banyu",
+                                "Bungin", "Habau", "Habau Hulu", "Hariang", "Hapalah", "Pematang", "Purai",
+                                "Sei Anyar", "Sei Durian", "Talan"
+                            ];
+
+                            // Menyaring opsi desa yang sesuai dengan desa yang login
+                            $opsiDesa = array_filter($daftarDesa, function ($desa) use ($desaLogin) {
+                                return $desa == $desaLogin;
+                            });
+                        }
+                        ?>
+                        <select class="form-control" name="desa">
+                            <option>--Pilih Desa--</option>
+                            <?php
+                            if ($_SESSION['peran'] !== 'admin desa') {
+                                $result = mysqli_query($conn,"SELECT * FROM tb_penduduk");
+                                while($data = mysqli_fetch_array($result)){?> 
+                                <option value="<?php echo $data['desa']?>" <?php if($row["desa"] == $data['desa']){echo "SELECTED";} ?>><?php echo $data['desa']?></option>
+                                <?php } ?>
+                            <?php
+                            } else {
+                                // Logika yang diperlukan jika peran adalah 'admin desa'
+                                foreach ($opsiDesa as $desa) {
+                                    echo "<option value=\"$desa\" SELECTED>$desa</option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                  
+                  <!-- <input id="desa" type="text" class="form-control" name="desa" value="<?php echo $row['desa']; ?>"> -->
                 </div>
                 <div class="form-group col-6">
                   <label for="l_awal">Jumlah Laki-laki Awal Bulan</label>
@@ -167,9 +206,9 @@ if(isset($_POST['simpan'])){
                 <button type="submit" class="btn btn-success btn-md" name="simpan">
                   <i class="fas fa-save"></i> Simpan
                 </button>
-                <button type="reset" class="btn btn-danger btn-md">
+                <a href="?page=datakependudukan" class="btn btn-danger btn-md">
                   <i class="fas fa-window-close"></i> Batal
-                </button>
+                </a>
               </div>
             </form>
           </div>

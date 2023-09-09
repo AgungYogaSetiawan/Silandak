@@ -23,7 +23,7 @@ if(isset($_POST['daftar'])){
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Registrasi - Aplikasi Pelayanan Online Kecamatan Banua Lawas</title>
+  <title>Registrasi - Aplikasi Layanan Online Kecamatan Banua Lawas</title>
 
   <!-- favicon -->
   <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo_tabalong_mini.png">
@@ -55,7 +55,7 @@ if(isset($_POST['daftar'])){
                 <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                     <div class="login-brand">
                         <img src="../assets/img/logo_tabalong.png" alt="logo" width="100">
-                        <h4>APLIKASI PELAYANAN ONLINE KECAMATAN BANUA LAWAS</h4>
+                        <h4>APLIKASI LAYANAN ONLINE KECAMATAN BANUA LAWAS</h4>
                     </div>
 
                 <div class="card card-danger">
@@ -100,12 +100,13 @@ if(isset($_POST['daftar'])){
                                     Daftar
                                 </button>
                             </div>
+                            <div class="mt-3 text-muted text-center">
+                                Sudah punya akun? Silahkan <a href="login_view.php" class="text-danger" style="text-decoration: none;">Login</a>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="mt-5 text-muted text-center">
-                    Sudah punya akun? Silahkan <a href="login_view.php" class="text-danger" style="text-decoration: none;">Login</a>
-                </div>
+                
                 <div class="mt-5 text-muted text-center">
                     <button data-toggle='modal' data-target='#modalFAQ' class="btn btn-transparent text-danger">FAQ</button> | <button data-toggle='modal' data-target='#modalAbout' class="btn btn-transparent text-danger">TENTANG APLIKASI</button> | <button data-toggle='modal' data-target='#modalPengaduan' class="btn btn-transparent text-danger">PENGADUAN</button>
                 </div>

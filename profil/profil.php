@@ -60,9 +60,25 @@ if(isset($_POST['simpan'])){
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
-    echo "<script>alert('Data Berhasil Disimpan');</script>";
+    $script = "
+            Swal.fire({
+                icon: 'success',
+                title: 'Data Berhasil Disimpan!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
   } else {
-    echo "<script>alert('Data gagal disimpan!');</script>";
+    $script = "
+            Swal.fire({
+                icon: 'error',
+                title: 'Data Gagal Disimpan!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
   }
 }
 ?>
@@ -73,11 +89,10 @@ if(isset($_POST['simpan'])){
   <section class="section">
     <div class="section-header justify-content-between bg-danger rounded-lg">
       <h1 class="text-white">FORM DATA PEMOHON</h1>
-      <a href="beranda"><h1 class="text-white"><i class="fas fa-arrow-left" style="font-size:20px;"></i> Kembali</h1></a>
+      <a href="?page=beranda"><h1 class="text-white"><i class="fas fa-arrow-left" style="font-size:20px;"></i> Kembali</h1></a>
     </div>
-
     <div class="section-body">
-      <div class="mt-5">
+      <div class="mt-3">
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <div class="card card-danger">
@@ -164,13 +179,17 @@ if(isset($_POST['simpan'])){
                   </div>
                   <div class="row">
                     <div class="form-group col-6">
-                      <label for="kelurahan">Kelurahan</label>
-                      <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>">
-                      <!-- <select class="form-control selectric">
-                        <option value="">--Pilih Kelurahan--</option>
-                        <option value="">West Java</option>
-                        <option>East Java</option>
-                      </select> -->
+                      <label for="kelurahan">Desa</label>
+                      <!-- <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>"> -->
+                      <select class="form-control" name="kelurahan">
+                          <option>--Pilih Desa--</option>
+                          <?php
+                          $res = mysqli_query($conn,"SELECT * FROM tb_penduduk");
+                          while($row = mysqli_fetch_array($res)){?> 
+                          <option value="<?php echo $row['desa']?>" <?php if($data["kelurahan"] == $row['desa']){echo "SELECTED";} ?>><?php echo $row['desa']?></option>
+                          <?php } 
+                          ?>
+                      </select>
                     </div>
                     <div class="form-group col-6">
                       <label>Kecamatan</label>
@@ -211,7 +230,7 @@ if(isset($_POST['simpan'])){
                     <label for="foto">Unggah Foto Profil</label>
                     <div class="custom-file">
                       <input type="file" class="form-control" name="foto">
-                      <img src="assets/<?= $data['foto']; ?>" width="50"><br>
+                      <a href="assets/<?= $data['foto']; ?>"><img src="assets/<?= $data['foto']; ?>" width="70"><br></a>
                       <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                     </div>
                   </div>
@@ -220,9 +239,9 @@ if(isset($_POST['simpan'])){
                     <button type="submit" class="btn btn-success btn-md" name="simpan">
                       <i class="fas fa-save"></i> Simpan
                     </button>
-                    <button type="reset" class="btn btn-danger btn-md">
+                    <a href="?page=beranda" class="btn btn-danger btn-md">
                       <i class="fas fa-window-close"></i> Batal
-                    </button>
+                    </a>
                   </div>
                 </form>
               </div>

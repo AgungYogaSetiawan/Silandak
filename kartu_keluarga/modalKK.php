@@ -127,13 +127,17 @@
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label for="kelurahan">Kelurahan</label>
-              <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>">
-              <!-- <select class="form-control selectric">
-                <option value="">--Pilih Kelurahan--</option>
-                <option value="">West Java</option>
-                <option>East Java</option>
-              </select> -->
+              <label for="kelurahan">Desa</label>
+              <!-- <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>"> -->
+              <select class="form-control" name="kelurahan">
+                  <option>--Pilih Desa--</option>
+                  <?php
+                  $res = mysqli_query($conn,"SELECT * FROM tb_penduduk");
+                  while($row = mysqli_fetch_array($res)){?> 
+                  <option value="<?php echo $row['desa']?>" <?php if($data["kelurahan"] == $row['desa']){echo "SELECTED";} ?>><?php echo $row['desa']?></option>
+                  <?php } 
+                  ?>
+              </select>
             </div>
             <div class="form-group col-6">
               <label>Kecamatan</label>
@@ -235,9 +239,9 @@
             <button type="submit" class="btn btn-warning btn-md" name="simpan_sementara">
               <i class="fas fa-save"></i> Simpan Sementara
             </button>
-            <button type="reset" class="btn btn-danger btn-md">
+            <a href="?page=beranda" class="btn btn-danger btn-md">
               <i class="fas fa-window-close"></i> Batal
-            </button>
+            </a>
           </div>
         </form>
       </div>
@@ -350,13 +354,17 @@
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label for="kelurahan">Kelurahan</label>
-              <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>">
-              <!-- <select class="form-control selectric">
-                <option value="">--Pilih Kelurahan--</option>
-                <option value="">West Java</option>
-                <option>East Java</option>
-              </select> -->
+              <label for="kelurahan">Desa</label>
+              <!-- <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>"> -->
+              <select class="form-control" name="kelurahan">
+                  <option>--Pilih Desa--</option>
+                  <?php
+                  $res = mysqli_query($conn,"SELECT * FROM tb_penduduk");
+                  while($row = mysqli_fetch_array($res)){?> 
+                  <option value="<?php echo $row['desa']?>" <?php if($data["kelurahan"] == $row['desa']){echo "SELECTED";} ?>><?php echo $row['desa']?></option>
+                  <?php } 
+                  ?>
+              </select>
             </div>
             <div class="form-group col-6">
               <label>Kecamatan</label>
@@ -400,7 +408,7 @@
             <div class="custom-file">
               <input type="file" class="form-control" name="file_buku_nikah">
               <p class="text-dark">File yang diunggah: <?php echo $data['file_buku_nikah']; ?></p>
-              <img src="assets/<?php echo $data['file_buku_nikah'] ?>" width="100">
+              <a href="assets/<?php echo $data['file_buku_nikah'] ?>"><img src="assets/<?php echo $data['file_buku_nikah'] ?>" width="100"></a>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -409,7 +417,7 @@
             <div class="custom-file">
               <input type="file" class="form-control" name="file_ktp">
               <p class="text-dark">File yang diunggah: <?php echo $data['file_ktp']; ?></p>
-              <img src="assets/<?php echo $data['file_ktp'] ?>" width="100">
+              <a href="assets/<?php echo $data['file_ktp'] ?>"><img src="assets/<?php echo $data['file_ktp'] ?>" width="100"></a>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -418,7 +426,7 @@
             <div class="custom-file">
               <input type="file" class="form-control" name="file_ijazah">
               <p class="text-dark">File yang diunggah: <?php echo $data['file_ijazah']; ?></p>
-              <img src="assets/<?php echo $data['file_ijazah'] ?>" width="100">
+              <a href="assets/<?php echo $data['file_ijazah'] ?>"><img src="assets/<?php echo $data['file_ijazah'] ?>" width="100"></a>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -427,7 +435,7 @@
             <div class="custom-file">
               <input type="file" class="form-control" name="file_kk">
               <p class="text-dark">File yang diunggah: <?php echo $data['file_kk']; ?></p>
-              <img src="assets/<?php echo $data['file_kk'] ?>" width="100">
+              <a href="assets/<?php echo $data['file_kk'] ?>"><img src="assets/<?php echo $data['file_kk'] ?>" width="100"></a>
               <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
             </div>
           </div>
@@ -545,13 +553,17 @@
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label for="kelurahan">Kelurahan</label>
-              <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>">
-              <!-- <select class="form-control selectric">
-                <option value="">--Pilih Kelurahan--</option>
-                <option value="">West Java</option>
-                <option>East Java</option>
-              </select> -->
+              <label for="kelurahan">Desa</label>
+              <!-- <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>"> -->
+              <select class="form-control" name="kelurahan">
+                  <option>--Pilih Desa--</option>
+                  <?php
+                  $res = mysqli_query($conn,"SELECT * FROM tb_penduduk");
+                  while($row = mysqli_fetch_array($res)){?> 
+                  <option value="<?php echo $row['desa']?>" <?php if($data["kelurahan"] == $row['desa']){echo "SELECTED";} ?>><?php echo $row['desa']?></option>
+                  <?php } 
+                  ?>
+              </select>
             </div>
             <div class="form-group col-6">
               <label>Kecamatan</label>

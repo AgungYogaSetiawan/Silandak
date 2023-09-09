@@ -1,9 +1,8 @@
 <!-- Main Content -->
 <div class="main-content">
   <section class="section">
-
     <div class="section-body">
-      <div class="mt-5">
+      <div class="mt-3">
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <div class="card card-danger">
@@ -30,14 +29,16 @@
                       $query = mysqli_query($conn, "SELECT * FROM tb_bio_wni a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE status_berkas='Selesai'");
                       $no = 1;
                       while($row = mysqli_fetch_array($query)) {
+                      setlocale(LC_TIME, 'id_ID');
+                      $tanggal_format = strftime('%d %B %Y', strtotime($row['tgl']));
                       ?>
                       <tr>
                         <td><?php echo $no++ ?></td>
-                        <td><?php echo $row['tgl']; ?></td>
+                        <td><?php echo $tanggal_format; ?></td>
                         <td><?php echo $row['nama']; ?></td>
                         <td><?php echo $row['nik']; ?></td>
                         <td><?php echo $row['nik']; ?></td>
-                        <td><?php echo $row['no_hp']; ?></td>
+                        <td><a href="https://wa.me/<?php echo $row['no_hp']; ?>"><?php echo $row['no_hp']; ?></a></td>
                         <td>
                         <?php
                         if($row['status_berkas'] == 'Baru') {?>
@@ -49,7 +50,7 @@
                         }
                         ?>
                         </td>
-                        <td><a href="?page=detailWNI&id_bio=<?php echo $row['user_id'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a></td>
+                        <td><a href="?page=detailWNI&id_bio=<?php echo $row['id_bio'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a></td>
                       </tr>
                       <?php
                       }

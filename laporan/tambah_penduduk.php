@@ -1,9 +1,28 @@
 <?php
 
+function angkaKeBulan($angka) {
+    $daftarBulan = array(
+        1 => 'Januari',
+        2 => 'Februari',
+        3 => 'Maret',
+        4 => 'April',
+        5 => 'Mei',
+        6 => 'Juni',
+        7 => 'Juli',
+        8 => 'Agustus',
+        9 => 'September',
+        10 => 'Oktober',
+        11 => 'November',
+        12 => 'Desember'
+    );
 
+    return $daftarBulan[$angka];
+}
 if(isset($_POST['tambah'])){
     // $id_penduduk =  $_POST['id_penduduk'];
     $desa =  htmlspecialchars($_POST['desa']);
+    $bulan = angkaKeBulan(date("n"));
+    $tahun = date("Y");
     $l_awal =  htmlspecialchars($_POST['l_awal']);
     $p_awal = htmlspecialchars($_POST['p_awal']);
     $tot_awal =  htmlspecialchars($_POST['tot_awal']);
@@ -26,7 +45,7 @@ if(isset($_POST['tambah'])){
     $jml_kk_akhir = htmlspecialchars($_POST['jml_kk_akhir']);
 
     // menyimpan data ke tabel
-    $sql = "INSERT INTO tb_penduduk (id_penduduk,desa,l_awal,p_awal,tot_awal,jml_kk_awal,l_lahir,p_lahir,tot_lahir,l_mati,p_mati,tot_mati,l_datang,p_datang,tot_datang,l_pindah,p_pindah,tot_pindah,l_akhir,p_akhir,tot_akhir,jml_kk_akhir) VALUES ('','$desa','$l_awal','$p_awal','$tot_awal','$jml_kk_awal','$l_lahir','$p_lahir','$tot_lahir','$l_mati','$p_mati','$tot_mati','$l_datang','$p_datang','$tot_datang','$l_pindah','$p_pindah','$tot_pindah','$l_akhir','$p_akhir','$tot_akhir','$jml_kk_akhir')";
+    $sql = "INSERT INTO tb_penduduk (id_penduduk,desa,bulan,tahun,l_awal,p_awal,tot_awal,jml_kk_awal,l_lahir,p_lahir,tot_lahir,l_mati,p_mati,tot_mati,l_datang,p_datang,tot_datang,l_pindah,p_pindah,tot_pindah,l_akhir,p_akhir,tot_akhir,jml_kk_akhir) VALUES ('','$desa','$bulan','$tahun','$l_awal','$p_awal','$tot_awal','$jml_kk_awal','$l_lahir','$p_lahir','$tot_lahir','$l_mati','$p_mati','$tot_mati','$l_datang','$p_datang','$tot_datang','$l_pindah','$p_pindah','$tot_pindah','$l_akhir','$p_akhir','$tot_akhir','$jml_kk_akhir')";
     mysqli_query($conn,$sql);
     
     echo "<script>alert('Data Berhasil Ditambahkan');</script>";
@@ -40,16 +59,60 @@ if(isset($_POST['tambah'])){
 <!-- Main Content -->
 <div class="main-content">
   <section class="section">
-
     <div class="section-body">
-      <div class="mt-5">
+      <div class="mt-3">
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <form method="post" enctype="multipart/form-data" role="form">
               <div class="row">
                 <div class="form-group col-6">
                   <label for="desa">Desa</label>
-                  <input id="desa" type="text" class="form-control" name="desa">
+                  <?php
+                  // Misalnya, Anda memiliki informasi desa yang login dalam variabel $desaLogin
+                  if($_SESSION['peran'] == 'admin desa'){
+                      $desaLogin = $_SESSION['kelurahan']; // Contoh desa yang login
+                  
+
+                      // Daftar semua opsi desa
+                      $daftarDesa = [
+                          "Bangkiling", "Bangkaling Raya", "Banua Lawas", "Banua Rantau", "Batang Banyu",
+                          "Bungin", "Habau", "Habau Hulu", "Hariang", "Hapalah", "Pematang", "Purai",
+                          "Sei Anyar", "Sei Durian", "Talan"
+                      ];
+
+                      // Menyaring opsi desa yang sesuai dengan desa yang login
+                      $opsiDesa = array_filter($daftarDesa, function ($desa) use ($desaLogin) {
+                          return $desa == $desaLogin;
+                      });
+                  }
+                  ?>
+                  <select class="form-control" name="desa">
+                      <option>--Pilih Desa--</option>
+                      <?php
+                      if ($_SESSION['peran'] !== 'admin desa') {
+                          echo "<option value='Bangkiling'>Bangkiling</option>
+                                  <option value='Bangkaling Raya'>Bangkiling Raya</option>
+                                  <option value='Banua Lawas'>Banua Lawas</option>
+                                  <option value='Banua Rantau'>Banua Rantau</option>
+                                  <option value='Batang Banyu'>Batang Banyu</option>
+                                  <option value='Bungin'>Bungin</option>
+                                  <option value='Habau'>Habau</option>
+                                  <option value='Habau Hulu'>Habau Hulu</option>
+                                  <option value='Hariang'>Hariang</option>
+                                  <option value='Hapalah'>Hapalah</option>
+                                  <option value='Pematang'>Pematang</option>
+                                  <option value='Purai'>Purai</option>
+                                  <option value='Sei Anyar'>Sei Anyar</option>
+                                  <option value='Sei Durian'>Sei Durian</option>
+                                  <option value='Talan'>Talan</option>";
+                      } else {
+                          // Logika yang diperlukan jika peran adalah 'admin desa'
+                          foreach ($opsiDesa as $desa) {
+                              echo "<option value=\"$desa\">$desa</option>";
+                          }
+                      }
+                      ?>
+                  </select>
                 </div>
                 <div class="form-group col-6">
                   <label for="l_awal">Jumlah Laki-laki Awal Bulan</label>
@@ -163,9 +226,9 @@ if(isset($_POST['tambah'])){
                 <button type="submit" class="btn btn-success btn-md" name="tambah">
                   <i class="fas fa-plus"></i> Tambah
                 </button>
-                <button type="reset" class="btn btn-danger btn-md">
+                <a href="?page=datakependudukan" class="btn btn-danger btn-md">
                   <i class="fas fa-window-close"></i> Batal
-                </button>
+                </a>
               </div>
             </form>
           </div>

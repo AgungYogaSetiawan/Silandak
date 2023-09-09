@@ -1,6 +1,8 @@
 <?php
 session_start();
 require '../pengaturan/fungsi.php';
+echo "<script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>";
+
 
 // membuat sistem login //
 // cek cookie
@@ -73,6 +75,7 @@ if(isset($_POST["login"])){
       } else if($row["level"] == "admin desa"){
         $_SESSION['id'] = $row['id_user'];
         $_SESSION['username'] = $username;
+        $_SESSION['kelurahan'] = $row['kelurahan'];
         $_SESSION['peran'] = "admin desa";
         // alihkan ke menu warga
         echo "<script>alert('Login Berhasil Selamat datang $username');</script>";
@@ -94,10 +97,10 @@ if (isset($_POST['kirim'])) {
     $no_hp = $_POST['no_hp'];
     $pesan = $_POST['pesan'];
 
-    // menginisialisasi objek koneksi ke database
+    // menginisialisasi objek connsi ke database
     $db = new mysqli('localhost', 'root', '', 'silandak');
 
-    // menginstansiasi objek CRUD dengan objek koneksi $db
+    // menginstansiasi objek CRUD dengan objek connsi $db
     $crud = new CRUD($db);
 
     // menambahkan data ke tabel menggunakan fungsi create
@@ -110,20 +113,251 @@ if (isset($_POST['kirim'])) {
 
     // memeriksa apakah data berhasil ditambahkan
     if ($result) {
-      echo "<script>alert('Pesan berhasil dikirim!');</script>";
+      $script = "
+            Swal.fire({
+                icon: 'success',
+                title: 'Pesan telah terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
     } else {
-      echo "<script>alert('Pesan gagal dikirim, mohon ulangi lagi!');</script>";
+      $script = "
+            Swal.fire({
+                icon: 'error',
+                title: 'Pesan gagal terkirim, mohon ulangi lagi!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
     }
 }
-
 // akhir membuat sistem tambah data lupa password //
+
+// kode perintah tambah data aduan //
+if (isset($_POST['submit_aduan'])) {
+    // Ambil data diri dari form
+    $pesan = mysqli_real_escape_string($conn, $_POST['pesan']);
+    $tgl_kejadian = $_POST['tgl_kejadian'];
+    $lokasi = mysqli_real_escape_string($conn, $_POST['lokasi']);
+    if($_POST["alias"] == "anonim") {
+      $alias = "anonymous";
+    } else {
+      $alias = str_split($_SESSION['username']);
+      $alias = join("*", $alias);
+    }
+    $limit = 10 * 1024 * 1024;
+    $ekstensi =  array('png','jpg','jpeg','pdf');
+
+    // Proses upload file
+    $files = $_FILES['files'];
+    $fileCount = count($files['name']);
+    for ($i = 0; $i < $fileCount; $i++) {
+      $fileName = mysqli_real_escape_string($conn, $files['name'][$i]);
+      $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+      $fileSize = $files['size'][$i];
+      $fileTempName = $files['tmp_name'][$i];
+      if($fileSize > $limit) {
+        echo "<script>alert('Ukuran file terlalu besar!');</script>";
+      } else {
+        if(!in_array($fileType, $ekstensi)) {
+          echo "<script>alert('Tipe file salah!');</script>";
+        } else {
+          // Simpan file ke folder upload
+          $uploadDir = '../assets/';
+          $filePath = $uploadDir . $fileName;
+          move_uploaded_file($fileTempName, $filePath);
+
+          // Simpan hubungan antara file dan data diri ke tabel `file_relations`
+          $query = "INSERT INTO tb_aduan (id_aduan,pengirim,pesan,tgl_kejadian,lokasi,lampiran) VALUES ('', '$alias', '$pesan', '$tgl_kejadian', '$lokasi','$fileName')";
+          $result = mysqli_query($conn, $query);
+        }
+      }
+    }
+
+    // memeriksa apakah data berhasil ditambahkan
+    if ($result) {
+      $script = "
+            Swal.fire({
+                icon: 'success',
+                title: 'Aduan anda telah terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
+    } else {
+      $script = "
+            Swal.fire({
+                icon: 'error',
+                title: 'Aduan anda gagal terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
+    }
+
+    // Tutup connsi ke database MySQL
+    mysqli_close($conn);
+}
+// end kode untuk tambah data aduan //
+
+
+// kode untuk tambah data aspirasi //
+if (isset($_POST['submit_aspirasi'])) {
+    // Ambil data diri dari form
+    date_default_timezone_set('Asia/Ujung_Pandang');
+    $tgl_waktu = date('d-M-Y');
+    $pesan = mysqli_real_escape_string($conn, $_POST['pesan']);
+    $asal_pelapor = mysqli_real_escape_string($conn, $_POST['asal_pelapor']);
+    if($_POST["alias"] == "anonim") {
+      $alias = "anonymous";
+    } else if($_POST["alias"] == "rahasia") {
+      $alias = str_split('');
+      $alias = join("*", $alias);
+    } else {
+      $alias = "";
+    }
+    $limit = 10 * 1024 * 1024;
+    $ekstensi =  array('png','jpg','jpeg','pdf');
+
+    // Proses upload file
+    $files = $_FILES['files'];
+    $fileCount = count($files['name']);
+    for ($i = 0; $i < $fileCount; $i++) {
+      $fileName = mysqli_real_escape_string($conn, $files['name'][$i]);
+      $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+      $fileSize = $files['size'][$i];
+      $fileTempName = $files['tmp_name'][$i];
+      if($fileSize > $limit) {
+        echo "<script>alert('Ukuran file terlalu besar!');</script>";
+      } else {
+        if(!in_array($fileType, $ekstensi)) {
+          echo "<script>alert('Tipe file salah!');</script>";
+        } else {
+          // Simpan file ke folder upload
+          $uploadDir = '../assets/';
+          $filePath = $uploadDir . $fileName;
+          move_uploaded_file($fileTempName, $filePath);
+
+          // Simpan hubungan antara file dan data diri ke tabel `file_relations`
+          $query = "INSERT INTO tb_aspirasi (id_aspirasi,tgl_waktu,pengirim,pesan,asal_pelapor,lampiran) VALUES ('', '$tgl_waktu', '$alias', '$pesan', '$asal_pelapor','$fileName')";
+          $result = mysqli_query($conn, $query);
+        }
+      }
+    }
+
+    // memeriksa apakah data berhasil ditambahkan
+    if ($result) {
+      $script = "
+            Swal.fire({
+                icon: 'success',
+                title: 'Aspirasi anda berhasil terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
+    } else {
+      $script = "
+            Swal.fire({
+                icon: 'error',
+                title: 'Aspirasi anda gagal terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
+    }
+
+    // Tutup connsi ke database MySQL
+    mysqli_close($conn);
+}
+// end kode untuk tambah data aspirasi //
+
+// kode untuk tambah data permintaan informasi //
+if (isset($_POST['submit_informasi'])) {
+    // Ambil data diri dari form
+    date_default_timezone_set('Asia/Ujung_Pandang');
+    $tgl_waktu = date('d-M-Y');
+    $pesan = mysqli_real_escape_string($conn, $_POST['pesan']);
+    $asal_pelapor = mysqli_real_escape_string($conn, $_POST['asal_pelapor']);
+    if($_POST["alias"] == "anonim") {
+      $alias = "anonymous";
+    } else if($_POST["alias"] == "rahasia") {
+      $alias = str_split($_SESSION['username']);
+      $alias = join("*", $alias);
+    } else {
+      $alias = "";
+    }
+    $limit = 10 * 1024 * 1024;
+    $ekstensi =  array('png','jpg','jpeg','pdf');
+
+    // Proses upload file
+    $files = $_FILES['files'];
+    $fileCount = count($files['name']);
+    for ($i = 0; $i < $fileCount; $i++) {
+      $fileName = mysqli_real_escape_string($conn, $files['name'][$i]);
+      $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
+      $fileSize = $files['size'][$i];
+      $fileTempName = $files['tmp_name'][$i];
+      if($fileSize > $limit) {
+        echo "<script>alert('Ukuran file terlalu besar!');</script>";
+      } else {
+        if(!in_array($fileType, $ekstensi)) {
+          echo "<script>alert('Tipe file salah!');</script>";
+        } else {
+          // Simpan file ke folder upload
+          $uploadDir = '../assets/';
+          $filePath = $uploadDir . $fileName;
+          move_uploaded_file($fileTempName, $filePath);
+
+          // Simpan hubungan antara file dan data diri ke tabel `file_relations`
+          $query = "INSERT INTO tb_informasi (id_informasi,tgl,pengirim,pesan,asal_pelapor,lampiran) VALUES ('', '$tgl_waktu', '$alias', '$pesan', '$asal_pelapor','$fileName')";
+          $result = mysqli_query($conn, $query);
+        }
+      }
+    }
+
+    // memeriksa apakah data berhasil ditambahkan
+    if ($result) {
+      $script = "
+            Swal.fire({
+                icon: 'success',
+                title: 'Informasi anda berhasil terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
+    } else {
+      $script = "
+            Swal.fire({
+                icon: 'error',
+                title: 'Informasi anda gagal terkirim!',
+                timer: 3000,
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        ";
+    }
+
+    // Tutup connsi ke database MySQL
+    mysqli_close($conn);
+}
+// end kode untuk tambah data aspirasi //
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-<title>Login - Aplikasi Pelayanan Online Kecamatan Banua Lawas</title>
+<title>Login - Aplikasi Layanan Online Kecamatan Banua Lawas</title>
 
 <!-- favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo_tabalong_mini.png">
@@ -153,7 +387,7 @@ if (isset($_POST['kirim'])) {
                 <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                     <div class="login-brand">
                         <img src="../assets/img/logo_tabalong.png" alt="logo" width="100">
-                        <h4>APLIKASI PELAYANAN ONLINE KECAMATAN BANUA LAWAS</h4>
+                        <h4>APLIKASI LAYANAN ONLINE KECAMATAN BANUA LAWAS</h4>
                     </div>
                 <?php if(isset($error)) : ?>
                   <div class="alert alert-danger">Username / Passsword anda salah!</div>
@@ -208,12 +442,13 @@ if (isset($_POST['kirim'])) {
                                     Login
                                 </button>
                             </div>
+                            <div class="mt-3 text-muted text-center">
+                                Belum punya akun? Silahkan <a href="register_view.php" class="text-danger" style="text-decoration:none;">Daftar</a>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="mt-5 text-muted text-center">
-                    Belum punya akun? Silahkan <a href="register_view.php" class="text-danger" style="text-decoration:none;">Daftar</a>
-                </div>
+                
                 <div class="mt-5 text-muted text-center">
                     <button data-toggle='modal' data-target='#modalFAQ' class="btn btn-transparent text-danger">FAQ</button> | <button data-toggle='modal' data-target='#modalAbout' class="btn btn-transparent text-danger">TENTANG APLIKASI</button> | <button data-toggle='modal' data-target='#modalPengaduan' class="btn btn-transparent text-danger">PENGADUAN</button> | <button data-toggle='modal' data-target='#modalLupaPassword' class="btn btn-transparent text-danger">LUPA PASSWORD</button>
                 </div>
@@ -363,41 +598,40 @@ if (isset($_POST['kirim'])) {
                 <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="aspirasi" autocomplete="off">
                 <label class="btn btn-outline-danger" for="btnradio2">ASPIRASI</label>
 
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="permintaan informasi" autocomplete="off">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="permintaan_informasi" autocomplete="off">
                 <label class="btn btn-outline-danger" for="btnradio3">PERMINTAAN INFORMASI</label>
               </div>
               
               <div class="card-body">
                 <div id="pengaduan" style="display:none;">
-                  <form method="POST">
+                  <form method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="judul_laporan" placeholder="Ketik Judul Laporan Anda">
                     </div>
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Isi Laporan Anda">
+                      <input type="text" class="form-control" id="pesan" name="pesan" placeholder="Ketik Judul dan Isi Laporan Anda">
                     </div>
                     <div class="mb-3">
-                      <input type="date" class="form-control" id="tanggal_laporan" placeholder="Pilih Tanggal Kejadian">
+                      <input type="date" class="form-control" id="tgl_kejadian" name="tgl_kejadian" placeholder="Pilih Tanggal Kejadian">
                     </div>
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Lokasi Kejadian">
+                      <input type="text" class="form-control" id="lokasi" name="lokasi" placeholder="Ketik Lokasi Kejadian">
                     </div>       
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Upload Lampiran</label>
+                      <input type="file" class="form-control" name="files[]" multiple>
+                      <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                     </div>
 
                     <hr>
                     <div class="form-group">
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" id="jk" value="">
-                          <label class="form-check-label" for="jk">Anonim</label>
+                          <input class="form-check-input" type="radio" id="anonim" value="anonim" name="alias">
+                          <label class="form-check-label" for="anonim">Anonim</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" id="jk" value="">
-                          <label class="form-check-label" for="jk">Rahasia</label>
+                          <input class="form-check-input" type="radio" id="rahasia" value="rahasia" name="alias">
+                          <label class="form-check-label" for="rahasia">Rahasia</label>
                         </div>
-                      <button type="submit" class="btn btn-danger btn-lg">
+                      <button type="submit" class="btn btn-danger btn-lg" name="submit_aduan">
                         LAPOR!
                       </button>
                     </div>
@@ -405,32 +639,29 @@ if (isset($_POST['kirim'])) {
                 </div>
 
                 <div id="aspirasi" style="display:none;">
-                  <form method="POST">
+                  <form method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="judul_laporan" placeholder="Ketik Judul Laporan Anda">
+                      <input type="text" class="form-control" id="pesan" name="pesan" placeholder="Ketik Judul dan Isi Laporan Anda">
                     </div>
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Isi Laporan Anda">
-                    </div>
-                    <div class="mb-3">
-                      <input type="text" class="form-control" id="tanggal_laporan" placeholder="Ketik Asal Pelapor">
+                      <input type="text" class="form-control" id="asal_pelapor" name="asal_pelapor" placeholder="Ketik Asal Pelapor">
                     </div>       
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Upload Lampiran</label>
+                      <input type="file" class="form-control" name="files[]" multiple>
+                      <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                     </div>
 
                     <hr>
                     <div class="form-group">
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" id="jk" value="">
-                          <label class="form-check-label" for="jk">Anonim</label>
+                          <input class="form-check-input" type="radio" id="anonim" value="anonim" name="alias">
+                          <label class="form-check-label" for="anonim">Anonim</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" id="jk" value="">
-                          <label class="form-check-label" for="jk">Rahasia</label>
+                          <input class="form-check-input" type="radio" id="rahasia" value="rahasia" name="alias">
+                          <label class="form-check-label" for="rahasia">Rahasia</label>
                         </div>
-                      <button type="submit" class="btn btn-danger btn-lg">
+                      <button type="submit" class="btn btn-danger btn-lg" name="submit_aspirasi">
                         LAPOR!
                       </button>
                     </div>
@@ -438,32 +669,29 @@ if (isset($_POST['kirim'])) {
                 </div>
 
                 <div id="permintaan_informasi" style="display:none;">
-                  <form method="POST">
+                  <form method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="judul_laporan" placeholder="Ketik Judul Laporan Anda">
+                      <input type="text" class="form-control" id="pesan" name="pesan" placeholder="Ketik Judul dan Isi Laporan Anda">
                     </div>
                     <div class="mb-3">
-                      <input type="text" class="form-control" id="isi_laporan" placeholder="Ketik Isi Laporan Anda">
-                    </div>
-                    <div class="mb-3">
-                      <input type="text" class="form-control" id="tanggal_laporan" placeholder="Ketik Asal Pelapor">
+                      <input type="text" class="form-control" id="asal_pelapor" name="asal_pelapor" placeholder="Ketik Asal Pelapor">
                     </div>       
                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Upload Lampiran</label>
+                      <input type="file" class="form-control" name="files[]" multiple>
+                      <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                     </div>
 
                     <hr>
                     <div class="form-group">
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" id="jk" value="">
-                          <label class="form-check-label" for="jk">Anonim</label>
+                          <input class="form-check-input" type="radio" id="anonim" value="anonim" name="alias">
+                          <label class="form-check-label" for="anonim">Anonim</label>
                         </div>
                         <div class="form-check form-check-inline">
-                          <input class="form-check-input" type="radio" id="jk" value="">
-                          <label class="form-check-label" for="jk">Rahasia</label>
+                          <input class="form-check-input" type="radio" id="rahasia" value="rahasia" name="alias">
+                          <label class="form-check-label" for="rahasia">Rahasia</label>
                         </div>
-                      <button type="submit" class="btn btn-danger btn-lg">
+                      <button type="submit" class="btn btn-danger btn-lg" name="submit_informasi">
                         LAPOR!
                       </button>
                     </div>
@@ -495,11 +723,11 @@ if (isset($_POST['kirim'])) {
                 <form method="POST">
                     <div class="form-group">
                       <label for="username">Username</label>
-                      <input id="username" type="text" class="form-control" name="username" require>
+                      <input id="username" type="text" class="form-control" name="username" required>
                     </div>
                     <div class="form-group">
                       <label for="no_hp">Nomor Handphone</label>
-                      <input id="no_hp" type="text" class="form-control" name="no_hp" require>
+                      <input id="no_hp" type="text" class="form-control" name="no_hp" required>
                     </div>
                     <div class="form-group">
                       <label for="pesan">Keterangan</label>
@@ -596,6 +824,11 @@ if (isset($_POST['kirim'])) {
 <!-- Template JS File -->
 <script src="../assets/js/scripts.js"></script>
 <script src="../assets/js/custom.js"></script>
+<script>
+    <?php if (isset($script)) {
+        echo $script;
+    } ?>
+</script>
 
 <!-- Page Specific JS File -->
 </body>

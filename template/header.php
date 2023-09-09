@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-<title>Aplikasi Pelayanan Online Kecamatan Banua Lawas</title>
+<title>Aplikasi Layanan Online Kecamatan Banua Lawas</title>
 
 <!-- favicon -->
 <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo_tabalong_mini.png">
@@ -25,9 +25,11 @@
 <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 
 
+
 <!-- Template CSS -->
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/components.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="layout-3">
@@ -41,7 +43,7 @@
         </div>
         <div class="nav-collapse">
             <ul class="navbar-nav">
-                <!-- <li class="nav-item active h6 mt-2"><a href="?page=beranda" class="nav-link">Aplikasi Pelayanan Online Kecamatan Banua Lawas</a></li> -->
+                <li class="nav-item active h6 mt-2"><a href="?page=beranda" class="nav-link">Aplikasi Layanan Online Kecamatan Banua Lawas</a></li>
             </ul>
         </div>
         <form class="form-inline ml-auto"></form>

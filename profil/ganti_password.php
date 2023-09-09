@@ -3,11 +3,10 @@
   <section class="section">
     <div class="section-header justify-content-between bg-danger rounded-lg">
       <h1 class="text-white">FORM GANTI PASSWORD</h1>
-      <a href="beranda"><h1 class="text-white"><i class="fas fa-arrow-left" style="font-size:20px;"></i> Kembali</h1></a>
+      <a href="?page=beranda"><h1 class="text-white"><i class="fas fa-arrow-left" style="font-size:20px;"></i> Kembali</h1></a>
     </div>
-
     <div class="section-body">
-      <div class="mt-5">
+      <div class="mt-3">
         <div class="row">
           <div class="col-12 col-sm-10 col-md-8 col-lg-8 col-xl-12">
             <div class="card card-danger">
@@ -72,16 +71,16 @@
                     </div>
 
                     <div class="text-muted mb-3">
-                        <a href="lupapassword" class="text-danger">Lupa Password?</a>
+                        <a href="?page=lupapassword" class="text-danger">Lupa Password?</a>
                     </div>
 
                     <div class="form-group">
                       <button type="submit" class="btn btn-success btn-md" name="ubah">
                         <i class="fas fa-save"></i> Simpan
                       </button>
-                      <button type="reset" class="btn btn-danger btn-md">
+                      <a href="?page=beranda" class="btn btn-danger btn-md">
                         <i class="fas fa-window-close"></i> Batal
-                      </button>
+                      </a>
                     </div>
                 </form>
               </div>
