@@ -31,7 +31,7 @@
                     $crud = new CRUD($db);
 
                     // mengambil data dari tabel menggunakan fungsi read
-                    $result = $crud->read('tb_informasi');
+                    $result = mysqli_query($conn, "SELECT * FROM tb_informasi ORDER BY id_informasi DESC");
 
                     // menampilkan data dalam tabel HTML
                     if ($result->num_rows > 0) {

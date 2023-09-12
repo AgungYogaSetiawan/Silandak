@@ -6,6 +6,7 @@ $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
 $baru = $row['status_berkas'];
 $id = $row['id_sp'];
+$filePemohon = $row['file_pemohon'];
 if(isset($_POST['setuju']) and $baru === 'Baru') {
   $keterangan = htmlspecialchars($_POST['keterangan']);
   $status_berkas = "Selesai";
@@ -22,6 +23,60 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
 } else if(isset($_POST['setuju']) and $baru === 'Selesai') {
   echo "<script>alert('Data sudah di acc, tidak bisa diubah!');</script>";
   echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiSuratPindah'>";
+}
+
+// upload file pemohon
+if(isset($_POST['upload'])) {
+  $fotoLama = htmlspecialchars($_POST['fotoLama']);
+  $namaFile = $_FILES['file_pemohon']['name'];
+  $ukuranFile = $_FILES['file_pemohon']['size'];
+  $error = $_FILES['file_pemohon']['error'];
+  $tmpName = $_FILES['file_pemohon']['tmp_name'];
+
+  move_uploaded_file($tmpName, 'assets/' . $namaFile);
+  // cek apakah edit foto baru
+  if($_FILES['file_pemohon']['error'] === 4) {
+    $foto = $fotoLama;
+  } else {
+    
+
+    // cek apakah yang diupload adalah gambar
+    $ekstensi = ['jpg','jpeg','png','pdf'];
+    $ekstensiGambar = explode('.', $namaFile);
+    $ekstensiGambar = strtolower(end($ekstensiGambar));
+    if(!in_array($ekstensiGambar, $ekstensi)) {
+      echo "<script>alert('Format file tidak sesuai!');</script>";
+    }
+
+    // cek ukuran
+    if($ukuranFile > 1000000) {
+      echo "<script>alert('Ukuran file terlalu besar!');</script>";
+    }
+    $foto = $namaFile;
+  }
+
+  // cek apakah ada foto yang diupload
+  if(empty($foto)) {
+    echo "<script>alert('Pilih file terlebih dahulu!');</script>";
+    echo "<meta http-equiv='refresh' content='0;url=index.php?page=detailSP&id_sp=$idsp'>";
+  } else if (!empty($filePemohon)) {
+    echo "<script>alert('File sudah diupload!');</script>";
+    echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiSuratPindah'>";
+  } else {
+    $sql = "UPDATE tb_surat_pindah SET file_pemohon = '$foto' WHERE id_sp = '$id'";
+    $hasil = mysqli_query($conn, $sql);
+
+    if($hasil) {
+      echo "<script>alert('Data berhasil terkirim!');</script>";
+      echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiSuratPindah'>";
+    } else if(empty($foto)) {
+      echo "<script>alert('Mohon upload file terlebih dahulu!');</script>";
+    } else {
+      echo "<script>alert('Terjadi kesalahan!');</script>";
+    }
+  }
+
+  
 }
 ?>
 
@@ -202,10 +257,10 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 </div>
                 <div class="form-group">
                   <button type="submit" class="btn btn-success btn-md" name="setuju">
-                    <i class="fas fa-save"></i> Disetujui
+                    <i class="fas fa-thumbs-up"></i> Disetujui
                   </button>
                   <button type="submit" class="btn btn-danger btn-md" name="tolak">
-                    <i class="fas fa-user-edit"></i> Ditolak
+                    <i class="fas fa-thumbs-down"></i> Ditolak
                   </button>
                   <a href="?page=dataBaruSuratPindah" class="btn btn-info btn-md">
                     <i class="fas fa-window-close"></i> Batal
@@ -216,7 +271,7 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
                 <?php
                 // $id = $_SESSION['id'];
-                $sql = "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.user_id='$idsp'";
+                $sql = "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.id_sp='$idsp'";
                 $result = mysqli_query($conn,$sql);
                 echo "<table class='table table-striped' id='tabel'>";
                 echo "<thead>";
@@ -226,17 +281,17 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 echo "</thead>";
 
                 echo "<tbody>";
-                while ($row = mysqli_fetch_array($result)) {
-                    $status_berkas = $row['status_berkas'];
+                while ($rows = mysqli_fetch_array($result)) {
+                    $status_berkas = $rows['status_berkas'];
                     if($status_berkas == 'Baru') {
                       $alert = 'primary';
                     } else {
                       $alert = 'success';
                     }
                     echo "<tr>
-                            <td>" . $row['tgl'] . "</td>
+                            <td>" . $rows['tgl'] . "</td>
                             <td><div class='btn btn-$alert' disabled>$status_berkas</div></td>
-                            <td>" . $row['keterangan'] . "</td>
+                            <td>" . $rows['keterangan'] . "</td>
                           </tr>";
                 }
 
@@ -244,6 +299,29 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
                 echo "</table>";
 
                 ?>
+                <?php if($baru === 'Selesai'): ?>
+                <hr>
+                <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Upload File Surat Permohonan</h6>
+                <p>*Upload jika data pemohon disetujui</p>
+                <form action="" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="fotoLama" name="fotoLama" value="<?php echo $row['file_pemohon']; ?>" readonly>
+                    <div class="custom-file">
+                      <input type="file" class="form-control" name="file_pemohon">
+                      <p class="text-dark">File yang diunggah: <?php echo $row['file_pemohon']; ?></p>
+                      <?php if(!empty($filePemohon)): ?>
+                      <a href="assets/<?php echo $row['file_pemohon'] ?>">Lihat File</a>
+                      <?php endif; ?>
+                      <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-md mt-2" name="upload">
+                      <i class="fas fa-paper-plane"></i> Kirim
+                    </button>
+                    <a href="?page=dataSelesaiSuratPindah" class="btn btn-danger btn-md mt-2">
+                      <i class="fas fa-window-close"></i> Batal
+                    </a>
+                </form>
+                </div>
+                <?php endif; ?>
           </div>
         </div>
       </div>

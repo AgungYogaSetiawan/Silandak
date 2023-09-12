@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                       <?php
-                      $query = mysqli_query($conn, "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE status_berkas='Selesai'");
+                      $query = mysqli_query($conn, "SELECT * FROM tb_kk a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.status_berkas='Selesai' ORDER BY a.id_kk DESC");
                       $no = 1;
                       while($row = mysqli_fetch_array($query)) {
                       setlocale(LC_TIME, 'id_ID');
@@ -50,7 +50,9 @@
                         }
                         ?>
                         </td>
-                        <td><a href="?page=detailKK&id_kk=<?php echo $row['id_kk'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a></td>
+                        <td>
+                          <a href="?page=detailKK&id_kk=<?php echo $row['id_kk'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a>
+                        </td>
                       </tr>
                       <?php
                       }

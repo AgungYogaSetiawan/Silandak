@@ -70,10 +70,12 @@
                       </div>
                     </div>
 
+                    <?php if($_SESSION['peran'] !== 'admin kecamatan'): ?>
                     <div class="text-muted mb-3">
                         <a href="?page=lupapassword" class="text-danger">Lupa Password?</a>
                     </div>
-
+                    <?php endif; ?>
+                    
                     <div class="form-group">
                       <button type="submit" class="btn btn-success btn-md" name="ubah">
                         <i class="fas fa-save"></i> Simpan

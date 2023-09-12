@@ -29,7 +29,7 @@
                         $crud = new CRUD($db);
 
                         // mengambil data dari tabel menggunakan fungsi read
-                        $result = $crud->read('tb_pesan');
+                        $result = mysqli_query($conn, "SELECT * FROM tb_pesan ORDER BY id_pesan DESC");
 
                         // menampilkan data dalam tabel HTML
                         if ($result->num_rows > 0) {

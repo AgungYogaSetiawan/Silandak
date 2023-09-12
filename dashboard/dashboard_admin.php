@@ -10,7 +10,7 @@
             <span>&times;</span>
           </button>
           <div class="alert-title">Hallo, <?php echo $_SESSION['username']; ?></div>
-          Anda login sebagai <?php echo $_SESSION['username']; ?> Kecamatan Banua Lawas.
+          Anda login sebagai Admin Kecamatan Banua Lawas.
         </div>
       </div>
     </div>

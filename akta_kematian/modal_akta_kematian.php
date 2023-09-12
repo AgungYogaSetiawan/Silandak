@@ -178,7 +178,7 @@
           <div class="form-group">
             <label>Upload Foto/Scan SK Kepala Desa atau Rumah Sakit</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_sk">
+              <input type="file" class="form-control" name="file_sk" required>
               <?php
               if (isset($_SESSION['file_sk'])) {
                 $fileName = $_SESSION['file_sk'];
@@ -192,7 +192,7 @@
           <div class="form-group">
             <label>Upload Foto/Scan Kartu Keluarga</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_kk">
+              <input type="file" class="form-control" name="file_kk" required>
               <?php
               if (isset($_SESSION['file_kk'])) {
                 $fileName = $_SESSION['file_kk'];

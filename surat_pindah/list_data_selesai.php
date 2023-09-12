@@ -26,7 +26,7 @@
                     </thead>
                     <tbody>
                       <?php
-                      $query = mysqli_query($conn, "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE status_berkas='Selesai'");
+                      $query = mysqli_query($conn, "SELECT * FROM tb_surat_pindah a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.status_berkas='Selesai' ORDER BY a.id_sp DESC");
                       $no = 1;
                       while($row = mysqli_fetch_array($query)) {
                       setlocale(LC_TIME, 'id_ID');

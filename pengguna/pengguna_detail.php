@@ -16,7 +16,7 @@ if($_POST['idx']) {
             </div>
             <div class="form-group col-6">
                 <label>Password</label>
-                <input type="text" class="form-control" name="password">
+                <input type="password" class="form-control" name="password">
             </div>
         </div>
         <div class="row">

@@ -27,7 +27,7 @@
                     <tbody>
                       <?php
                       $sesi = $_SESSION['id'];
-                      $query = mysqli_query($conn, "SELECT * FROM tb_kematian a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$sesi'");
+                      $query = mysqli_query($conn, "SELECT * FROM tb_kematian a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$sesi' ORDER BY a.id_ak DESC");
                       $no = 1;
                       while($row = mysqli_fetch_array($query)) {
                       setlocale(LC_TIME, 'id_ID');
@@ -51,7 +51,18 @@
                         }
                         ?>
                         </td>
-                        <td><a href="?page=viewAKM&id_ak=<?php echo $row['id_ak'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a></td>
+                        <td>
+                          <a href="?page=viewAKM&id_ak=<?php echo $row['id_ak'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a>
+                          <?php if($row['status_berkas'] == 'Selesai' && !empty($row['file_pemohon'])) {?>
+                          <a href="assets/<?php echo $row['file_pemohon'] ?>" class="btn btn-danger btnktp" download="<?php echo $row['file_pemohon'] ?>"><i class="fas fa-file-upload"></i></a>
+                          <?php
+                          } else {
+                          ?>
+                          <a class="btn btn-secondary btnktp" disabled><i class="fas fa-file-upload"></i></a>
+                          <?php
+                          }
+                          ?>
+                        </td>
                       </tr>
                       <?php
                       }

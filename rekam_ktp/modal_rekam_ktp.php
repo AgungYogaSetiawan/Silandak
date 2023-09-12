@@ -177,7 +177,7 @@
           <div class="form-group">
             <label>Upload Foto/Scan Kartu Keluarga</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_kk">
+              <input type="file" class="form-control" name="file_kk" required>
               <?php
               if (isset($_SESSION['file_name'])) {
                 $fileName = $_SESSION['file_name'];

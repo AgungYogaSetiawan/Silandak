@@ -179,7 +179,7 @@
           <div class="form-group">
             <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_buku_nikah">
+              <input type="file" class="form-control" name="file_buku_nikah" required>
               <?php
               if (isset($_SESSION['file_buku_nikah'])) {
                 $fileName = $_SESSION['file_buku_nikah'];
@@ -193,7 +193,7 @@
           <div class="form-group">
             <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_ktp">
+              <input type="file" class="form-control" name="file_ktp" required>
               <?php
               if (isset($_SESSION['file_ktp'])) {
                 $fileName = $_SESSION['file_ktp'];
@@ -207,7 +207,7 @@
           <div class="form-group">
             <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_ijazah">
+              <input type="file" class="form-control" name="file_ijazah" required>
               <?php
               if (isset($_SESSION['file_ijazah'])) {
                 $fileName = $_SESSION['file_ijazah'];
@@ -221,7 +221,7 @@
           <div class="form-group">
             <label>Upload Foto/Scan Kartu Keluarga</label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_kk">
+              <input type="file" class="form-control" name="file_kk" required>
               <?php
               if (isset($_SESSION['file_kk'])) {
                 $fileName = $_SESSION['file_kk'];
