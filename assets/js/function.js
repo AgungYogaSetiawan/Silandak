@@ -215,8 +215,31 @@ function hitungJmlPindah() {
 
 // script hitung total penduduk akhir bulan
 function hitungJmlAkhir() {
-    var l_akhir = parseFloat(document.getElementById("l_akhir").value);
-    var p_akhir = parseFloat(document.getElementById("p_akhir").value);
-    var result = l_akhir + p_akhir;
-    document.getElementById('tot_akhir').value = result;
+    var l_awal = parseFloat(document.getElementById("l_awal").value);
+    var l_lahir = parseFloat(document.getElementById("l_lahir").value);
+    var l_mati = parseFloat(document.getElementById("l_mati").value);
+    var l_datang = parseFloat(document.getElementById("l_datang").value);
+    var l_pindah = parseFloat(document.getElementById("l_pindah").value);
+    var p_awal = parseFloat(document.getElementById("p_awal").value);
+    var p_lahir = parseFloat(document.getElementById("p_lahir").value);
+    var p_mati = parseFloat(document.getElementById("p_mati").value);
+    var p_datang = parseFloat(document.getElementById("p_datang").value);
+    var p_pindah = parseFloat(document.getElementById("p_pindah").value);
+
+    var res = l_awal + l_lahir - l_mati + l_datang - l_pindah;
+    var resp = p_awal + p_lahir - p_mati + p_datang - p_pindah;
+    var tot = res + resp;
+    document.getElementById('l_akhir').value = res;
+    document.getElementById('p_akhir').value = resp;
+    document.getElementById('tot_akhir').value = tot;
+
+}
+
+function JmlAkhir() {
+    hitungJmlAwal();
+    hitungJmlAkhir();
+    hitungJmlLahir();
+    hitungJmlMati();
+    hitungJmlDatang();
+    hitungJmlPindah();
 }
