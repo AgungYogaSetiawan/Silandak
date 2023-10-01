@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 04 Jun 2023 pada 12.52
+-- Waktu pembuatan: 02 Okt 2023 pada 01.51
 -- Versi server: 10.3.16-MariaDB
 -- Versi PHP: 7.1.30
 
@@ -59,15 +59,22 @@ CREATE TABLE `tb_akta_lahir` (
   `file_kk` varchar(200) NOT NULL,
   `status_berkas` enum('Baru','Selesai') NOT NULL,
   `tgl` varchar(100) NOT NULL,
-  `keterangan` text DEFAULT NULL
+  `keterangan` text DEFAULT NULL,
+  `file_pemohon` varchar(200) NOT NULL,
+  `slug_ak` varchar(255) NOT NULL,
+  `slug_sk` varchar(255) NOT NULL,
+  `slug_bk` varchar(255) NOT NULL,
+  `slug_kk` varchar(255) NOT NULL,
+  `slug_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_akta_lahir`
 --
 
-INSERT INTO `tb_akta_lahir` (`id_lahir`, `user_id`, `file_akta_lahir`, `file_ket_lahir`, `file_buku_nikah`, `file_kk`, `status_berkas`, `tgl`, `keterangan`) VALUES
-(1, 8, '', 'codedatawithyoga.png', 'Day 3 narasiodata.jpeg', 'codedatawithyoga.png', 'Selesai', '11-May-2023', 'okeeee');
+INSERT INTO `tb_akta_lahir` (`id_lahir`, `user_id`, `file_akta_lahir`, `file_ket_lahir`, `file_buku_nikah`, `file_kk`, `status_berkas`, `tgl`, `keterangan`, `file_pemohon`, `slug_ak`, `slug_sk`, `slug_bk`, `slug_kk`, `slug_file`) VALUES
+(1, 8, '', 'codedatawithyoga.png', 'Day 3 narasiodata.jpeg', 'codedatawithyoga.png', 'Selesai', '11-May-2023', 'okeeee', 'CamScanner 12-25-2022 19.00.pdf', '', '', '', '', ''),
+(2, 8, '230922023813.png', 'Account-Center.png', 'Account-Center.png', 'Account-Center.png', 'Baru', '19-Sep-2023', NULL, '', 'Blush-big.png', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -91,7 +98,13 @@ CREATE TABLE `tb_aspirasi` (
 INSERT INTO `tb_aspirasi` (`id_aspirasi`, `tgl_waktu`, `pengirim`, `pesan`, `asal_pelapor`, `lampiran`) VALUES
 (8, '26-Apr-2023', 'm*i*k*a', 'jgj', 'jj', '2021-04-19_162329.jpg'),
 (9, '26-Apr-2023', 'm*i*k*a', 'lapor', 'bjm', '2021-APTOS-Big-Data-Competition-Tianchi-competition-Alibabacloud-Tianchi.png'),
-(10, '26-Apr-2023', 'm*i*k*a', 'g', 'hj', 'batu.jpeg');
+(10, '26-Apr-2023', 'm*i*k*a', 'g', 'hj', 'batu.jpeg'),
+(11, '26-Aug-2023', 'anonymous', 'rrr', 'rrrr', 'Account-Center.png'),
+(12, '02-Sep-2023', '', 'er', 'bjm', 'Account-Center.png'),
+(13, '02-Sep-2023', 'a*a*a*a*a', 'er', 'bjm', 'Account-Center.png'),
+(14, '02-Sep-2023', 'anonymous', 'sd', 'fsdf', 'Account-Center.png'),
+(15, '02-Sep-2023', '', 'dsd', 'dsd', 'Account-Center.png'),
+(16, '02-Sep-2023', 'anonymous', 'dad', 'de', 'Account-Center.png');
 
 -- --------------------------------------------------------
 
@@ -105,15 +118,18 @@ CREATE TABLE `tb_bio_wni` (
   `file_kk` varchar(200) NOT NULL,
   `status_berkas` enum('Baru','Selesai') NOT NULL,
   `tgl` varchar(100) NOT NULL,
-  `keterangan` text NOT NULL
+  `keterangan` text NOT NULL,
+  `file_pemohon` varchar(200) NOT NULL,
+  `slug_kk` varchar(255) NOT NULL,
+  `slug_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_bio_wni`
 --
 
-INSERT INTO `tb_bio_wni` (`id_bio`, `user_id`, `file_kk`, `status_berkas`, `tgl`, `keterangan`) VALUES
-(1, 8, 'Dash.png', 'Selesai', '25-May-2023', 'acc');
+INSERT INTO `tb_bio_wni` (`id_bio`, `user_id`, `file_kk`, `status_berkas`, `tgl`, `keterangan`, `file_pemohon`, `slug_kk`, `slug_file`) VALUES
+(1, 8, 'Account-Center.png', 'Selesai', '25-May-2023', 'acc', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -162,15 +178,19 @@ CREATE TABLE `tb_kematian` (
   `file_kk` varchar(200) NOT NULL,
   `status_berkas` enum('Baru','Selesai') NOT NULL,
   `tgl` varchar(100) NOT NULL,
-  `keterangan` text NOT NULL
+  `keterangan` text NOT NULL,
+  `file_pemohon` varchar(200) NOT NULL,
+  `slug_sk` varchar(255) NOT NULL,
+  `slug_kk` varchar(255) NOT NULL,
+  `slug_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_kematian`
 --
 
-INSERT INTO `tb_kematian` (`id_ak`, `user_id`, `file_sk`, `file_kk`, `status_berkas`, `tgl`, `keterangan`) VALUES
-(1, 8, 'Account-Center.png', 'glassfish.jpg', 'Selesai', '23-May-2023', 'acc');
+INSERT INTO `tb_kematian` (`id_ak`, `user_id`, `file_sk`, `file_kk`, `status_berkas`, `tgl`, `keterangan`, `file_pemohon`, `slug_sk`, `slug_kk`, `slug_file`) VALUES
+(1, 8, 'Account-Center.png', 'glassfish.jpg', 'Selesai', '23-May-2023', 'acc', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -187,15 +207,27 @@ CREATE TABLE `tb_kk` (
   `file_kk` varchar(200) NOT NULL,
   `status_berkas` enum('Baru','Selesai') NOT NULL,
   `tgl` varchar(100) NOT NULL,
-  `keterangan` text DEFAULT NULL
+  `keterangan` text DEFAULT NULL,
+  `file_pemohon` varchar(200) NOT NULL,
+  `slug_bk` varchar(255) NOT NULL,
+  `slug_ktp` varchar(255) NOT NULL,
+  `slug_ijazah` varchar(255) NOT NULL,
+  `slug_kk` varchar(255) NOT NULL,
+  `slug_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_kk`
 --
 
-INSERT INTO `tb_kk` (`id_kk`, `user_id`, `file_buku_nikah`, `file_ijazah`, `file_ktp`, `file_kk`, `status_berkas`, `tgl`, `keterangan`) VALUES
-(4, 8, 'foto_yoga.png', 'Day 3 narasiodata.jpeg', 'foto_yoga1.jpeg', 'codedatawithyoga.png', 'Selesai', '02-Mei-2023', 'oke');
+INSERT INTO `tb_kk` (`id_kk`, `user_id`, `file_buku_nikah`, `file_ijazah`, `file_ktp`, `file_kk`, `status_berkas`, `tgl`, `keterangan`, `file_pemohon`, `slug_bk`, `slug_ktp`, `slug_ijazah`, `slug_kk`, `slug_file`) VALUES
+(5, 10, '2021-APTOS-Big-Data-Competition-Tianchi-competition-Alibabacloud-Tianchi.png', 'berkas2a.png', 'Account-Center.png', 'Day 2 narasiodata.jpeg', 'Baru', '04-Jul-2023', NULL, '', '', '', '', '', ''),
+(6, 11, '2021-APTOS-Big-Data-Competition-Tianchi-competition-Alibabacloud-Tianchi.png', '', 'Account-Center.png', '', 'Baru', '04-Jul-2023', NULL, '', '', '', '', '', ''),
+(7, 8, '2021-04-19_162329.jpg', 'Account-Center.png', 'Account-Center.png', 'Account-Center.png', 'Baru', '02-Sep-2023', NULL, '', '', '', '', '', ''),
+(8, 8, 'background sidang.jpeg', 'background sidang.jpeg', 'background sidang.jpeg', 'background sidang.jpeg', 'Selesai', '02-Sep-2023', 'oke', 'AkselResume-CV DITA.pdf', '', '', '', '', ''),
+(9, 8, 'Blush-big.png', 'Blush-big.png', 'Blush-big.png', 'Blush-big.png', 'Selesai', '10-Sep-2023', 'done', 'cv dita.pdf', '', '', '', '', ''),
+(10, 16, 'Diminta-ngerakit-PC-dengan-budget-8-Juta-ini-pilihan-saya-YouTube.png', 'Account-Center.png', 'Diminta-ngerakit-PC-dengan-budget-8-Juta-ini-pilihan-saya-YouTube.png', 'batu.jpeg', 'Baru', '19-Sep-2023', NULL, '', '', '', '', '', ''),
+(11, 16, 'wallhaven-q22x27.png', 'wallhaven-wqery6.jpg', 'tangan.jpeg', 'wide1.png', 'Baru', '19-Sep-2023', NULL, '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -206,6 +238,8 @@ INSERT INTO `tb_kk` (`id_kk`, `user_id`, `file_buku_nikah`, `file_ijazah`, `file
 CREATE TABLE `tb_penduduk` (
   `id_penduduk` int(11) NOT NULL,
   `desa` varchar(200) NOT NULL,
+  `bulan` varchar(50) NOT NULL,
+  `tahun` int(11) NOT NULL,
   `l_awal` int(11) NOT NULL,
   `p_awal` int(11) NOT NULL,
   `tot_awal` int(11) NOT NULL,
@@ -232,8 +266,24 @@ CREATE TABLE `tb_penduduk` (
 -- Dumping data untuk tabel `tb_penduduk`
 --
 
-INSERT INTO `tb_penduduk` (`id_penduduk`, `desa`, `l_awal`, `p_awal`, `tot_awal`, `jml_kk_awal`, `l_lahir`, `p_lahir`, `tot_lahir`, `l_mati`, `p_mati`, `tot_mati`, `l_datang`, `p_datang`, `tot_datang`, `l_pindah`, `p_pindah`, `tot_pindah`, `l_akhir`, `p_akhir`, `tot_akhir`, `jml_kk_akhir`) VALUES
-(1, 'Banua Lawas', 520, 393, 913, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 0, 5, 5, 5, 5, 5);
+INSERT INTO `tb_penduduk` (`id_penduduk`, `desa`, `bulan`, `tahun`, `l_awal`, `p_awal`, `tot_awal`, `jml_kk_awal`, `l_lahir`, `p_lahir`, `tot_lahir`, `l_mati`, `p_mati`, `tot_mati`, `l_datang`, `p_datang`, `tot_datang`, `l_pindah`, `p_pindah`, `tot_pindah`, `l_akhir`, `p_akhir`, `tot_akhir`, `jml_kk_akhir`) VALUES
+(1, 'Banua Lawas', 'September', 2023, 2012, 1876, 3888, 21, 20, 41, 43, 4, 4, 141, 41, 414, 41, 6, 63, 44, 42, 5, 41, 424),
+(18, 'Bangkiling', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(19, 'Bangkiling Raya', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(20, 'Banua Rantau', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(21, 'Batang Banyu', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(22, 'Bungin', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(23, 'Habau', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(24, 'Habau Hulu', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(25, 'Hariang', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(26, 'Hapalah', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(27, 'Pematang', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(28, 'Purai', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(29, 'Sei Anyar', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(30, 'Sei Durian', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(31, 'Talan', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(33, 'Sei Anyar', 'Agustus', 2023, 42, 42, 84, 44, 424, 43, 467, 5, 1, 6, 3, 3, 6, 1, 3, 4, 3, 3, 6, 33),
+(34, 'Banua Lawas', 'September', 2023, 53, 62, 115, 64, 224, 424, 648, 525, 45, 570, 51, 54, 105, 44, 42, 86, 4, 2, 6, 4144);
 
 -- --------------------------------------------------------
 
@@ -253,7 +303,6 @@ CREATE TABLE `tb_pesan` (
 --
 
 INSERT INTO `tb_pesan` (`id_pesan`, `username`, `no_hp`, `pesan`) VALUES
-(1, 'mika', '2147483647', 'ganti password'),
 (2, 'udin', '2147483647', 'ganti password'),
 (3, 'sintia', '086945635696', 'ganti password'),
 (4, 'dita', '0869625638', 'ganti password'),
@@ -272,15 +321,19 @@ CREATE TABLE `tb_pindah_datang` (
   `file_ktp` varchar(200) NOT NULL,
   `status_berkas` enum('Baru','Selesai') NOT NULL,
   `tgl` varchar(100) NOT NULL,
-  `keterangan` text NOT NULL
+  `keterangan` text NOT NULL,
+  `file_pemohon` varchar(200) NOT NULL,
+  `slug_kp` varchar(255) NOT NULL,
+  `slug_ktp` varchar(255) NOT NULL,
+  `slug_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_pindah_datang`
 --
 
-INSERT INTO `tb_pindah_datang` (`id_pd`, `user_id`, `file_kp`, `file_ktp`, `status_berkas`, `tgl`, `keterangan`) VALUES
-(1, 8, 'sertifikat vaksin 1.jpeg', 'KTP.jpeg', 'Selesai', '24-May-2023', 'oke acc');
+INSERT INTO `tb_pindah_datang` (`id_pd`, `user_id`, `file_kp`, `file_ktp`, `status_berkas`, `tgl`, `keterangan`, `file_pemohon`, `slug_kp`, `slug_ktp`, `slug_file`) VALUES
+(1, 8, 'sertifikat vaksin 1.jpeg', 'KTP.jpeg', 'Selesai', '24-May-2023', 'oke acc', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -294,17 +347,23 @@ CREATE TABLE `tb_rekam_ktp` (
   `file_kk` varchar(200) NOT NULL,
   `status_berkas` enum('Baru','Selesai') NOT NULL,
   `tgl` varchar(100) NOT NULL,
-  `keterangan` text NOT NULL
+  `keterangan` text NOT NULL,
+  `file_pemohon` varchar(200) NOT NULL,
+  `slug_kk` varchar(255) NOT NULL,
+  `slug_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_rekam_ktp`
 --
 
-INSERT INTO `tb_rekam_ktp` (`id_ktp`, `user_id`, `file_kk`, `status_berkas`, `tgl`, `keterangan`) VALUES
-(1, 8, 'Account-Center.png', 'Selesai', '25-May-2023', 'accccc'),
-(2, 9, 'glassfish2.jpg', 'Selesai', '25-May-2023', 'acc'),
-(3, 8, 'glassfish2.jpg', 'Baru', '30-May-2023', '');
+INSERT INTO `tb_rekam_ktp` (`id_ktp`, `user_id`, `file_kk`, `status_berkas`, `tgl`, `keterangan`, `file_pemohon`, `slug_kk`, `slug_file`) VALUES
+(1, 8, 'Account-Center.png', 'Selesai', '25-May-2023', 'accccc', '', '', ''),
+(2, 9, 'glassfish2.jpg', 'Selesai', '25-May-2023', 'acc', '', '', ''),
+(3, 8, '230922041525.pdf', 'Baru', '30-May-2023', '', '', '', ''),
+(4, 8, 'Blush-big.png', 'Baru', '02-Sep-2023', '', '', '', ''),
+(5, 8, '230921041821.jpeg', 'Baru', '10-Sep-2023', '', '', '', ''),
+(8, 8, '230915105744.png', 'Baru', '15-Sep-2023', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -320,15 +379,20 @@ CREATE TABLE `tb_surat_pindah` (
   `file_ktp` varchar(200) NOT NULL,
   `status_berkas` enum('Baru','Selesai') NOT NULL,
   `tgl` varchar(50) NOT NULL,
-  `keterangan` text DEFAULT NULL
+  `keterangan` text DEFAULT NULL,
+  `file_pemohon` varchar(200) NOT NULL,
+  `slug_sk` varchar(255) NOT NULL,
+  `slug_kk` varchar(255) NOT NULL,
+  `slug_ktp` varchar(255) NOT NULL,
+  `slug_file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_surat_pindah`
 --
 
-INSERT INTO `tb_surat_pindah` (`id_sp`, `user_id`, `file_kp`, `file_kk`, `file_ktp`, `status_berkas`, `tgl`, `keterangan`) VALUES
-(1, 8, 'glassfish.jpg', 'glassfish2.jpg', 'Account-Center.png', 'Selesai', '18-May-2023', 'berkas betul');
+INSERT INTO `tb_surat_pindah` (`id_sp`, `user_id`, `file_kp`, `file_kk`, `file_ktp`, `status_berkas`, `tgl`, `keterangan`, `file_pemohon`, `slug_sk`, `slug_kk`, `slug_ktp`, `slug_file`) VALUES
+(1, 8, 'glassfish.jpg', 'glassfish2.jpg', 'Account-Center.png', 'Selesai', '18-May-2023', 'berkas betul', '16453-32356-1-SM.pdf', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -357,17 +421,24 @@ CREATE TABLE `tb_user` (
   `rw` varchar(50) DEFAULT NULL,
   `alamat` varchar(255) DEFAULT NULL,
   `kode_pos` int(11) DEFAULT NULL,
-  `foto` varchar(255) DEFAULT NULL
+  `foto` varchar(255) DEFAULT NULL,
+  `slug_foto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tb_user`
 --
 
-INSERT INTO `tb_user` (`id_user`, `username`, `password`, `level`, `kewarganegaraan`, `nama`, `nik`, `no_hp`, `pekerjaan`, `tmpt_lahir`, `tgl_lahir`, `jk`, `status`, `agama`, `kelurahan`, `kecamatan`, `rt`, `rw`, `alamat`, `kode_pos`, `foto`) VALUES
-(7, 'admin', '$2y$10$2aP.Kuoe2HybiBxtmvFmSeYxfJmCG/EKgD0S1WiiwFDmwWob9dNWa', 'admin kecamatan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(8, 'dita', '$2y$10$tbsGKUgz2dvuwFX1HdQwrOrCP4nRu5lApCaGBPxDIzson6KU/Zuci', 'warga', 'Indonesia', 'Dita', '1234567891234567', '086945635696', 'Mahasiswa', 'Banjarmasin', '2023-05-02', 'Perempuan', 'Belum Menikah', 'Islam', 'Kelayan Tengah', 'Banua Lawas', '12', '2', 'jln hksn', 70123, 'nomask1.jpg'),
-(9, 'udin', '$2y$10$yEfCVr.aGFuFxpCt/9ubsOdyxDpglxDent3x51oNaU1jMwHdFoQQ6', 'admin desa', 'Indonesia', 'Udin', '655675675677577', '089759535536', 'Buruh', 'Tanjung', '1996-06-20', 'Laki-laki', 'Sudah Menikah', 'Islam', 'Kelayan Tengah', 'Banua Lawas', '2', '4', 'jln hksnnn', 70123, 'mask1.jpg');
+INSERT INTO `tb_user` (`id_user`, `username`, `password`, `level`, `kewarganegaraan`, `nama`, `nik`, `no_hp`, `pekerjaan`, `tmpt_lahir`, `tgl_lahir`, `jk`, `status`, `agama`, `kelurahan`, `kecamatan`, `rt`, `rw`, `alamat`, `kode_pos`, `foto`, `slug_foto`) VALUES
+(7, 'admin', '$2y$10$xNHxhzPriq/HRA3h2MtfGO.OCtLoS1hp1CL/ZVmrlnSrhfIburKYi', 'admin kecamatan', '', '', '', '', '', '', '0000-00-00', '', 'Belum Menikah', '', 'Banua Lawas', 'Banua Lawas', '', '', '', 0, '', ''),
+(8, 'dita', '$2y$10$qXuLQCMjwCOlbLYuT6YMROncUaooyL1W5MJ.XD16AZxEDkY5aCAtW', 'warga', 'Indonesia', 'Dita', '123456789123456', '086945635696', 'Mahasiswa', 'Banjarmasin', '2023-05-02', 'Perempuan', 'Belum Menikah', 'Islam', 'Bungin', 'Banua Lawas', '12', '2', 'jln hksn', 70123, '230922013942.jpg', 'nomask2.jpg'),
+(9, 'udin', '$2y$10$yEfCVr.aGFuFxpCt/9ubsOdyxDpglxDent3x51oNaU1jMwHdFoQQ6', 'admin desa', 'Indonesia', 'Udin', '655675675677577', '089759535536', 'Buruh', 'Tanjung', '1996-06-20', 'Laki-laki', 'Sudah Menikah', 'Islam', 'Banua Lawas', 'Banua Lawas', '2', '4', 'jln hksnnn', 70123, 'mask1.jpg', ''),
+(10, 'rudi', '$2y$10$IMldsmc3t1usFmZAiKB2xerSNv5lWU0zbKoKLU9j41FhsOznjdnuG', 'warga', 'Indonesia', 'Rudiansyah', '655656867663', '08758482462', 'Wirausaha', 'Barabai', '2023-07-04', 'Laki-laki', 'Sudah Menikah', 'Islam', 'Purai', 'Banua Lawas', '3', '21', 'Jln.A.Yani Km. 202', 70125, 'mask1.jpg', ''),
+(11, 'aulia', '$2y$10$7mGEYjBaUYWqide/.8Oqcu8d1wszijbToMRifVKuV5lO4tSrgMg1a', 'warga', 'Indonesia', 'Aulia Sandra', '55645747', '5645767', 'Mahasiswa', 'Banjarmasin', '2023-06-22', 'Perempuan', 'Belum Menikah', 'Islam', 'sungai andai', 'Banua Lawas', '2', '3', 'jln hksn', 70123, 'Blush-big.png', ''),
+(13, 'dddd', '$2y$10$jMbNbIcC2kNS3IB7DpEBbejk2WKMpa18sYSOvD41302FBgmFqFkcy', 'warga', 'dadadaa', 'dafafaaa', '2525211', '52525222', 'fsfsg', 'gsgs', '2023-08-25', 'Laki-laki', 'Belum Menikah', 'Islam', 'daac', 'Banua Lawas', '12', '3', 'ascas', 4152, 'background sidang.jpeg', ''),
+(14, 'sdasd', '$2y$10$xH1Iks3nLcnVUjs4hWxPt.Y5ZyMG4ZWiebJ1hspJbjvCs4XhHAZ6G', 'warga', 'faf', 'ffa', '4242', '2334', 'fsfa', 'faf', '2023-08-12', 'Laki-laki', 'Belum Menikah', 'ada', 'Bangkiling', 'Banua Lawas', '34', '3', 'fsf', 2523, 'Blush-big.png', ''),
+(15, 'yoga', '$2y$10$sXxrR.HvVdbyttiREhBpLuvroXDbb4J0omn0mE/tF91CDOLRV11gO', 'admin kecamatan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
+(16, 'budi', '$2y$10$v3rVeD4aFc4oKuo8VraAL.0U.m8X4chCXEb3vanDPpQs5oCB9iq2C', 'warga', 'Indonesia', 'Budianto', '42525245', '5265636', 'Mahasiswa', 'Banjarmasin', '2023-09-19', 'Laki-laki', 'Belum Menikah', 'Islam', 'Hapalah', 'Banua Lawas', '12', '3', 'JLN.HKSN', 63634, 'wallhaven-q22x27.png', '');
 
 --
 -- Indexes for dumped tables
@@ -478,13 +549,13 @@ ALTER TABLE `tb_aduan`
 -- AUTO_INCREMENT untuk tabel `tb_akta_lahir`
 --
 ALTER TABLE `tb_akta_lahir`
-  MODIFY `id_lahir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_lahir` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_aspirasi`
 --
 ALTER TABLE `tb_aspirasi`
-  MODIFY `id_aspirasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_aspirasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_bio_wni`
@@ -514,19 +585,19 @@ ALTER TABLE `tb_kematian`
 -- AUTO_INCREMENT untuk tabel `tb_kk`
 --
 ALTER TABLE `tb_kk`
-  MODIFY `id_kk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_penduduk`
 --
 ALTER TABLE `tb_penduduk`
-  MODIFY `id_penduduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_penduduk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pesan`
 --
 ALTER TABLE `tb_pesan`
-  MODIFY `id_pesan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pesan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pindah_datang`
@@ -538,7 +609,7 @@ ALTER TABLE `tb_pindah_datang`
 -- AUTO_INCREMENT untuk tabel `tb_rekam_ktp`
 --
 ALTER TABLE `tb_rekam_ktp`
-  MODIFY `id_ktp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_ktp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_surat_pindah`
@@ -550,7 +621,7 @@ ALTER TABLE `tb_surat_pindah`
 -- AUTO_INCREMENT untuk tabel `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

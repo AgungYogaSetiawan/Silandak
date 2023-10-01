@@ -9,27 +9,30 @@ if(isset($_POST['kirim'])){
   $tgl_waktu = date('d-M-Y');
   $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
   
-  $file_kp = $_FILES['file_kp']['name'];
-  $pdf_kp = explode('.', $file_kp);
+  $file_kp1 = $_FILES['file_kp']['name'];
+  $pdf_kp = explode('.', $file_kp1);
   $ekstensi_kp = strtolower(end($pdf_kp));
   $ukuran_kp = $_FILES['file_kp']['size'];
   $file_tmp_kp = $_FILES['file_kp']['tmp_name'];
+  $file_kp = date('ymdhis').'.'.$ekstensi_kp;
 
-  $file_kk = $_FILES['file_kk']['name'];
-  $pdf_kk = explode('.', $file_kk);
+  $file_kk1 = $_FILES['file_kk']['name'];
+  $pdf_kk = explode('.', $file_kk1);
   $ekstensi_kk = strtolower(end($pdf_kk));
   $ukuran_kk = $_FILES['file_kk']['size'];
   $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+  $file_kk = date('ymdhis').'.'.$ekstensi_kk;
   
-  $file_ktp = $_FILES['file_ktp']['name'];
-  $pdf_ktp = explode('.', $file_ktp);
+  $file_ktp1 = $_FILES['file_ktp']['name'];
+  $pdf_ktp = explode('.', $file_ktp1);
   $ekstensi_ktp = strtolower(end($pdf_ktp));
   $ukuran_ktp = $_FILES['file_ktp']['size'];
   $file_tmp_ktp = $_FILES['file_ktp']['tmp_name'];
+  $file_ktp = date('ymdhis').'.'.$ekstensi_ktp;
 
   // koding cek upload file ket pindah
   if(in_array($ekstensi_kp, $ekstensi_diperbolehkan) === true){
-    if($ukuran_kp < 1044070){ 
+    if($ukuran_kp < 10485760){ 
       move_uploaded_file($file_tmp_kp, '../assets/'.$file_kp);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -40,7 +43,7 @@ if(isset($_POST['kirim'])){
 
   // koding cek upload file ktp
   if(in_array($ekstensi_ktp, $ekstensi_diperbolehkan) === true){
-    if($ukuran_ktp < 1044070){ 
+    if($ukuran_ktp < 10485760){ 
       move_uploaded_file($file_tmp_ktp, '../assets/'.$file_ktp);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -51,7 +54,7 @@ if(isset($_POST['kirim'])){
 
   // koding cek upload file kk
   if(in_array($ekstensi_kk, $ekstensi_diperbolehkan) === true){
-    if($ukuran_kk < 1044070){ 
+    if($ukuran_kk < 10485760){ 
       move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -61,7 +64,7 @@ if(isset($_POST['kirim'])){
   }
 
     //Query input menginput data kedalam tabel kk
-    $sql = "INSERT INTO tb_surat_pindah (user_id,file_kp,file_kk,file_ktp,status_berkas,tgl) VALUES ('$user_id','$file_kp','$file_kk','$file_ktp','$status','$tgl_waktu')";
+    $sql = "INSERT INTO tb_surat_pindah (user_id,file_kp,file_kk,file_ktp,status_berkas,tgl,slug_sk,slug_kk,slug_ktp) VALUES ('$user_id','$file_kp','$file_kk','$file_ktp','$status','$tgl_waktu','$file_kp1','$file_kk1','$file_ktp1')";
 
     //Mengeksekusi/menjalankan query diatas	
     $hasil = mysqli_query($conn,$sql);
@@ -79,25 +82,28 @@ if(isset($_POST['kirim'])){
     // $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
     
-    $file_kp = $_FILES['file_kp']['name'];
-    $pdf_kp = explode('.', $file_kp);
+    $file_kp1 = $_FILES['file_kp']['name'];
+    $pdf_kp = explode('.', $file_kp1);
     $ekstensi_kp = strtolower(end($pdf_kp));
     $ukuran_kp = $_FILES['file_kp']['size'];
     $file_tmp_kp = $_FILES['file_kp']['tmp_name'];
+    $file_kp = date('ymdhis').'.'.$ekstensi_kp;
     move_uploaded_file($file_tmp_kp, '../assets/'.$file_kp);
 
-    $file_kk = $_FILES['file_kk']['name'];
-    $pdf_kk = explode('.', $file_kk);
+    $file_kk1 = $_FILES['file_kk']['name'];
+    $pdf_kk = explode('.', $file_kk1);
     $ekstensi_kk = strtolower(end($pdf_kk));
     $ukuran_kk = $_FILES['file_kk']['size'];
     $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+    $file_kk = date('ymdhis').'.'.$ekstensi_kk;
     move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
     
-    $file_ktp = $_FILES['file_ktp']['name'];
-    $pdf_ktp = explode('.', $file_ktp);
+    $file_ktp1 = $_FILES['file_ktp']['name'];
+    $pdf_ktp = explode('.', $file_ktp1);
     $ekstensi_ktp = strtolower(end($pdf_ktp));
     $ukuran_ktp = $_FILES['file_ktp']['size'];
     $file_tmp_ktp = $_FILES['file_ktp']['tmp_name'];
+    $file_ktp = date('ymdhis').'.'.$ekstensi_ktp;
     move_uploaded_file($file_tmp_ktp, '../assets/'.$file_ktp);
 
     // simpan data ke array
@@ -152,10 +158,13 @@ $id = $data['id_sp'];
 if(isset($_POST['ubah']) and $baru === 'Baru') {
   // foto ket pindah
   $fotoLamaKP = htmlspecialchars($_POST['fotoLamaKP']);
-  $namaFileKP = $_FILES['file_kp']['name'];
+  $namaFileKP1 = $_FILES['file_kp']['name'];
   $ukuranFileKP = $_FILES['file_kp']['size'];
   $errorKP = $_FILES['file_kp']['error'];
   $tmpNameKP = $_FILES['file_kp']['tmp_name'];
+  $pdf_KP = explode('.', $namaFileKP1);
+  $ekstensi_KP = strtolower(end($pdf_KP));
+  $namaFileKP = date('ymdhis').'.'.$ekstensi_KP;
 
   move_uploaded_file($tmpNameKP, '../assets/' . $namaFileKP);
   // cek apakah edit foto baru
@@ -168,7 +177,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiKP = ['jpg','jpeg','png'];
+    $ekstensiKP = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarKP = explode('.', $namaFileKP);
     $ekstensiGambarKP = strtolower(end($ekstensiGambarKP));
     if(!in_array($ekstensiGambarKP, $ekstensiKP)) {
@@ -176,7 +185,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileKP > 1000000) {
+    if($ukuranFileKP > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoKP = $namaFileKP;
@@ -184,10 +193,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
 
   // foto KTP
   $fotoLamaKTP = htmlspecialchars($_POST['fotoLamaKTP']);
-  $namaFileKTP = $_FILES['file_ktp']['name'];
+  $namaFileKTP1 = $_FILES['file_ktp']['name'];
   $ukuranFileKTP = $_FILES['file_ktp']['size'];
   $errorKTP = $_FILES['file_ktp']['error'];
   $tmpNameKTP = $_FILES['file_ktp']['tmp_name'];
+  $pdf_KTP = explode('.', $namaFileKTP1);
+  $ekstensi_KTP = strtolower(end($pdf_KTP));
+  $namaFileKTP = date('ymdhis').'.'.$ekstensi_KTP;
 
   move_uploaded_file($tmpNameKTP, '../assets/' . $namaFileKTP);
   // cek apakah edit foto baru
@@ -200,7 +212,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiKTP = ['jpg','jpeg','png'];
+    $ekstensiKTP = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarKTP = explode('.', $namaFileKTP);
     $ekstensiGambarKTP = strtolower(end($ekstensiGambarKTP));
     if(!in_array($ekstensiGambarKTP, $ekstensiKTP)) {
@@ -208,7 +220,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileKTP > 1000000) {
+    if($ukuranFileKTP > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoKTP = $namaFileKTP;
@@ -216,10 +228,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
 
   // foto KK
   $fotoLamaKK = htmlspecialchars($_POST['fotoLamaKK']);
-  $namaFileKK = $_FILES['file_kk']['name'];
+  $namaFileKK1 = $_FILES['file_kk']['name'];
   $ukuranFileKK = $_FILES['file_kk']['size'];
   $errorKK = $_FILES['file_kk']['error'];
   $tmpNameKK = $_FILES['file_kk']['tmp_name'];
+  $pdf_KK = explode('.', $namaFileKK1);
+  $ekstensi_KK = strtolower(end($pdf_KK));
+  $namaFileKK = date('ymdhis').'.'.$ekstensi_KK;
 
   move_uploaded_file($tmpNameKK, '../assets/' . $namaFileKK);
   // cek apakah edit foto baru
@@ -232,7 +247,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiKK = ['jpg','jpeg','png'];
+    $ekstensiKK = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarKK = explode('.', $namaFileKK);
     $ekstensiGambarKK = strtolower(end($ekstensiGambarKK));
     if(!in_array($ekstensiGambarKK, $ekstensiKK)) {
@@ -240,13 +255,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileKK > 1000000) {
+    if($ukuranFileKK > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoKK = $namaFileKK;
   }
 
-  $sql = "UPDATE tb_surat_pindah SET file_kp = '$fotoKP', file_kk = '$fotoKK', file_ktp = '$fotoKTP' WHERE id_sp = '$id'";
+  $sql = "UPDATE tb_surat_pindah SET file_kp = '$fotoKP', file_kk = '$fotoKK', file_ktp = '$fotoKTP', slug_sk = '$namaFileKP1', slug_kk = '$namaFileKK1', slug_ktp = '$namaFileKTP1' WHERE id_sp = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {

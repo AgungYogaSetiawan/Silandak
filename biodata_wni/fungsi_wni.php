@@ -11,15 +11,16 @@ if(isset($_POST['kirim'])){
   $tgl_waktu = date('d-M-Y');
   $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
 
-  $file_kk = $_FILES['file_kk']['name'];
-  $pdf_kk = explode('.', $file_kk);
+  $file_kk1 = $_FILES['file_kk']['name'];
+  $pdf_kk = explode('.', $file_kk1);
   $ekstensi_kk = strtolower(end($pdf_kk));
   $ukuran_kk = $_FILES['file_kk']['size'];
   $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+  $file_kk = date('ymdhis').'.'.$ekstensi_kk;
 
   // koding cek upload file kk
   if(in_array($ekstensi_kk, $ekstensi_diperbolehkan) === true){
-    if($ukuran_kk < 1044070){ 
+    if($ukuran_kk < 10485760){ 
       move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -29,7 +30,7 @@ if(isset($_POST['kirim'])){
   }
 
     //Query input menginput data kedalam tabel kk
-    $sql = "INSERT INTO tb_bio_wni (user_id,file_kk,status_berkas,tgl) VALUES ('$user_id','$file_kk','$status','$tgl_waktu')";
+    $sql = "INSERT INTO tb_bio_wni (user_id,file_kk,status_berkas,tgl,slug_kk) VALUES ('$user_id','$file_kk','$status','$tgl_waktu','$file_kk1')";
 
     //Mengeksekusi/menjalankan query diatas	
     $hasil = mysqli_query($conn,$sql);
@@ -48,11 +49,12 @@ if(isset($_POST['kirim'])){
     // $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
 
-    $file_kk = $_FILES['file_kk']['name'];
-    $pdf_kk = explode('.', $file_kk);
+    $file_kk1 = $_FILES['file_kk']['name'];
+    $pdf_kk = explode('.', $file_kk1);
     $ekstensi_kk = strtolower(end($pdf_kk));
     $ukuran_kk = $_FILES['file_kk']['size'];
     $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+    $file_kk = date('ymdhis').'.'.$ekstensi_kk;
     move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
 
     // simpan data ke array
@@ -104,10 +106,13 @@ $id = $data['id_bio'];
 if(isset($_POST['ubah']) and $baru === 'Baru') {
   // foto KK
   $fotoLamaKK = htmlspecialchars($_POST['fotoLamaKK']);
-  $namaFileKK = $_FILES['file_kk']['name'];
+  $namaFileKK1 = $_FILES['file_kk']['name'];
   $ukuranFileKK = $_FILES['file_kk']['size'];
   $errorKK = $_FILES['file_kk']['error'];
   $tmpNameKK = $_FILES['file_kk']['tmp_name'];
+  $pdf_KK = explode('.', $namaFileKK1);
+  $ekstensi_KK = strtolower(end($pdf_KK));
+  $namaFileKK = date('ymdhis').'.'.$ekstensi_KK;
 
   move_uploaded_file($tmpNameKK, '../assets/' . $namaFileKK);
   // cek apakah edit foto baru
@@ -120,7 +125,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiKK = ['jpg','jpeg','png'];
+    $ekstensiKK = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarKK = explode('.', $namaFileKK);
     $ekstensiGambarKK = strtolower(end($ekstensiGambarKK));
     if(!in_array($ekstensiGambarKK, $ekstensiKK)) {
@@ -128,13 +133,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileKK > 1000000) {
+    if($ukuranFileKK > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoKK = $namaFileKK;
   }
 
-  $sql = "UPDATE tb_bio_wni SET file_kk = '$fotoKK' WHERE id_bio = '$id'";
+  $sql = "UPDATE tb_bio_wni SET file_kk = '$fotoKK', slug_kk = '$namaFileKK1' WHERE id_bio = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {

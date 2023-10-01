@@ -28,10 +28,13 @@ if(isset($_POST['setuju']) and $baru === 'Baru') {
 // upload file pemohon
 if(isset($_POST['upload'])) {
   $fotoLama = htmlspecialchars($_POST['fotoLama']);
-  $namaFile = $_FILES['file_pemohon']['name'];
+  $file = $_FILES['file_pemohon']['name'];
   $ukuranFile = $_FILES['file_pemohon']['size'];
   $error = $_FILES['file_pemohon']['error'];
   $tmpName = $_FILES['file_pemohon']['tmp_name'];
+  $pdf = explode('.', $file);
+  $ekstensi = strtolower(end($pdf));
+  $namaFile = date('ymdhis').'.'.$ekstensi;
 
   move_uploaded_file($tmpName, 'assets/' . $namaFile);
   // cek apakah edit foto baru
@@ -49,7 +52,7 @@ if(isset($_POST['upload'])) {
     }
 
     // cek ukuran
-    if($ukuranFile > 1000000) {
+    if($ukuranFile > 10485760) {
       echo "<script>alert('Ukuran file terlalu besar!');</script>";
     }
     $foto = $namaFile;
@@ -63,7 +66,7 @@ if(isset($_POST['upload'])) {
     echo "<script>alert('File sudah diupload!');</script>";
     echo "<meta http-equiv='refresh' content='0;url=index.php?page=dataSelesaiKartuKeluarga'>";
   } else {
-    $sql = "UPDATE tb_kk SET file_pemohon = '$foto' WHERE id_kk = '$id'";
+    $sql = "UPDATE tb_kk SET file_pemohon = '$foto', slug_file = '$file' WHERE id_kk = '$id'";
     $hasil = mysqli_query($conn, $sql);
 
     if($hasil) {
@@ -227,8 +230,19 @@ if(isset($_POST['upload'])) {
                 <label>Upload Foto/Scan Buku Nikah Suami Istri</label>
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_buku_nikah">
-                  <p class="text-dark">File yang diunggah: <?php echo $row['file_buku_nikah']; ?></p>
-                  <a href="assets/<?php echo $row['file_buku_nikah'] ?>"><img src="assets/<?php echo $row['file_buku_nikah'] ?>" width="100"></a>
+                  <p class="text-dark">File yang diunggah: <?php echo $row['slug_bk']; ?></p>
+                  <?php
+                  $id = $_GET['id_kk'];
+                  $qry = mysqli_query($conn, "SELECT * FROM tb_kk WHERE id_kk = '$id'");
+                  $qry = mysqli_fetch_array($qry);
+                  $pdf_kk = explode('.', $qry['file_buku_nikah']);
+                  $ekstensi_kk = strtolower(end($pdf_kk));
+                  if($ekstensi_kk == 'pdf') { 
+                  ?>
+                    <a href="assets/<?php echo $row['file_buku_nikah'] ?>"><i class="fa fa-file-pdf" style="font-size: 20px; color: red;"></i></a>
+                  <?php } else { ?>
+                    <a href="assets/<?php echo $row['file_buku_nikah'] ?>"><img src="assets/<?php echo $row['file_buku_nikah'] ?>" width="100"></a>
+                  <?php } ?>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -236,8 +250,19 @@ if(isset($_POST['upload'])) {
                 <label>Upload Foto/Scan Kartu Tanda Penduduk</label>
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_ktp">
-                  <p class="text-dark">File yang diunggah: <?php echo $row['file_ktp']; ?></p>
-                  <a href="assets/<?php echo $row['file_ktp'] ?>"><img src="assets/<?php echo $row['file_ktp'] ?>" width="100"></a>
+                  <p class="text-dark">File yang diunggah: <?php echo $row['slug_ktp']; ?></p>
+                  <?php
+                  $id = $_GET['id_kk'];
+                  $qry = mysqli_query($conn, "SELECT * FROM tb_kk WHERE id_kk = '$id'");
+                  $qry = mysqli_fetch_array($qry);
+                  $pdf_kk = explode('.', $qry['file_ktp']);
+                  $ekstensi_kk = strtolower(end($pdf_kk));
+                  if($ekstensi_kk == 'pdf') { 
+                  ?>
+                    <a href="assets/<?php echo $row['file_ktp'] ?>"><i class="fa fa-file-pdf" style="font-size: 20px; color: red;"></i></a>
+                  <?php } else { ?>
+                    <a href="assets/<?php echo $row['file_ktp'] ?>"><img src="assets/<?php echo $row['file_ktp'] ?>" width="100"></a>
+                  <?php } ?>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -245,8 +270,19 @@ if(isset($_POST['upload'])) {
                 <label>Upload Foto/Scan Ijazah Pendidikan Terakhir / SK Kerja</label>
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_ijazah">
-                  <p class="text-dark">File yang diunggah: <?php echo $row['file_ijazah']; ?></p>
-                  <a href="assets/<?php echo $row['file_ijazah'] ?>"><img src="assets/<?php echo $row['file_ijazah'] ?>" width="100"></a>
+                  <p class="text-dark">File yang diunggah: <?php echo $row['slug_ijazah']; ?></p>
+                  <?php
+                  $id = $_GET['id_kk'];
+                  $qry = mysqli_query($conn, "SELECT * FROM tb_kk WHERE id_kk = '$id'");
+                  $qry = mysqli_fetch_array($qry);
+                  $pdf_kk = explode('.', $qry['file_ijazah']);
+                  $ekstensi_kk = strtolower(end($pdf_kk));
+                  if($ekstensi_kk == 'pdf') { 
+                  ?>
+                    <a href="assets/<?php echo $row['file_ijazah'] ?>"><i class="fa fa-file-pdf" style="font-size: 20px; color: red;"></i></a>
+                  <?php } else { ?>
+                    <a href="assets/<?php echo $row['file_ijazah'] ?>"><img src="assets/<?php echo $row['file_ijazah'] ?>" width="100"></a>
+                  <?php } ?>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -254,8 +290,19 @@ if(isset($_POST['upload'])) {
                 <label>Upload Foto/Scan Kartu Keluarga</label>
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_kk">
-                  <p class="text-dark">File yang diunggah: <?php echo $row['file_kk']; ?></p>
-                  <a href="assets/<?php echo $row['file_kk'] ?>"><img src="assets/<?php echo $row['file_kk'] ?>" width="100"></a>
+                  <p class="text-dark">File yang diunggah: <?php echo $row['slug_kk']; ?></p>
+                  <?php
+                  $id = $_GET['id_kk'];
+                  $qry = mysqli_query($conn, "SELECT * FROM tb_kk WHERE id_kk = '$id'");
+                  $qry = mysqli_fetch_array($qry);
+                  $pdf_kk = explode('.', $qry['file_kk']);
+                  $ekstensi_kk = strtolower(end($pdf_kk));
+                  if($ekstensi_kk == 'pdf') { 
+                  ?>
+                    <a href="assets/<?php echo $data['file_kk'] ?>"><i class="fa fa-file-pdf" style="font-size: 20px; color: red;"></i></a>
+                  <?php } else { ?>
+                    <a href="assets/<?php echo $data['file_kk'] ?>"><img src="assets/<?php echo $data['file_kk'] ?>" width="100"></a>
+                  <?php } ?>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -317,7 +364,7 @@ if(isset($_POST['upload'])) {
                     <input type="hidden" id="fotoLama" name="fotoLama" value="<?php echo $row['file_pemohon']; ?>" readonly>
                     <div class="custom-file">
                       <input type="file" class="form-control" name="file_pemohon">
-                      <p class="text-dark">File yang diunggah: <?php echo $row['file_pemohon']; ?></p>
+                      <p class="text-dark">File yang diunggah: <?php echo $row['slug_file']; ?></p>
                       <?php if(!empty($filePemohon)): ?>
                       <a href="assets/<?php echo $row['file_pemohon'] ?>">Lihat File</a>
                       <?php endif; ?>

@@ -23,13 +23,17 @@ if(isset($_POST['simpan'])){
   $alamat = htmlspecialchars($_POST['alamat']);
   $kode_pos = htmlspecialchars($_POST['kode_pos']);
   $fotoLama = htmlspecialchars($_POST['fotoLama']);
-  $namaFile = $_FILES['foto']['name'];
+  $file = $_FILES['foto']['name'];
+  $split_file = explode('.', $file);
+  $ekstensi = strtolower(end($split_file));
+  $namaFile = date('ymdhis').'.'.$ekstensi;
   $ukuranFile = $_FILES['foto']['size'];
   $error = $_FILES['foto']['error'];
   $tmpName = $_FILES['foto']['tmp_name'];
 
   
 
+  
   move_uploaded_file($tmpName, 'assets/' . $namaFile);
   // cek apakah edit foto baru
   if($_FILES['foto']['error'] === 4) {
@@ -49,14 +53,14 @@ if(isset($_POST['simpan'])){
     }
 
     // cek ukuran
-    if($ukuranFile > 1000000) {
+    if($ukuranFile > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $foto = $namaFile;
   }
   
 
-  $sql = "UPDATE tb_user SET kewarganegaraan = '$kewarganegaraan', nama = '$nama', nik = '$nik', no_hp = '$no_hp', pekerjaan = '$pekerjaan', tmpt_lahir = '$tmpt_lahir', tgl_lahir = '$tgl_lahir', jk = '$jk', status = '$status', agama = '$agama', kelurahan = '$kelurahan', kecamatan = '$kecamatan', rt = '$rt', rw = '$rw', alamat = '$alamat', kode_pos = '$kode_pos', foto = '$foto' WHERE id_user = '$id'";
+  $sql = "UPDATE tb_user SET kewarganegaraan = '$kewarganegaraan', nama = '$nama', nik = '$nik', no_hp = '$no_hp', pekerjaan = '$pekerjaan', tmpt_lahir = '$tmpt_lahir', tgl_lahir = '$tgl_lahir', jk = '$jk', status = '$status', agama = '$agama', kelurahan = '$kelurahan', kecamatan = '$kecamatan', rt = '$rt', rw = '$rw', alamat = '$alamat', kode_pos = '$kode_pos', foto = '$foto', slug_foto = '$file' WHERE id_user = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
@@ -68,7 +72,9 @@ if(isset($_POST['simpan'])){
                 timerProgressBar: true,
                 showConfirmButton: false
             });
+
         ";
+    echo "<meta http-equiv='refresh' content='0;url=index.php?page=beranda'>";
   } else {
     $script = "
             Swal.fire({
@@ -79,6 +85,7 @@ if(isset($_POST['simpan'])){
                 showConfirmButton: false
             });
         ";
+    echo "<meta http-equiv='refresh' content='0;url=index.php?page=beranda'>";
   }
 }
 ?>
@@ -230,8 +237,9 @@ if(isset($_POST['simpan'])){
                     <label for="foto">Unggah Foto Profil</label>
                     <div class="custom-file">
                       <input type="file" class="form-control" name="foto">
+                      <p class="text-dark">File yang diunggah: <?php echo $data['slug_foto']; ?></p>
                       <a href="assets/<?= $data['foto']; ?>"><img src="assets/<?= $data['foto']; ?>" width="70"><br></a>
-                      <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
+                      <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg</p>
                     </div>
                   </div>
 

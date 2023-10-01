@@ -11,16 +11,17 @@ if(isset($_POST['kirim'])){
   $tgl_waktu = date('d-M-Y');
   $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
 
-  $file_kk = $_FILES['file_kk']['name'];
-  $pdf_kk = explode('.', $file_kk);
+  $file_kk1 = $_FILES['file_kk']['name'];
+  $pdf_kk = explode('.', $file_kk1);
   $ekstensi_kk = strtolower(end($pdf_kk));
+  $nama_kk = date('ymdhis').'.'.$ekstensi_kk;
   $ukuran_kk = $_FILES['file_kk']['size'];
   $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
 
   // koding cek upload file kk
   if(in_array($ekstensi_kk, $ekstensi_diperbolehkan) === true){
-    if($ukuran_kk < 1044070){ 
-      move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
+    if($ukuran_kk < 10485760){ 
+      move_uploaded_file($file_tmp_kk, '../assets/'.$nama_kk);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
     }
@@ -29,7 +30,7 @@ if(isset($_POST['kirim'])){
   }
 
     //Query input menginput data kedalam tabel kk
-    $sql = "INSERT INTO tb_rekam_ktp (user_id,file_kk,status_berkas,tgl) VALUES ('$user_id','$file_kk','$status','$tgl_waktu')";
+    $sql = "INSERT INTO tb_rekam_ktp (user_id,file_kk,status_berkas,tgl,slug_kk) VALUES ('$user_id','$nama_kk','$status','$tgl_waktu','$file_kk1')";
 
     //Mengeksekusi/menjalankan query diatas	
     $hasil = mysqli_query($conn,$sql);
@@ -48,19 +49,20 @@ if(isset($_POST['kirim'])){
     // $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
 
-    $file_kk = $_FILES['file_kk']['name'];
-    $pdf_kk = explode('.', $file_kk);
+    $file_kk1 = $_FILES['file_kk']['name'];
+    $pdf_kk = explode('.', $file_kk1);
     $ekstensi_kk = strtolower(end($pdf_kk));
+    $nama_kk = date('ymdhis').'.'.$ekstensi_kk;
     $ukuran_kk = $_FILES['file_kk']['size'];
     $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
-    move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
+    move_uploaded_file($file_tmp_kk, '../assets/'.$nama_kk);
 
     // simpan data ke array
     // $data_temp["user_id"] = $user_id;
     // $data_temp["file_kk"] = $file_kk;
 
     // Simpan variabel array $data ke dalam session menggunakan fungsi $_SESSION.
-    $_SESSION["file_name"] = $file_kk;
+    $_SESSION["file_name"] = $nama_kk;
 
     $_SESSION['message'] = "Data berhasil disimpan sementara";
     header("Location: ../index.php?page=beranda");
@@ -107,7 +109,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileKK > 1000000) {
+    if($ukuranFileKK > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoKK = $namaFileKK;

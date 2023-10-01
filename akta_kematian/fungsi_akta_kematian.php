@@ -11,21 +11,23 @@ if(isset($_POST['kirim'])){
   $tgl_waktu = date('d-M-Y');
   $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
   
-  $file_sk = $_FILES['file_sk']['name'];
-  $pdf_sk = explode('.', $file_sk);
+  $file_sk1 = $_FILES['file_sk']['name'];
+  $pdf_sk = explode('.', $file_sk1);
   $ekstensi_sk = strtolower(end($pdf_sk));
   $ukuran_sk = $_FILES['file_sk']['size'];
   $file_tmp_sk = $_FILES['file_sk']['tmp_name'];
+  $file_sk = date('ymdhis').'.'.$ekstensi_sk;
 
-  $file_kk = $_FILES['file_kk']['name'];
-  $pdf_kk = explode('.', $file_kk);
+  $file_kk1 = $_FILES['file_kk']['name'];
+  $pdf_kk = explode('.', $file_kk1);
   $ekstensi_kk = strtolower(end($pdf_kk));
   $ukuran_kk = $_FILES['file_kk']['size'];
   $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+  $file_kk = date('ymdhis').'.'.$ekstensi_kk;
 
   // koding cek upload file sk rs kepala desa
   if(in_array($ekstensi_sk, $ekstensi_diperbolehkan) === true){
-    if($ukuran_sk < 1044070){ 
+    if($ukuran_sk < 10485760){ 
       move_uploaded_file($file_tmp_sk, '../assets/'.$file_sk);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -36,7 +38,7 @@ if(isset($_POST['kirim'])){
 
   // koding cek upload file kk
   if(in_array($ekstensi_kk, $ekstensi_diperbolehkan) === true){
-    if($ukuran_kk < 1044070){ 
+    if($ukuran_kk < 10485760){ 
       move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -46,7 +48,7 @@ if(isset($_POST['kirim'])){
   }
 
     //Query input menginput data kedalam tabel akta kematian
-    $sql = "INSERT INTO tb_kematian (user_id,file_sk,file_kk,status_berkas,tgl) VALUES ('$user_id','$file_sk','$file_kk','$status','$tgl_waktu')";
+    $sql = "INSERT INTO tb_kematian (user_id,file_sk,file_kk,status_berkas,tgl,slug_sk,slug_kk) VALUES ('$user_id','$file_sk','$file_kk','$status','$tgl_waktu','$file_sk1','$file_kk1')";
 
     //Mengeksekusi/menjalankan query diatas	
     $hasil = mysqli_query($conn,$sql);
@@ -67,18 +69,20 @@ if(isset($_POST['kirim'])){
     $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
     
-    $file_sk = $_FILES['file_sk']['name'];
-    $pdf_sk = explode('.', $file_sk);
+    $file_sk1 = $_FILES['file_sk']['name'];
+    $pdf_sk = explode('.', $file_sk1);
     $ekstensi_sk = strtolower(end($pdf_sk));
     $ukuran_sk = $_FILES['file_sk']['size'];
     $file_tmp_sk = $_FILES['file_sk']['tmp_name'];
+    $file_sk = date('ymdhis').'.'.$ekstensi_sk;
     move_uploaded_file($file_tmp_sk, '../assets/'.$file_sk);
 
-    $file_kk = $_FILES['file_kk']['name'];
-    $pdf_kk = explode('.', $file_kk);
+    $file_kk1 = $_FILES['file_kk']['name'];
+    $pdf_kk = explode('.', $file_kk1);
     $ekstensi_kk = strtolower(end($pdf_kk));
     $ukuran_kk = $_FILES['file_kk']['size'];
     $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+    $file_kk = date('ymdhis').'.'.$ekstensi_kk;
     move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
 
     // simpan data ke array
@@ -132,10 +136,13 @@ $id = $data['id_ak'];
 if(isset($_POST['ubah']) and $baru === 'Baru') {
   // foto sk rs kepala desa
   $fotoLamaSK = htmlspecialchars($_POST['fotoLamaSK']);
-  $namaFileSK = $_FILES['file_sk']['name'];
+  $namaFileSK1 = $_FILES['file_sk']['name'];
   $ukuranFileSK = $_FILES['file_sk']['size'];
   $errorSK = $_FILES['file_sk']['error'];
   $tmpNameSK = $_FILES['file_sk']['tmp_name'];
+  $pdf_SK = explode('.', $namaFileSK1);
+  $ekstensi_SK = strtolower(end($pdf_SK));
+  $namaFileSK = date('ymdhis').'.'.$ekstensi_SK;
 
   move_uploaded_file($tmpNameSK, '../assets/' . $namaFileSK);
   // cek apakah edit foto baru
@@ -148,7 +155,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiSK = ['jpg','jpeg','png'];
+    $ekstensiSK = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarSK = explode('.', $namaFileSK);
     $ekstensiGambarSK = strtolower(end($ekstensiGambarSK));
     if(!in_array($ekstensiGambarSK, $ekstensiSK)) {
@@ -156,7 +163,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileSK > 1000000) {
+    if($ukuranFileSK > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoSK = $namaFileSK;
@@ -164,10 +171,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
 
   // foto KK
   $fotoLamaKK = htmlspecialchars($_POST['fotoLamaKK']);
-  $namaFileKK = $_FILES['file_kk']['name'];
+  $namaFileKK1 = $_FILES['file_kk']['name'];
   $ukuranFileKK = $_FILES['file_kk']['size'];
   $errorKK = $_FILES['file_kk']['error'];
   $tmpNameKK = $_FILES['file_kk']['tmp_name'];
+  $pdf_KK = explode('.', $namaFileKK1);
+  $ekstensi_KK = strtolower(end($pdf_KK));
+  $namaFileKK = date('ymdhis').'.'.$ekstensi_KK;
 
   move_uploaded_file($tmpNameKK, '../assets/' . $namaFileKK);
   // cek apakah edit foto baru
@@ -180,7 +190,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiKK = ['jpg','jpeg','png'];
+    $ekstensiKK = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarKK = explode('.', $namaFileKK);
     $ekstensiGambarKK = strtolower(end($ekstensiGambarKK));
     if(!in_array($ekstensiGambarKK, $ekstensiKK)) {
@@ -188,13 +198,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileKK > 1000000) {
+    if($ukuranFileKK > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoKK = $namaFileKK;
   }
 
-  $sql = "UPDATE tb_kematian SET file_sk = '$fotoSK', file_kk = '$fotoKK' WHERE id_ak = '$id'";
+  $sql = "UPDATE tb_kematian SET file_sk = '$fotoSK', file_kk = '$fotoKK', slug_sk = '$namaFileSK1', slug_kk = '$namaFileKK1' WHERE id_ak = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {

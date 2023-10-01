@@ -9,33 +9,37 @@ if(isset($_POST['kirim'])){
   $tgl_waktu = date('d-M-Y');
   $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
   
-  $file_akta_lahir = $_FILES['file_akta_lahir']['name'];
-  $pdf_akta_lahir = explode('.', $file_akta_lahir);
+  $file_akta_lahir1 = $_FILES['file_akta_lahir']['name'];
+  $pdf_akta_lahir = explode('.', $file_akta_lahir1);
   $ekstensi_akta_lahir = strtolower(end($pdf_akta_lahir));
   $ukuran_akta_lahir = $_FILES['file_akta_lahir']['size'];
   $file_tmp_akta_lahir = $_FILES['file_akta_lahir']['tmp_name'];
+  $file_akta_lahir = date('ymdhis').'.'.$ekstensi_akta_lahir;
   
-  $file_ket_lahir = $_FILES['file_ket_lahir']['name'];
-  $pdf_ket_lahir = explode('.', $file_ket_lahir);
+  $file_ket_lahir1 = $_FILES['file_ket_lahir']['name'];
+  $pdf_ket_lahir = explode('.', $file_ket_lahir1);
   $ekstensi_ket_lahir = strtolower(end($pdf_ket_lahir));
   $ukuran_ket_lahir = $_FILES['file_ket_lahir']['size'];
   $file_tmp_ket_lahir = $_FILES['file_ket_lahir']['tmp_name'];
+  $file_ket_lahir = date('ymdhis').'.'.$ekstensi_ket_lahir;
 
-  $file_buku_nikah = $_FILES['file_buku_nikah']['name'];
-  $pdf_buku_nikah = explode('.', $file_buku_nikah);
+  $file_buku_nikah1 = $_FILES['file_buku_nikah']['name'];
+  $pdf_buku_nikah = explode('.', $file_buku_nikah1);
   $ekstensi_buku_nikah = strtolower(end($pdf_buku_nikah));
   $ukuran_buku_nikah = $_FILES['file_buku_nikah']['size'];
   $file_tmp_buku_nikah = $_FILES['file_buku_nikah']['tmp_name'];
+  $file_buku_nikah = date('ymdhis').'.'.$ekstensi_buku_nikah;
 
-  $file_kk = $_FILES['file_kk']['name'];
-  $pdf_kk = explode('.', $file_kk);
+  $file_kk1 = $_FILES['file_kk']['name'];
+  $pdf_kk = explode('.', $file_kk1);
   $ekstensi_kk = strtolower(end($pdf_kk));
   $ukuran_kk = $_FILES['file_kk']['size'];
   $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+  $file_kk = date('ymdhis').'.'.$ekstensi_kk;
 
   // koding cek upload file akta_lahir
   if(in_array($ekstensi_akta_lahir, $ekstensi_diperbolehkan) === true){
-    if($ukuran_akta_lahir < 1044070){ 
+    if($ukuran_akta_lahir < 10485760){ 
       move_uploaded_file($file_tmp_akta_lahir, '../assets/'.$file_akta_lahir);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -46,7 +50,7 @@ if(isset($_POST['kirim'])){
 
   // koding cek upload file ket_lahir
   if(in_array($ekstensi_ket_lahir, $ekstensi_diperbolehkan) === true){
-    if($ukuran_ket_lahir < 1044070){ 
+    if($ukuran_ket_lahir < 10485760){ 
       move_uploaded_file($file_tmp_ket_lahir, '../assets/'.$file_ket_lahir);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -57,7 +61,7 @@ if(isset($_POST['kirim'])){
 
   // koding cek upload file buku_nikah
   if(in_array($ekstensi_buku_nikah, $ekstensi_diperbolehkan) === true){
-    if($ukuran_buku_nikah < 1044070){ 
+    if($ukuran_buku_nikah < 10485760){ 
       move_uploaded_file($file_tmp_buku_nikah, '../assets/'.$file_buku_nikah);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -68,7 +72,7 @@ if(isset($_POST['kirim'])){
 
   // koding cek upload file kk
   if(in_array($ekstensi_kk, $ekstensi_diperbolehkan) === true){
-    if($ukuran_kk < 1044070){ 
+    if($ukuran_kk < 10485760){ 
       move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
     } else{
         echo 'UKURAN FILE TERLALU BESAR!';
@@ -78,7 +82,7 @@ if(isset($_POST['kirim'])){
   }
 
     //Query input menginput data kedalam tabel akta lahir
-    $sql = "INSERT INTO tb_akta_lahir (user_id,file_akta_lahir,file_ket_lahir,file_buku_nikah,file_kk,status_berkas,tgl) VALUES ('$user_id','$file_akta_lahir','$file_ket_lahir','$file_buku_nikah','$file_kk','$status','$tgl_waktu')";
+    $sql = "INSERT INTO tb_akta_lahir (user_id,file_akta_lahir,file_ket_lahir,file_buku_nikah,file_kk,status_berkas,tgl,slug_ak,slug_sk,slug_bk,slug_kk) VALUES ('$user_id','$file_akta_lahir','$file_ket_lahir','$file_buku_nikah','$file_kk','$status','$tgl_waktu','$file_akta_lahir1','$file_ket_lahir1','$file_buku_nikah1','$file_kk1')";
 
     //Mengeksekusi/menjalankan query diatas	
     $hasil = mysqli_query($conn,$sql);
@@ -96,32 +100,36 @@ if(isset($_POST['kirim'])){
     // $user_id = $_POST['user_id'];
     $ekstensi_diperbolehkan = array('pdf','png','jpg','jpeg');
     
-    $file_akta_lahir = $_FILES['file_akta_lahir']['name'];
-    $pdf_akta_lahir = explode('.', $file_akta_lahir);
+    $file_akta_lahir1 = $_FILES['file_akta_lahir']['name'];
+    $pdf_akta_lahir = explode('.', $file_akta_lahir1);
     $ekstensi_akta_lahir = strtolower(end($pdf_akta_lahir));
     $ukuran_akta_lahir = $_FILES['file_akta_lahir']['size'];
     $file_tmp_akta_lahir = $_FILES['file_akta_lahir']['tmp_name'];
+    $file_akta_lahir = date('ymdhis').'.'.$ekstensi_akta_lahir;
     move_uploaded_file($file_tmp_akta_lahir, '../assets/'.$file_akta_lahir);
     
-    $file_ket_lahir = $_FILES['file_ket_lahir']['name'];
-    $pdf_ket_lahir = explode('.', $file_ket_lahir);
+    $file_ket_lahir1 = $_FILES['file_ket_lahir']['name'];
+    $pdf_ket_lahir = explode('.', $file_ket_lahir1);
     $ekstensi_ket_lahir = strtolower(end($pdf_ket_lahir));
     $ukuran_ket_lahir = $_FILES['file_ket_lahir']['size'];
     $file_tmp_ket_lahir = $_FILES['file_ket_lahir']['tmp_name'];
+    $file_ket_lahir = date('ymdhis').'.'.$ekstensi_ket_lahir;
     move_uploaded_file($file_tmp_ket_lahir, '../assets/'.$file_ket_lahir);
 
-    $file_buku_nikah = $_FILES['file_buku_nikah']['name'];
-    $pdf_buku_nikah = explode('.', $file_buku_nikah);
+    $file_buku_nikah1 = $_FILES['file_buku_nikah']['name'];
+    $pdf_buku_nikah = explode('.', $file_buku_nikah1);
     $ekstensi_buku_nikah = strtolower(end($pdf_buku_nikah));
     $ukuran_buku_nikah = $_FILES['file_buku_nikah']['size'];
     $file_tmp_buku_nikah = $_FILES['file_buku_nikah']['tmp_name'];
+    $file_buku_nikah = date('ymdhis').'.'.$ekstensi_buku_nikah;
     move_uploaded_file($file_tmp_buku_nikah, '../assets/'.$file_buku_nikah);
 
-    $file_kk = $_FILES['file_kk']['name'];
-    $pdf_kk = explode('.', $file_kk);
+    $file_kk1 = $_FILES['file_kk']['name'];
+    $pdf_kk = explode('.', $file_kk1);
     $ekstensi_kk = strtolower(end($pdf_kk));
     $ukuran_kk = $_FILES['file_kk']['size'];
     $file_tmp_kk = $_FILES['file_kk']['tmp_name'];
+    $file_kk = date('ymdhis').'.'.$ekstensi_kk;
     move_uploaded_file($file_tmp_kk, '../assets/'.$file_kk);
 
     // simpan data ke array
@@ -178,10 +186,13 @@ $id = $data['id_lahir'];
 if(isset($_POST['ubah']) and $baru === 'Baru') {
   // foto akta lahir
   $fotoLamaAL = htmlspecialchars($_POST['fotoLamaAL']);
-  $namaFileAL = $_FILES['file_akta_lahir']['name'];
+  $namaFileAL1 = $_FILES['file_akta_lahir']['name'];
   $ukuranFileAL = $_FILES['file_akta_lahir']['size'];
   $errorAL = $_FILES['file_akta_lahir']['error'];
   $tmpNameAL = $_FILES['file_akta_lahir']['tmp_name'];
+  $pdf_AL = explode('.', $namaFileAL1);
+  $ekstensi_AL = strtolower(end($pdf_AL));
+  $namaFileAL = date('ymdhis').'.'.$ekstensi_AL;
 
   move_uploaded_file($tmpNameAL, '../assets/' . $namaFileAL);
   // cek apakah edit foto baru
@@ -194,7 +205,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiAL = ['jpg','jpeg','png'];
+    $ekstensiAL = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarAL = explode('.', $namaFileAL);
     $ekstensiGambarAL = strtolower(end($ekstensiGambarAL));
     if(!in_array($ekstensiGambarAL, $ekstensiAL)) {
@@ -202,7 +213,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileAL > 1000000) {
+    if($ukuranFileAL > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoAL = $namaFileAL;
@@ -210,10 +221,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
 
   // foto ket lahir
   $fotoLamaKL = htmlspecialchars($_POST['fotoLamaKL']);
-  $namaFileKL = $_FILES['file_ket_lahir']['name'];
+  $namaFileKL1 = $_FILES['file_ket_lahir']['name'];
   $ukuranFileKL = $_FILES['file_ket_lahir']['size'];
   $errorKL = $_FILES['file_ket_lahir']['error'];
   $tmpNameKL = $_FILES['file_ket_lahir']['tmp_name'];
+  $pdf_KL = explode('.', $namaFileKL1);
+  $ekstensi_KL = strtolower(end($pdf_KL));
+  $namaFileKL = date('ymdhis').'.'.$ekstensi_KL;
 
   move_uploaded_file($tmpNameKL, '../assets/' . $namaFileKL);
   // cek apakah edit foto baru
@@ -226,7 +240,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiKL = ['jpg','jpeg','png'];
+    $ekstensiKL = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarKL = explode('.', $namaFileKL);
     $ekstensiGambarKL = strtolower(end($ekstensiGambarKL));
     if(!in_array($ekstensiGambarKL, $ekstensiKL)) {
@@ -234,7 +248,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileKL > 1000000) {
+    if($ukuranFileKL > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoKL = $namaFileKL;
@@ -242,10 +256,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
 
   // foto buku nikah
   $fotoLamaBK = htmlspecialchars($_POST['fotoLamaBK']);
-  $namaFileBK = $_FILES['file_buku_nikah']['name'];
+  $namaFileBK1 = $_FILES['file_buku_nikah']['name'];
   $ukuranFileBK = $_FILES['file_buku_nikah']['size'];
   $errorBK = $_FILES['file_buku_nikah']['error'];
   $tmpNameBK = $_FILES['file_buku_nikah']['tmp_name'];
+  $pdf_BK = explode('.', $namaFileBK1);
+  $ekstensi_BK = strtolower(end($pdf_BK));
+  $namaFileBK = date('ymdhis').'.'.$ekstensi_BK;
 
   move_uploaded_file($tmpNameBK, '../assets/' . $namaFileBK);
   // cek apakah edit foto baru
@@ -258,7 +275,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiBK = ['jpg','jpeg','png'];
+    $ekstensiBK = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarBK = explode('.', $namaFileBK);
     $ekstensiGambarBK = strtolower(end($ekstensiGambarBK));
     if(!in_array($ekstensiGambarBK, $ekstensiBK)) {
@@ -266,7 +283,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileBK > 1000000) {
+    if($ukuranFileBK > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoBK = $namaFileBK;
@@ -274,10 +291,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
 
   // foto kk
   $fotoLamaKK = htmlspecialchars($_POST['fotoLamaKK']);
-  $namaFileKK = $_FILES['file_kk']['name'];
+  $namaFileKK1 = $_FILES['file_kk']['name'];
   $ukuranFileKK = $_FILES['file_kk']['size'];
   $errorKK = $_FILES['file_kk']['error'];
   $tmpNameKK = $_FILES['file_kk']['tmp_name'];
+  $pdf_KK = explode('.', $namaFileKK1);
+  $ekstensi_KK = strtolower(end($pdf_KK));
+  $namaFileKK = date('ymdhis').'.'.$ekstensi_KK;
 
   move_uploaded_file($tmpNameKK, '../assets/' . $namaFileKK);
   // cek apakah edit foto baru
@@ -290,7 +310,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiKK = ['jpg','jpeg','png'];
+    $ekstensiKK = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarKK = explode('.', $namaFileKK);
     $ekstensiGambarKK = strtolower(end($ekstensiGambarKK));
     if(!in_array($ekstensiGambarKK, $ekstensiKK)) {
@@ -298,13 +318,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileKK > 1000000) {
+    if($ukuranFileKK > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoKK = $namaFileKK;
   }
 
-  $sql = "UPDATE tb_akta_lahir SET file_akta_lahir = '$fotoAL', file_ket_lahir = '$fotoKL', file_buku_nikah = '$fotoBK', file_kk = '$fotoKK' WHERE id_lahir = '$id'";
+  $sql = "UPDATE tb_akta_lahir SET file_akta_lahir = '$fotoAL', file_ket_lahir = '$fotoKL', file_buku_nikah = '$fotoBK', file_kk = '$fotoKK', slug_ak = '$namaFileAL1' ,slug_sk = '$namaFileKL1', slug_bk = '$namaFileBK1', slug_kk = '$namaFileKK1' WHERE id_lahir = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {

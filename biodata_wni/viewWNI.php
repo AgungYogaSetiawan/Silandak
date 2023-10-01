@@ -153,8 +153,19 @@ $id = $data['id_bio'];
                 <label>Upload Foto/Scan Kartu Keluarga</label>
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_kk">
-                  <p class="text-dark">File yang diunggah: <?php echo $data['file_kk']; ?></p>
-                  <a href="assets/<?php echo $data['file_kk'] ?>"><img src="assets/<?php echo $data['file_kk'] ?>" width="100"></a>
+                  <p class="text-dark">File yang diunggah: <?php echo $data['slug_kk']; ?></p>
+                  <?php
+                  $id = $_GET['id_bio'];
+                  $qry = mysqli_query($conn, "SELECT * FROM tb_bio_wni WHERE id_bio = '$id'");
+                  $qry = mysqli_fetch_array($qry);
+                  $pdf_kk = explode('.', $qry['file_kk']);
+                  $ekstensi_kk = strtolower(end($pdf_kk));
+                  if($ekstensi_kk == 'pdf') { 
+                  ?>
+                    <a href="assets/<?php echo $data['file_kk'] ?>"><i class="fa fa-file-pdf" style="font-size: 20px; color: red;"></i></a>
+                  <?php } else { ?>
+                    <a href="assets/<?php echo $data['file_kk'] ?>"><img src="assets/<?php echo $data['file_kk'] ?>" width="100"></a>
+                  <?php } ?>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>

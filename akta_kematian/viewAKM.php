@@ -9,10 +9,13 @@ $id = $data['id_ak'];
 if(isset($_POST['ubah']) and $baru === 'Baru') {
   // foto sk rs kepala desa
   $fotoLamaSK = htmlspecialchars($_POST['fotoLamaSK']);
-  $namaFileSK = $_FILES['file_sk']['name'];
+  $namaFileSK1 = $_FILES['file_sk']['name'];
   $ukuranFileSK = $_FILES['file_sk']['size'];
   $errorSK = $_FILES['file_sk']['error'];
   $tmpNameSK = $_FILES['file_sk']['tmp_name'];
+  $pdf_sk = explode('.', $namaFilesk1);
+  $ekstensi_sk = strtolower(end($pdf_sk));
+  $namaFilesk = date('ymdhis').'.'.$ekstensi_sk;
 
   move_uploaded_file($tmpNameSK, 'assets/' . $namaFileSK);
   // cek apakah edit foto baru
@@ -25,7 +28,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiSK = ['jpg','jpeg','png'];
+    $ekstensiSK = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarSK = explode('.', $namaFileSK);
     $ekstensiGambarSK = strtolower(end($ekstensiGambarSK));
     if(!in_array($ekstensiGambarSK, $ekstensiSK)) {
@@ -33,7 +36,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileSK > 1000000) {
+    if($ukuranFileSK > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoSK = $namaFileSK;
@@ -41,10 +44,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
 
   // foto KK
   $fotoLamaKK = htmlspecialchars($_POST['fotoLamaKK']);
-  $namaFileKK = $_FILES['file_kk']['name'];
+  $namaFileKK1 = $_FILES['file_kk']['name'];
   $ukuranFileKK = $_FILES['file_kk']['size'];
   $errorKK = $_FILES['file_kk']['error'];
   $tmpNameKK = $_FILES['file_kk']['tmp_name'];
+  $pdf_KK = explode('.', $namaFileKK1);
+  $ekstensi_KK = strtolower(end($pdf_KK));
+  $namaFileKK = date('ymdhis').'.'.$ekstensi_KK;
 
   move_uploaded_file($tmpNameKK, 'assets/' . $namaFileKK);
   // cek apakah edit foto baru
@@ -57,7 +63,7 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek apakah yang diupload adalah gambar
-    $ekstensiKK = ['jpg','jpeg','png'];
+    $ekstensiKK = ['jpg','jpeg','png','pdf'];
     $ekstensiGambarKK = explode('.', $namaFileKK);
     $ekstensiGambarKK = strtolower(end($ekstensiGambarKK));
     if(!in_array($ekstensiGambarKK, $ekstensiKK)) {
@@ -65,13 +71,13 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
     }
 
     // cek ukuran
-    if($ukuranFileKK > 1000000) {
+    if($ukuranFileKK > 10485760) {
       echo "<script>alert('Ukuran gambar terlalu besar!');</script>";
     }
     $fotoKK = $namaFileKK;
   }
 
-  $sql = "UPDATE tb_kematian SET file_sk = '$fotoSK', file_kk = '$fotoKK' WHERE id_ak = '$id'";
+  $sql = "UPDATE tb_kematian SET file_sk = '$fotoSK', file_kk = '$fotoKK', slug_sk = '$namaFileSK1', slug_kk = '$namaFileKK1' WHERE id_ak = '$id'";
   $hasil = mysqli_query($conn, $sql);
 
   if($hasil) {
@@ -235,8 +241,19 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
                 <label>Upload Foto/Scan SK Rumah Sakit atau Kepala Desa</label>
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_sk">
-                  <p class="text-dark">File yang diunggah: <?php echo $data['file_sk']; ?></p>
-                  <a href="assets/<?php echo $data['file_sk'] ?>"><img src="assets/<?php echo $data['file_sk'] ?>" width="100"></a>
+                  <p class="text-dark">File yang diunggah: <?php echo $data['slug_sk']; ?></p>
+                  <?php
+                  $id = $_GET['id_ak'];
+                  $qry = mysqli_query($conn, "SELECT * FROM tb_kematian WHERE id_ak = '$id'");
+                  $qry = mysqli_fetch_array($qry);
+                  $pdf_kk = explode('.', $qry['file_sk']);
+                  $ekstensi_kk = strtolower(end($pdf_kk));
+                  if($ekstensi_kk == 'pdf') { 
+                  ?>
+                    <a href="assets/<?php echo $data['file_sk'] ?>"><i class="fa fa-file-pdf" style="font-size: 20px; color: red;"></i></a>
+                  <?php } else { ?>
+                    <a href="assets/<?php echo $data['file_sk'] ?>"><img src="assets/<?php echo $data['file_sk'] ?>" width="100"></a>
+                  <?php } ?>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
@@ -244,8 +261,19 @@ if(isset($_POST['ubah']) and $baru === 'Baru') {
                 <label>Upload Foto/Scan Kartu Keluarga</label>
                 <div class="custom-file">
                   <input type="file" class="form-control" name="file_kk">
-                  <p class="text-dark">File yang diunggah: <?php echo $data['file_kk']; ?></p>
-                  <a href="assets/<?php echo $data['file_kk'] ?>"><img src="assets/<?php echo $data['file_kk'] ?>" width="100"></a>
+                  <p class="text-dark">File yang diunggah: <?php echo $data['slug_kk']; ?></p>
+                  <?php
+                  $id = $_GET['id_ak'];
+                  $qry = mysqli_query($conn, "SELECT * FROM tb_kematian WHERE id_ak = '$id'");
+                  $qry = mysqli_fetch_array($qry);
+                  $pdf_kk = explode('.', $qry['file_kk']);
+                  $ekstensi_kk = strtolower(end($pdf_kk));
+                  if($ekstensi_kk == 'pdf') { 
+                  ?>
+                    <a href="assets/<?php echo $data['file_kk'] ?>"><i class="fa fa-file-pdf" style="font-size: 20px; color: red;"></i></a>
+                  <?php } else { ?>
+                    <a href="assets/<?php echo $data['file_kk'] ?>"><img src="assets/<?php echo $data['file_kk'] ?>" width="100"></a>
+                  <?php } ?>
                   <p style="color: red">Ekstensi yang diperbolehkan .png | .jpg | .jpeg | .pdf</p>
                 </div>
               </div>
