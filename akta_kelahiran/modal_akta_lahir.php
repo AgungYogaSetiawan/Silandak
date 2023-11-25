@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body" id="bodydetail">
         <div class="author-box">
-            <div class="author-box">
+          <div class="author-box">
             <ol>
               <li>Mengisi formulir data pemohon</li>
               <li>Siapkan berkas persyaratan dengan hasil foto/scan permohonan akta lahir</li>
@@ -18,7 +18,7 @@
               <li>Siapkan berkas persyaratan dengan hasil foto/scan buku nikah orang tua/SPTJM (misal nikah siri)</li>
               <li>Siapkan berkas persyaratan dengan hasil foto/scan kartu keluarga</li>
             </ol>
-            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -41,51 +41,58 @@
       </div>
       <hr>
       <div class="modal-body" id="bodydetail">
-        <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-user"></i> DATA PEMOHON</h6>
+        </div>
         <form method="POST" action="akta_kelahiran/fungsi_akta_lahir.php" enctype="multipart/form-data" role="form">
           <?php
           $id = $_SESSION['id'];
           $sql = "SELECT * FROM tb_user WHERE id_user='$id'";
-          $result = mysqli_query($conn,$sql);
+          $result = mysqli_query($conn, $sql);
           $data = mysqli_fetch_array($result);
+
+          // mengambil data barang dengan kode paling besar
+          $q = mysqli_query($conn, "SELECT max(id_lahir) as kodeTerbesar FROM tb_akta_lahir");
+          $d = mysqli_fetch_array($q);
+          $kodeBarang = $d['kodeTerbesar'];
+
+          // mengambil angka dari kode barang terbesar, menggunakan fungsi substr
+          // dan diubah ke integer dengan (int)
+          $urutan = (int) $kodeBarang;
+
+          // bilangan yang diambil ini ditambah 1 untuk menentukan nomor urut berikutnya
+          $urutan++;
+
+          // membentuk kode barang baru
+          // perintah sprintf("%03s", $urutan); berguna untuk membuat string menjadi 3 karakter
+          // misalnya perintah sprintf("%03s", 15); maka akan menghasilkan '015'
+          // angka yang diambil tadi digabungkan dengan kode huruf yang kita inginkan, misalnya BRG 
+          $huruf = "AK";
+          $kodeBarang = $huruf . sprintf("%05s", $urutan);
           ?>
           <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_user']; ?>" readonly>
+          <input type="hidden" id="nmr_urut" name="nmr_urut" value="<?php echo $kodeBarang; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
-              <label for="kewarganegaraan">Kewarganegaraan</label>
-              <input id="kewarganegaraan" type="text" class="form-control" name="kewarganegaraan" value="<?php echo $data['kewarganegaraan']; ?>">
+              <label for="kewarganegaraan">Kewarganegaraan <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="kewarganegaraan" type="text" class="form-control" name="kewarganegaraan" value="<?php echo $data['kewarganegaraan']; ?>" required>
             </div>
             <div class="form-group col-6">
-              <label for="nama">Nama Lengkap</label>
-              <input id="nama" type="text" class="form-control" name="nama" value="<?php echo $data['nama']; ?>">
+              <label for="nama">Nama Lengkap <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="nama" type="text" class="form-control" name="nama" value="<?php echo $data['nama']; ?>" required>
             </div>
           </div>
-          
+
           <div class="row">
             <div class="form-group col-6">
-              <label for="nik">NIK</label>
-              <input id="nik" type="text" class="form-control" name="nik" value="<?php echo $data['nik']; ?>">
-              <div class="invalid-feedback">
-            </div>
-          </div>
-            <div class="form-group col-6">
-              <label for="no_hp">No.Telepon</label>
-              <input id="no_hp" type="text" class="form-control" name="no_hp" value="<?php echo $data['no_hp']; ?>">
+              <label for="nik">NIK <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="nik" type="text" class="form-control" name="nik" value="<?php echo $data['nik']; ?>" required>
               <div class="invalid-feedback">
               </div>
             </div>
-          </div>
-          
-          <div class="row">
             <div class="form-group col-6">
-              <label for="pekerjaan">Pekerjaan</label>
-              <input id="pekerjaan" type="text" class="form-control" name="pekerjaan" value="<?php echo $data['pekerjaan']; ?>">
-              <div class="invalid-feedback">
-            </div>
-          </div>
-            <div class="form-group col-6">
-              <label for="tmpt_lahir">Tempat Lahir</label>
-              <input id="tmpt_lahir" type="text" class="form-control" name="tmpt_lahir" value="<?php echo $data['tmpt_lahir']; ?>">
+              <label for="no_hp">No.Telepon <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="no_hp" type="text" class="form-control" name="no_hp" value="<?php echo $data['no_hp']; ?>" required>
               <div class="invalid-feedback">
               </div>
             </div>
@@ -93,15 +100,30 @@
 
           <div class="row">
             <div class="form-group col-6">
-              <label for="tgl_lahir">Tanggal Lahir</label>
-              <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir" value="<?php echo $data['tgl_lahir']; ?>">
+              <label for="pekerjaan">Pekerjaan <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="pekerjaan" type="text" class="form-control" name="pekerjaan" value="<?php echo $data['pekerjaan']; ?>" required>
               <div class="invalid-feedback">
+              </div>
+            </div>
+            <div class="form-group col-6">
+              <label for="tmpt_lahir">Tempat Lahir <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="tmpt_lahir" type="text" class="form-control" name="tmpt_lahir" value="<?php echo $data['tmpt_lahir']; ?>" required>
+              <div class="invalid-feedback">
+              </div>
             </div>
           </div>
+
+          <div class="row">
             <div class="form-group col-6">
-              <label class="d-block" for="jk">Jenis Kelamin</label>
+              <label for="tgl_lahir">Tanggal Lahir <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir" value="<?php echo $data['tgl_lahir']; ?>" required>
+              <div class="invalid-feedback">
+              </div>
+            </div>
+            <div class="form-group col-6">
+              <label class="d-block" for="jk">Jenis Kelamin <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="jk1" name="jk" value="Laki-laki" <?php echo ($data['jk'] == 'Laki-laki') ? " checked" : "" ?>>
+                <input class="form-check-input" type="radio" id="jk1" name="jk" value="Laki-laki" <?php echo ($data['jk'] == 'Laki-laki') ? " checked" : "" ?> required>
                 <label class="form-check-label" for="jk">Laki-laki</label>
               </div>
               <div class="form-check form-check-inline">
@@ -113,36 +135,38 @@
 
           <div class="row">
             <div class="form-group col-6">
-              <label>Status</label>
-              <select class="form-control selectric" name="status">
+              <label>Status <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <select class="form-control selectric" name="status" required>
                 <option value="">--Pilih Status--</option>
                 <option value="Belum Menikah" <?php echo ($data['status'] == 'Belum Menikah') ? " selected" : "" ?>>Belum Menikah</option>
                 <option value="Sudah Menikah" <?php echo ($data['status'] == 'Sudah Menikah') ? " selected" : "" ?>>Sudah Menikah</option>
               </select>
             </div>
             <div class="form-group col-6">
-              <label for="agama">Agama</label>
-              <input id="agama" type="text" class="form-control" name="agama" value="<?php echo $data['agama'] ?>">
+              <label for="agama">Agama <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="agama" type="text" class="form-control" name="agama" value="<?php echo $data['agama'] ?>" required>
               <div class="invalid-feedback">
               </div>
             </div>
           </div>
           <div class="row">
             <div class="form-group col-6">
-              <label for="kelurahan">Desa</label>
+              <label for="kelurahan">Desa <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
               <!-- <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>"> -->
-              <select class="form-control" name="kelurahan">
-                  <option>--Pilih Desa--</option>
-                  <?php
-                  $res = mysqli_query($conn,"SELECT * FROM tb_penduduk");
-                  while($row = mysqli_fetch_array($res)){?> 
-                  <option value="<?php echo $row['desa']?>" <?php if($data["kelurahan"] == $row['desa']){echo "SELECTED";} ?>><?php echo $row['desa']?></option>
-                  <?php } 
-                  ?>
+              <select class="form-control" name="kelurahan" required>
+                <option>--Pilih Desa--</option>
+                <?php
+                $res = mysqli_query($conn, "SELECT * FROM tb_penduduk");
+                while ($row = mysqli_fetch_array($res)) { ?>
+                  <option value="<?php echo $row['desa'] ?>" <?php if ($data["kelurahan"] == $row['desa']) {
+                                                                echo "SELECTED";
+                                                              } ?>><?php echo $row['desa'] ?></option>
+                <?php }
+                ?>
               </select>
             </div>
             <div class="form-group col-6">
-              <label>Kecamatan</label>
+              <label>Kecamatan <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
               <select class="form-control selectric" name="kecamatan">
                 <option selected>Banua Lawas</option>
               </select>
@@ -151,14 +175,14 @@
 
           <div class="row">
             <div class="form-group col-6">
-              <label for="rt">RT</label>
-              <input id="rt" type="text" class="form-control" name="rt" value="<?php echo $data['rt'] ?>">
+              <label for="rt">RT <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="rt" type="text" class="form-control" name="rt" value="<?php echo $data['rt'] ?>" required>
               <div class="invalid-feedback">
               </div>
             </div>
             <div class="form-group col-6">
-              <label for="rw">RW</label>
-              <input id="rw" type="text" class="form-control" name="rw" value="<?php echo $data['rw'] ?>">
+              <label for="rw">RW <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="rw" type="text" class="form-control" name="rw" value="<?php echo $data['rw'] ?>" required>
               <div class="invalid-feedback">
               </div>
             </div>
@@ -166,26 +190,33 @@
 
           <div class="row">
             <div class="form-group col-6">
-              <label for="alamat">Alamat Domisili</label>
-              <input id="alamat" type="text" class="form-control" name="alamat" value="<?php echo $data['alamat'] ?>">
+              <label for="alamat">Alamat Domisili <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="alamat" type="text" class="form-control" name="alamat" value="<?php echo $data['alamat'] ?>" required>
             </div>
             <div class="form-group col-6">
-              <label for="kode_pos">Kode Pos</label>
-              <input id="kode_pos" type="number" class="form-control" name="kode_pos" value="<?php echo $data['kode_pos'] ?>">
+              <label for="kode_pos">Kode Pos <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
+              <input id="kode_pos" type="number" class="form-control" name="kode_pos" value="<?php echo $data['kode_pos'] ?>" required>
               <div class="invalid-feedback">
               </div>
             </div>
           </div>
           <hr>
-          <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
+          <div class="text-danger mb-5">
+            <h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6>
+          </div>
           <div class="form-group">
-            <label>Upload Foto/Scan Surat Permohonan Akta Lahir</label>
+            <label>Upload Foto/Scan Surat Permohonan Akta Lahir <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_akta_lahir" required>
+              <input type="file" class="form-control" name="file_akta_lahir" <?php if (isset($_SESSION["file_akta_lahir"])) {
+                                                                                echo '';
+                                                                              } else {
+                                                                                echo 'required';
+                                                                              } ?>>
               <?php
               if (isset($_SESSION['file_akta_lahir'])) {
                 $fileName = $_SESSION['file_akta_lahir'];
-                echo '<p>File yang diunggah: ' . $fileName . '</p>';
+                $fileSlug = $_SESSION['slug_akta_lahir'];
+                echo '<p>File yang diunggah: ' . $fileSlug . '</p>';
                 echo '<img src="assets/' . $fileName . '" width="100">';
               }
               ?>
@@ -193,13 +224,18 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Upload Foto/Scan Surat Keterangan Lahir</label>
+            <label>Upload Foto/Scan Surat Keterangan Lahir <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_ket_lahir" required>
+              <input type="file" class="form-control" name="file_ket_lahir" <?php if (isset($_SESSION["file_ket_lahir"])) {
+                                                                              echo '';
+                                                                            } else {
+                                                                              echo 'required';
+                                                                            } ?>>
               <?php
               if (isset($_SESSION['file_ket_lahir'])) {
                 $fileName = $_SESSION['file_ket_lahir'];
-                echo '<p>File yang diunggah: ' . $fileName . '</p>';
+                $fileSlug = $_SESSION['slug_ket_lahir'];
+                echo '<p>File yang diunggah: ' . $fileSlug . '</p>';
                 echo '<img src="assets/' . $fileName . '" width="100">';
               }
               ?>
@@ -207,13 +243,18 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Upload Foto/Scan Buku Nikah Orang Tua/SPTJM (misal nikah siri)</label>
+            <label>Upload Foto/Scan Buku Nikah Orang Tua/SPTJM (misal nikah siri) <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_buku_nikah" required>
+              <input type="file" class="form-control" name="file_buku_nikah" <?php if (isset($_SESSION["file_buku_nikah"])) {
+                                                                                echo '';
+                                                                              } else {
+                                                                                echo 'required';
+                                                                              } ?>>
               <?php
               if (isset($_SESSION['file_buku_nikah'])) {
                 $fileName = $_SESSION['file_buku_nikah'];
-                echo '<p>File yang diunggah: ' . $fileName . '</p>';
+                $fileSlug = $_SESSION['slug_buku_nikah'];
+                echo '<p>File yang diunggah: ' . $fileSlug . '</p>';
                 echo '<img src="assets/' . $fileName . '" width="100">';
               }
               ?>
@@ -221,13 +262,18 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Upload Foto/Scan Kartu Keluarga</label>
+            <label>Upload Foto/Scan Kartu Keluarga <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
             <div class="custom-file">
-              <input type="file" class="form-control" name="file_kk" required>
+              <input type="file" class="form-control" name="file_kk" <?php if (isset($_SESSION["file_kk"])) {
+                                                                        echo '';
+                                                                      } else {
+                                                                        echo 'required';
+                                                                      } ?>>
               <?php
               if (isset($_SESSION['file_kk'])) {
                 $fileName = $_SESSION['file_kk'];
-                echo '<p>File yang diunggah: ' . $fileName . '</p>';
+                $fileSlug = $_SESSION['slug_kk'];
+                echo '<p>File yang diunggah: ' . $fileSlug . '</p>';
                 echo '<img src="assets/' . $fileName . '" width="100">';
               }
               ?>
@@ -265,12 +311,14 @@
       </div>
       <hr>
       <div class="modal-body" id="bodydetail">
-        <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-user"></i> DATA PEMOHON</h6>
+        </div>
         <form method="POST" action="akta_kelahiran/fungsi_akta_lahir.php" enctype="multipart/form-data" role="form">
           <?php
           $id = $_SESSION['id'];
           $sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$id'";
-          $result = mysqli_query($conn,$sql);
+          $result = mysqli_query($conn, $sql);
           $data = mysqli_fetch_array($result);
           ?>
           <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_user']; ?>" readonly>
@@ -288,14 +336,14 @@
               <input id="nama" type="text" class="form-control" name="nama" value="<?php echo $data['nama']; ?>">
             </div>
           </div>
-          
+
           <div class="row">
             <div class="form-group col-6">
               <label for="nik">NIK</label>
               <input id="nik" type="text" class="form-control" name="nik" value="<?php echo $data['nik']; ?>">
               <div class="invalid-feedback">
+              </div>
             </div>
-          </div>
             <div class="form-group col-6">
               <label for="no_hp">No.Telepon</label>
               <input id="no_hp" type="text" class="form-control" name="no_hp" value="<?php echo $data['no_hp']; ?>">
@@ -303,14 +351,14 @@
               </div>
             </div>
           </div>
-          
+
           <div class="row">
             <div class="form-group col-6">
               <label for="pekerjaan">Pekerjaan</label>
               <input id="pekerjaan" type="text" class="form-control" name="pekerjaan" value="<?php echo $data['pekerjaan']; ?>">
               <div class="invalid-feedback">
+              </div>
             </div>
-          </div>
             <div class="form-group col-6">
               <label for="tmpt_lahir">Tempat Lahir</label>
               <input id="tmpt_lahir" type="text" class="form-control" name="tmpt_lahir" value="<?php echo $data['tmpt_lahir']; ?>">
@@ -324,8 +372,8 @@
               <label for="tgl_lahir">Tanggal Lahir</label>
               <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir" value="<?php echo $data['tgl_lahir']; ?>">
               <div class="invalid-feedback">
+              </div>
             </div>
-          </div>
             <div class="form-group col-6">
               <label class="d-block" for="jk">Jenis Kelamin</label>
               <div class="form-check form-check-inline">
@@ -360,13 +408,15 @@
               <label for="kelurahan">Desa</label>
               <!-- <input id="kelurahan" type="text" class="form-control" name="kelurahan" value="<?php echo $data['kelurahan'] ?>"> -->
               <select class="form-control" name="kelurahan">
-                  <option>--Pilih Desa--</option>
-                  <?php
-                  $res = mysqli_query($conn,"SELECT * FROM tb_penduduk");
-                  while($row = mysqli_fetch_array($res)){?> 
-                  <option value="<?php echo $row['desa']?>" <?php if($data["kelurahan"] == $row['desa']){echo "SELECTED";} ?>><?php echo $row['desa']?></option>
-                  <?php } 
-                  ?>
+                <option>--Pilih Desa--</option>
+                <?php
+                $res = mysqli_query($conn, "SELECT * FROM tb_penduduk");
+                while ($row = mysqli_fetch_array($res)) { ?>
+                  <option value="<?php echo $row['desa'] ?>" <?php if ($data["kelurahan"] == $row['desa']) {
+                                                                echo "SELECTED";
+                                                              } ?>><?php echo $row['desa'] ?></option>
+                <?php }
+                ?>
               </select>
             </div>
             <div class="form-group col-6">
@@ -405,7 +455,9 @@
             </div>
           </div>
           <hr>
-          <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
+          <div class="text-danger mb-5">
+            <h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6>
+          </div>
           <div class="form-group">
             <label>Upload Foto/Scan Permohonan Akta Lahir</label>
             <div class="custom-file">
@@ -469,13 +521,15 @@
       </div>
       <hr>
       <div class="modal-body" id="bodydetail">
-        <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
-          <?php
-          $sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user";
-          $result = mysqli_query($conn,$sql);
-          $data = mysqli_fetch_array($result);
-          ?>
-          <form method="post" action="akta_kelahiran/fungsi_akta_lahir.php" enctype="multipart/form-data" role="form">
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-user"></i> DATA PEMOHON</h6>
+        </div>
+        <?php
+        $sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user";
+        $result = mysqli_query($conn, $sql);
+        $data = mysqli_fetch_array($result);
+        ?>
+        <form method="post" action="akta_kelahiran/fungsi_akta_lahir.php" enctype="multipart/form-data" role="form">
           <input type="hidden" id="user_id" name="user_id" value="<?php echo $data['id_lahir']; ?>" readonly>
           <div class="row">
             <div class="form-group col-6">
@@ -487,14 +541,14 @@
               <input id="nama" type="text" class="form-control" name="nama" value="<?php echo $data['nama']; ?>">
             </div>
           </div>
-          
+
           <div class="row">
             <div class="form-group col-6">
               <label for="nik">NIK</label>
               <input id="nik" type="text" class="form-control" name="nik" value="<?php echo $data['nik']; ?>">
               <div class="invalid-feedback">
+              </div>
             </div>
-          </div>
             <div class="form-group col-6">
               <label for="no_hp">No.Telepon</label>
               <input id="no_hp" type="text" class="form-control" name="no_hp" value="<?php echo $data['no_hp']; ?>">
@@ -502,14 +556,14 @@
               </div>
             </div>
           </div>
-          
+
           <div class="row">
             <div class="form-group col-6">
               <label for="pekerjaan">Pekerjaan</label>
               <input id="pekerjaan" type="text" class="form-control" name="pekerjaan" value="<?php echo $data['pekerjaan']; ?>">
               <div class="invalid-feedback">
+              </div>
             </div>
-          </div>
             <div class="form-group col-6">
               <label for="tmpt_lahir">Tempat Lahir</label>
               <input id="tmpt_lahir" type="text" class="form-control" name="tmpt_lahir" value="<?php echo $data['tmpt_lahir']; ?>">
@@ -523,8 +577,8 @@
               <label for="tgl_lahir">Tanggal Lahir</label>
               <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir" value="<?php echo $data['tgl_lahir']; ?>">
               <div class="invalid-feedback">
+              </div>
             </div>
-          </div>
             <div class="form-group col-6">
               <label class="d-block" for="jk">Jenis Kelamin</label>
               <div class="form-check form-check-inline">
@@ -600,7 +654,9 @@
             </div>
           </div>
           <hr>
-          <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
+          <div class="text-danger mb-5">
+            <h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6>
+          </div>
           <div class="form-group">
             <label>Upload Foto/Scan Permohonan Akta Lahir</label>
             <div class="custom-file">
@@ -638,54 +694,58 @@
             </div>
           </div>
           <hr>
-          <div class="text-danger mb-5"><h6><i class="fas fa-thumbs-up"></i> Verifikasi Persyaratan</h6></div>
-            <div class="form-group">
-              <label for="keterangan">Keterangan</label>
-              <textarea class="form-control" name="keterangan"><?php echo $data['keterangan'] ?></textarea>
-            </div>
-            <div class="form-group">
-              <button type="submit" class="btn btn-success btn-md" name="setuju">
-                <i class="fas fa-save"></i> Disetujui
-              </button>
-              <button type="submit" class="btn btn-danger btn-md" name="tolak">
-                <i class="fas fa-user-edit"></i> Ditolak
-              </button>
-              <a href="dataBaruKartuKeluarga" class="btn btn-info btn-md">
-                <i class="fas fa-window-close"></i> Batal
-              </a>
-            </div>
-          </form>
-          <hr>
-          <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
-          <?php
-          $sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user";
-          $result = mysqli_query($conn,$sql);
-          echo "<table class='table table-striped' id='tabel'>";
-          echo "<thead>";
-          echo "<tr>
+          <div class="text-danger mb-5">
+            <h6><i class="fas fa-thumbs-up"></i> Verifikasi Persyaratan</h6>
+          </div>
+          <div class="form-group">
+            <label for="keterangan">Keterangan</label>
+            <textarea class="form-control" name="keterangan"><?php echo $data['keterangan'] ?></textarea>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-md" name="setuju">
+              <i class="fas fa-save"></i> Disetujui
+            </button>
+            <button type="submit" class="btn btn-danger btn-md" name="tolak">
+              <i class="fas fa-user-edit"></i> Ditolak
+            </button>
+            <a href="dataBaruKartuKeluarga" class="btn btn-info btn-md">
+              <i class="fas fa-window-close"></i> Batal
+            </a>
+          </div>
+        </form>
+        <hr>
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-history"></i> Data Histori</h6>
+        </div>
+        <?php
+        $sql = "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user";
+        $result = mysqli_query($conn, $sql);
+        echo "<table class='table table-striped' id='tabel'>";
+        echo "<thead>";
+        echo "<tr>
                   <th>Waktu</th><th>Status Berkas</th><th>Keterangan</th>
                 </tr>";
-          echo "</thead>";
+        echo "</thead>";
 
-          echo "<tbody>";
-          while ($row = mysqli_fetch_array($result)) {
-              $status_berkas = $row['status_berkas'];
-              if($status_berkas == 'Baru') {
-                $alert = 'primary';
-              } else {
-                $alert = 'success';
-              }
-              echo "<tr>
+        echo "<tbody>";
+        while ($row = mysqli_fetch_array($result)) {
+          $status_berkas = $row['status_berkas'];
+          if ($status_berkas == 'Baru') {
+            $alert = 'primary';
+          } else {
+            $alert = 'success';
+          }
+          echo "<tr>
                       <td>" . $row['tgl'] . "</td>
                       <td><div class='btn btn-$alert' disabled>$status_berkas</div></td>
                       <td>" . $row['keterangan'] . "</td>
                     </tr>";
-          }
+        }
 
-          echo "</tbody>";
-          echo "</table>";
+        echo "</tbody>";
+        echo "</table>";
 
-          ?>
+        ?>
       </div>
     </div>
   </div>
@@ -704,171 +764,179 @@
       </div>
       <hr>
       <div class="modal-body" id="bodydetail">
-        <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="kewarganegaraan">Kewarganegaraan</label>
-              <input id="kewarganegaraan" type="text" class="form-control" name="kewarganegaraan" autofocus>
-            </div>
-            <div class="form-group col-6">
-              <label for="nama">Nama Lengkap</label>
-              <input id="nama" type="text" class="form-control" name="nama">
-            </div>
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-user"></i> DATA PEMOHON</h6>
+        </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="kewarganegaraan">Kewarganegaraan</label>
+            <input id="kewarganegaraan" type="text" class="form-control" name="kewarganegaraan" autofocus>
           </div>
-          
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="nik">NIK</label>
-              <input id="nik" type="text" class="form-control" name="nik">
-              <div class="invalid-feedback">
-            </div>
+          <div class="form-group col-6">
+            <label for="nama">Nama Lengkap</label>
+            <input id="nama" type="text" class="form-control" name="nama">
           </div>
-            <div class="form-group col-6">
-              <label for="no_hp">No.Telepon</label>
-              <input id="no_hp" type="number" class="form-control" name="no_hp">
-              <div class="invalid-feedback">
-              </div>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="pekerjaan">Pekerjaan</label>
-              <input id="pekerjaan" type="text" class="form-control" name="pekerjaan">
-              <div class="invalid-feedback">
-            </div>
-          </div>
-            <div class="form-group col-6">
-              <label for="tempat_lahir">Tempat Lahir</label>
-              <input id="tempat_lahir" type="text" class="form-control" name="tempat_lahir">
-              <div class="invalid-feedback">
-              </div>
-            </div>
-          </div>
+        </div>
 
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="tgl_lahir">Tanggal Lahir</label>
-              <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir">
-              <div class="invalid-feedback">
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="nik">NIK</label>
+            <input id="nik" type="text" class="form-control" name="nik">
+            <div class="invalid-feedback">
             </div>
           </div>
-            <div class="form-group col-6">
-              <label class="d-block" for="jk">Jenis Kelamin</label>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="jk" value="">
-                <label class="form-check-label" for="jk">Laki-laki</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="jk" value="">
-                <label class="form-check-label" for="jk">Perempuan</label>
-              </div>
+          <div class="form-group col-6">
+            <label for="no_hp">No.Telepon</label>
+            <input id="no_hp" type="number" class="form-control" name="no_hp">
+            <div class="invalid-feedback">
             </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="form-group col-6">
-              <label>Status</label>
-              <select class="form-control selectric">
-                <option selected>--Pilih Status--</option>
-                <option>West Java</option>
-                <option>East Java</option>
-              </select>
-            </div>
-            <div class="form-group col-6">
-              <label for="agama">Agama</label>
-              <input id="agama" type="text" class="form-control" name="agama">
-              <div class="invalid-feedback">
-              </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="pekerjaan">Pekerjaan</label>
+            <input id="pekerjaan" type="text" class="form-control" name="pekerjaan">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <div class="row">
-            <div class="form-group col-6">
-              <label>Kelurahan</label>
-              <select class="form-control selectric">
-                <option selected>--Pilih Kelurahan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
-              </select>
-            </div>
-            <div class="form-group col-6">
-              <label>Kecamatan</label>
-              <select class="form-control selectric">
-                <option selected>Banua Lawas</option>
-              </select>
+          <div class="form-group col-6">
+            <label for="tempat_lahir">Tempat Lahir</label>
+            <input id="tempat_lahir" type="text" class="form-control" name="tempat_lahir">
+            <div class="invalid-feedback">
             </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="rt">RT</label>
-              <input id="rt" type="number" class="form-control" name="rt">
-              <div class="invalid-feedback">
-              </div>
-            </div>
-            <div class="form-group col-6">
-              <label for="rw">RW</label>
-              <input id="rw" type="number" class="form-control" name="rw">
-              <div class="invalid-feedback">
-              </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="tgl_lahir">Tanggal Lahir</label>
+            <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir">
+            <div class="invalid-feedback">
             </div>
           </div>
+          <div class="form-group col-6">
+            <label class="d-block" for="jk">Jenis Kelamin</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="jk" value="">
+              <label class="form-check-label" for="jk">Laki-laki</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="jk" value="">
+              <label class="form-check-label" for="jk">Perempuan</label>
+            </div>
+          </div>
+        </div>
 
-          <div class="row">
-            <div class="form-group col-6">
-              <label>Alamat Domisili</label>
-              <textarea class="form-control"></textarea>
-            </div>
-            <div class="form-group col-6">
-              <label for="kodepos">Kode Pos</label>
-              <input id="kodepos" type="number" class="form-control" name="kodepos">
-              <div class="invalid-feedback">
-              </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label>Status</label>
+            <select class="form-control selectric">
+              <option selected>--Pilih Status--</option>
+              <option>West Java</option>
+              <option>East Java</option>
+            </select>
+          </div>
+          <div class="form-group col-6">
+            <label for="agama">Agama</label>
+            <input id="agama" type="text" class="form-control" name="agama">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <hr>
-          <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
-          <div class="form-group">
-            <label>Foto/Scan Buku Nikah Suami Istri</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label>Kelurahan</label>
+            <select class="form-control selectric">
+              <option selected>--Pilih Kelurahan--</option>
+              <option>West Java</option>
+              <option>East Java</option>
+            </select>
+          </div>
+          <div class="form-group col-6">
+            <label>Kecamatan</label>
+            <select class="form-control selectric">
+              <option selected>Banua Lawas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="rt">RT</label>
+            <input id="rt" type="number" class="form-control" name="rt">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <div class="form-group">
-            <label>Foto/Scan Akta Mertua dan Orang Tua</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Choose file</label>
+          <div class="form-group col-6">
+            <label for="rw">RW</label>
+            <input id="rw" type="number" class="form-control" name="rw">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <div class="form-group">
-            <label>Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6">
+            <label>Alamat Domisili</label>
+            <textarea class="form-control"></textarea>
+          </div>
+          <div class="form-group col-6">
+            <label for="kodepos">Kode Pos</label>
+            <input id="kodepos" type="number" class="form-control" name="kodepos">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <hr>
-          <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
-          <!-- <div class="table-responsive"> -->
-            <table class="table table-striped" id="tabel">
-              <thead>
-                <tr>
-                  <th>Waktu</th>
-                  <th>Status</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>04 April 2023</td>
-                  <td><div class="btn btn-success btn-sm" disabled>Completed</div></td>
-                  <td>Berkas Oke banget silakan cetak</td>
-                </tr>
-              </tbody>
-            </table>
-          <!-- </div> -->
+        </div>
+        <hr>
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6>
+        </div>
+        <div class="form-group">
+          <label>Foto/Scan Buku Nikah Suami Istri</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Foto/Scan Akta Mertua dan Orang Tua</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Foto/Scan Kartu Tanda Penduduk</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+        </div>
+        <hr>
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-history"></i> Data Histori</h6>
+        </div>
+        <!-- <div class="table-responsive"> -->
+        <table class="table table-striped" id="tabel">
+          <thead>
+            <tr>
+              <th>Waktu</th>
+              <th>Status</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>04 April 2023</td>
+              <td>
+                <div class="btn btn-success btn-sm" disabled>Completed</div>
+              </td>
+              <td>Berkas Oke banget silakan cetak</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- </div> -->
       </div>
     </div>
   </div>
@@ -887,171 +955,179 @@
       </div>
       <hr>
       <div class="modal-body" id="bodydetail">
-        <div class="text-danger mb-5"><h6><i class="fas fa-user"></i> DATA PEMOHON</h6></div>
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="kewarganegaraan">Kewarganegaraan</label>
-              <input id="kewarganegaraan" type="text" class="form-control" name="kewarganegaraan" autofocus>
-            </div>
-            <div class="form-group col-6">
-              <label for="nama">Nama Lengkap</label>
-              <input id="nama" type="text" class="form-control" name="nama">
-            </div>
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-user"></i> DATA PEMOHON</h6>
+        </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="kewarganegaraan">Kewarganegaraan</label>
+            <input id="kewarganegaraan" type="text" class="form-control" name="kewarganegaraan" autofocus>
           </div>
-          
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="nik">NIK</label>
-              <input id="nik" type="text" class="form-control" name="nik">
-              <div class="invalid-feedback">
-            </div>
+          <div class="form-group col-6">
+            <label for="nama">Nama Lengkap</label>
+            <input id="nama" type="text" class="form-control" name="nama">
           </div>
-            <div class="form-group col-6">
-              <label for="no_hp">No.Telepon</label>
-              <input id="no_hp" type="number" class="form-control" name="no_hp">
-              <div class="invalid-feedback">
-              </div>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="pekerjaan">Pekerjaan</label>
-              <input id="pekerjaan" type="text" class="form-control" name="pekerjaan">
-              <div class="invalid-feedback">
-            </div>
-          </div>
-            <div class="form-group col-6">
-              <label for="tempat_lahir">Tempat Lahir</label>
-              <input id="tempat_lahir" type="text" class="form-control" name="tempat_lahir">
-              <div class="invalid-feedback">
-              </div>
-            </div>
-          </div>
+        </div>
 
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="tgl_lahir">Tanggal Lahir</label>
-              <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir">
-              <div class="invalid-feedback">
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="nik">NIK</label>
+            <input id="nik" type="text" class="form-control" name="nik">
+            <div class="invalid-feedback">
             </div>
           </div>
-            <div class="form-group col-6">
-              <label class="d-block" for="jk">Jenis Kelamin</label>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="jk" value="">
-                <label class="form-check-label" for="jk">Laki-laki</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" id="jk" value="">
-                <label class="form-check-label" for="jk">Perempuan</label>
-              </div>
+          <div class="form-group col-6">
+            <label for="no_hp">No.Telepon</label>
+            <input id="no_hp" type="number" class="form-control" name="no_hp">
+            <div class="invalid-feedback">
             </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="form-group col-6">
-              <label>Status</label>
-              <select class="form-control selectric">
-                <option selected>--Pilih Status--</option>
-                <option>West Java</option>
-                <option>East Java</option>
-              </select>
-            </div>
-            <div class="form-group col-6">
-              <label for="agama">Agama</label>
-              <input id="agama" type="text" class="form-control" name="agama">
-              <div class="invalid-feedback">
-              </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="pekerjaan">Pekerjaan</label>
+            <input id="pekerjaan" type="text" class="form-control" name="pekerjaan">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <div class="row">
-            <div class="form-group col-6">
-              <label>Kelurahan</label>
-              <select class="form-control selectric">
-                <option selected>--Pilih Kelurahan--</option>
-                <option>West Java</option>
-                <option>East Java</option>
-              </select>
-            </div>
-            <div class="form-group col-6">
-              <label>Kecamatan</label>
-              <select class="form-control selectric">
-                <option selected>Banua Lawas</option>
-              </select>
+          <div class="form-group col-6">
+            <label for="tempat_lahir">Tempat Lahir</label>
+            <input id="tempat_lahir" type="text" class="form-control" name="tempat_lahir">
+            <div class="invalid-feedback">
             </div>
           </div>
+        </div>
 
-          <div class="row">
-            <div class="form-group col-6">
-              <label for="rt">RT</label>
-              <input id="rt" type="number" class="form-control" name="rt">
-              <div class="invalid-feedback">
-              </div>
-            </div>
-            <div class="form-group col-6">
-              <label for="rw">RW</label>
-              <input id="rw" type="number" class="form-control" name="rw">
-              <div class="invalid-feedback">
-              </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="tgl_lahir">Tanggal Lahir</label>
+            <input id="tgl_lahir" type="date" class="form-control" name="tgl_lahir">
+            <div class="invalid-feedback">
             </div>
           </div>
+          <div class="form-group col-6">
+            <label class="d-block" for="jk">Jenis Kelamin</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="jk" value="">
+              <label class="form-check-label" for="jk">Laki-laki</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="jk" value="">
+              <label class="form-check-label" for="jk">Perempuan</label>
+            </div>
+          </div>
+        </div>
 
-          <div class="row">
-            <div class="form-group col-6">
-              <label>Alamat Domisili</label>
-              <textarea class="form-control"></textarea>
-            </div>
-            <div class="form-group col-6">
-              <label for="kodepos">Kode Pos</label>
-              <input id="kodepos" type="number" class="form-control" name="kodepos">
-              <div class="invalid-feedback">
-              </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label>Status</label>
+            <select class="form-control selectric">
+              <option selected>--Pilih Status--</option>
+              <option>West Java</option>
+              <option>East Java</option>
+            </select>
+          </div>
+          <div class="form-group col-6">
+            <label for="agama">Agama</label>
+            <input id="agama" type="text" class="form-control" name="agama">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <hr>
-          <div class="text-danger mb-5"><h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6></div>
-          <div class="form-group">
-            <label>Foto/Scan Buku Nikah Suami Istri</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <div class="row">
+          <div class="form-group col-6">
+            <label>Kelurahan</label>
+            <select class="form-control selectric">
+              <option selected>--Pilih Kelurahan--</option>
+              <option>West Java</option>
+              <option>East Java</option>
+            </select>
+          </div>
+          <div class="form-group col-6">
+            <label>Kecamatan</label>
+            <select class="form-control selectric">
+              <option selected>Banua Lawas</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6">
+            <label for="rt">RT</label>
+            <input id="rt" type="number" class="form-control" name="rt">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <div class="form-group">
-            <label>Foto/Scan Akta Mertua dan Orang Tua</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Choose file</label>
+          <div class="form-group col-6">
+            <label for="rw">RW</label>
+            <input id="rw" type="number" class="form-control" name="rw">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <div class="form-group">
-            <label>Foto/Scan Kartu Tanda Penduduk</label>
-            <div class="custom-file">
-              <input type="file" class="custom-file-input" id="customFile">
-              <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+
+        <div class="row">
+          <div class="form-group col-6">
+            <label>Alamat Domisili</label>
+            <textarea class="form-control"></textarea>
+          </div>
+          <div class="form-group col-6">
+            <label for="kodepos">Kode Pos</label>
+            <input id="kodepos" type="number" class="form-control" name="kodepos">
+            <div class="invalid-feedback">
             </div>
           </div>
-          <hr>
-          <div class="text-danger mb-5"><h6><i class="fas fa-history"></i> Data Histori</h6></div>
-          <!-- <div class="table-responsive"> -->
-            <table class="table table-striped" id="tabel">
-              <thead>
-                <tr>
-                  <th>Waktu</th>
-                  <th>Status</th>
-                  <th>Keterangan</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>04 April 2023</td>
-                  <td><div class="btn btn-success btn-sm" disabled>Completed</div></td>
-                  <td>Berkas Oke banget silakan cetak</td>
-                </tr>
-              </tbody>
-            </table>
-          <!-- </div> -->
+        </div>
+        <hr>
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-file"></i> BERKAS PERSYARATAN</h6>
+        </div>
+        <div class="form-group">
+          <label>Foto/Scan Buku Nikah Suami Istri</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Foto/Scan Akta Mertua dan Orang Tua</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Foto/Scan Kartu Tanda Penduduk</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
+        </div>
+        <hr>
+        <div class="text-danger mb-5">
+          <h6><i class="fas fa-history"></i> Data Histori</h6>
+        </div>
+        <!-- <div class="table-responsive"> -->
+        <table class="table table-striped" id="tabel">
+          <thead>
+            <tr>
+              <th>Waktu</th>
+              <th>Status</th>
+              <th>Keterangan</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>04 April 2023</td>
+              <td>
+                <div class="btn btn-success btn-sm" disabled>Completed</div>
+              </td>
+              <td>Berkas Oke banget silakan cetak</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- </div> -->
       </div>
     </div>
   </div>

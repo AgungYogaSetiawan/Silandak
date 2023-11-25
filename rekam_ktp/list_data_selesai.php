@@ -28,34 +28,34 @@
                       <?php
                       $query = mysqli_query($conn, "SELECT * FROM tb_rekam_ktp a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE a.status_berkas='Selesai' ORDER BY a.id_ktp DESC");
                       $no = 1;
-                      while($row = mysqli_fetch_array($query)) {
-                      setlocale(LC_TIME, 'id_ID');
-                      $tanggal_format = strftime('%d %B %Y', strtotime($row['tgl']));
+                      while ($row = mysqli_fetch_array($query)) {
+                        setlocale(LC_TIME, 'id_ID');
+                        $tanggal_format = strftime('%d %B %Y', strtotime($row['tgl']));
                       ?>
-                      <tr>
-                        <td><?php echo $no++ ?></td>
-                        <td><?php echo $tanggal_format; ?></td>
-                        <td><?php echo $row['nama']; ?></td>
-                        <td><?php echo $row['nik']; ?></td>
-                        <td><?php echo $row['nik']; ?></td>
-                        <td><a href="https://wa.me/<?php echo $row['no_hp']; ?>"><?php echo $row['no_hp']; ?></a></td>
-                        <td>
-                        <?php
-                        if($row['status_berkas'] == 'Baru') {?>
-                          <div class="btn btn-primary" disabled><?php echo 'Baru' ?></div>
-                        <?php
-                        } else {?>
-                          <div class="btn btn-success" disabled><?php echo 'Selesai' ?></div>
-                        <?php
-                        }
-                        ?>
-                        </td>
-                        <td><a href="?page=detailKTP&id_ktp=<?php echo $row['id_ktp'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a></td>
-                      </tr>
+                        <tr>
+                          <td><?php echo $no++ ?></td>
+                          <td><?php echo $tanggal_format; ?></td>
+                          <td><?php echo $row['nama']; ?></td>
+                          <td><?php echo $row['nik']; ?></td>
+                          <td><?php echo $row['nmr_urut']; ?></td>
+                          <td><a href="https://wa.me/<?php echo $row['no_hp']; ?>"><?php echo $row['no_hp']; ?></a></td>
+                          <td>
+                            <?php
+                            if ($row['status_berkas'] == 'Baru') { ?>
+                              <div class="btn btn-primary" disabled><?php echo 'Baru' ?></div>
+                            <?php
+                            } else { ?>
+                              <div class="btn btn-success" disabled><?php echo 'Selesai' ?></div>
+                            <?php
+                            }
+                            ?>
+                          </td>
+                          <td><a href="?page=detailKTP&id_ktp=<?php echo $row['id_ktp'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a></td>
+                        </tr>
                       <?php
                       }
                       ?>
-                        <!-- <td><div class="btn btn-success btn-sm">Completed</div></td>
+                      <!-- <td><div class="btn btn-success btn-sm">Completed</div></td>
                         <td><button class="btn btn-info" data-toggle="modal" data-target="#modalLihatDataKK"><i class="fas fa-search"></i></button></td> -->
                     </tbody>
                   </table>

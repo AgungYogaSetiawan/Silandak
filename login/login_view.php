@@ -62,7 +62,7 @@ if (isset($_POST["login"])) {
         $_SESSION['peran'] = "warga";
         // alihkan ke menu warga
         echo "<script>alert('Login Berhasil Selamat datang $username');</script>";
-        echo "<meta http-equiv='refresh' content='0;url=../index.php?page=beranda'>";
+        echo "<meta http-equiv='refresh' content='0;url=../index.php?page=profile'>";
         exit;
       } else if ($row["level"] == "admin kecamatan") {
         $_SESSION['id'] = $row['id_user'];
@@ -358,10 +358,10 @@ if (isset($_POST['submit_informasi'])) {
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Login - Aplikasi Layanan Online Kecamatan Banua Lawas</title>
+  <title>Login - Aplikasi Sistem Layanan Data Kecamatan Banua Lawas</title>
 
   <!-- favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo_tabalong_mini.png">
+  <link rel="shortcut icon" type="image/x-icon" href="../assets/img/logo_tabalong_new.png">
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
@@ -387,8 +387,8 @@ if (isset($_POST['submit_informasi'])) {
         <div class="row">
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <div class="login-brand">
-              <img src="../assets/img/logo_tabalong.png" alt="logo" width="100">
-              <h4>APLIKASI LAYANAN ONLINE KECAMATAN BANUA LAWAS</h4>
+              <img src="../assets/img/logo_tabalong_new.png" alt="logo" width="100">
+              <h4 class="mt-3">SILANDAK</h4>
             </div>
             <?php if (isset($error)) : ?>
               <div class="alert alert-danger">Username / Passsword anda salah!</div>
@@ -476,7 +476,7 @@ if (isset($_POST['submit_informasi'])) {
           <div class="author-box">
             <div class="author-box font-weight-bolder">Q: Apa itu SILANDAK?</div>
             <div class="author-box">
-              <p>A: SILANDAK (Sistem Informasi Pelayanan Online Kecamatan) yang berguna untuk menyediakan pelayanan yang ada di kecamatan namun berbasis online yang dapat diakses dari mana saja</p>
+              <p>A: Aplikasi Sistem Layanan Data Kecamatan (SILANDAK) adalah sebuah aplikasi berbasis website yang dibangun untuk memberikan pelayanan administrasi kepada masyarakat Kecamatan Banua Lawas. aplikasi ini dibuat untuk membantu memudahkan masyarakat untuk pengajuan permohonan pengurusan surat di kecamatan.</p>
             </div>
             <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
             <div class="author-box">
@@ -541,35 +541,68 @@ if (isset($_POST['submit_informasi'])) {
         <div class="modal-body" id="bodydetail">
           <div class="author-box">
             <div class="author-box-name">
+              <h5>TENTANG APLIKASI SILANDAK</h5>
+            </div>
+            <hr>
+            <div class="author-box">
+              <p>Aplikasi Sistem Layanan Data Kecamatan (SILANDAK) adalah sebuah aplikasi berbasis website yang dibangun untuk memberikan pelayanan administrasi kepada masyarakat Kecamatan Banua Lawas. aplikasi ini dibuat untuk membantu memudahkan masyarakat untuk pengajuan permohonan pengurusan surat di kecamatan.</p>
+              <p>Beberapa pelayanan yang tersedia adalah:</p>
+              <ol>
+                <li>Kartu Keluarga</li>
+                <li>Akta Kelahiran</li>
+                <li>Surat Pindah</li>
+                <li>Akta Kematian</li>
+                <li>Surat Pindah Datang</li>
+                <li>Biodata WNI</li>
+                <li>Rekam KTP</li>
+              </ol>
+            </div>
+
+            <div class="author-box-name">
               <h5>ALUR PEMOHON/MASYARAKAT</h5>
             </div>
             <hr>
-            <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
             <div class="author-box">
-              <p>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aliquid temporibus hic quidem itaque dignissimos veniam, nostrum accusantium tempore blanditiis earum at soluta neque asperiores!</p>
+              <p>Silahkan buka file dibawah ini untuk melihat alur penggunaan bagi pemohon/masyarakat</p>
+              <a href="../assets/Alur Penggunaan Aplikasi Website SILANDAK Untuk Pemohon Warga.pdf"><i class="fa fa-file-pdf" style="font-size: 40px; color: red;"></i></a>
             </div>
 
-            <div class="author-box">
+            <div class="author-box mt-3">
               <div class="author-box-name">
                 <h5>ALUR ADMIN KECAMATAN</h5>
               </div>
               <hr>
-              <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
+
               <div class="author-box">
-                <p>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aliquid temporibus hic quidem itaque dignissimos veniam, nostrum accusantium tempore blanditiis earum at soluta neque asperiores!</p>
+                <p>Silahkan buka file dibawah ini untuk melihat alur penggunaan bagi admin kecamatan</p>
+                <a href="../assets/Alur Penggunaan Aplikasi Website SILANDAK Untuk Admin Kecamatan.pdf"><i class="fa fa-file-pdf" style="font-size: 40px; color: red;"></i></a>
               </div>
             </div>
 
-            <div class="author-box">
+            <div class="author-box mt-3">
               <div class="author-box-name">
                 <h5>ALUR ADMIN DESA</h5>
               </div>
               <hr>
-              <div class="author-box font-weight-bolder">Q: Bagaimana saya dapat mengakses layanan SILANDAK?</div>
+
               <div class="author-box">
-                <p>A: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus aliquid temporibus hic quidem itaque dignissimos veniam, nostrum accusantium tempore blanditiis earum at soluta neque asperiores!</p>
+                <p>Silahkan buka file dibawah ini untuk melihat alur penggunaan bagi admin desa</p>
+                <a href="../assets/Alur Penggunaan Aplikasi Website SILANDAK Untuk Admin Desa.pdf"><i class="fa fa-file-pdf" style="font-size: 40px; color: red;"></i></a>
               </div>
             </div>
+
+            <div class="author-box mt-3">
+              <div class="author-box-name">
+                <h5>CARA MENGGANTI PASSWORD BARU DAN LUPA PASSWORD</h5>
+              </div>
+              <hr>
+
+              <div class="author-box">
+                <p>Silahkan buka file dibawah ini untuk melihat alur penggunaan bagi admin desa</p>
+                <a href="../assets/Cara Mengisi Ganti Password dan Lupa Password.pdf"><i class="fa fa-file-pdf" style="font-size: 40px; color: red;"></i></a>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -723,15 +756,15 @@ if (isset($_POST['submit_informasi'])) {
           </div>
           <form method="POST">
             <div class="form-group">
-              <label for="username">Username</label>
+              <label for="username">Username <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
               <input id="username" type="text" class="form-control" name="username" required>
             </div>
             <div class="form-group">
-              <label for="no_hp">Nomor Handphone</label>
+              <label for="no_hp">Nomor Handphone <span class="required-asterisk text-danger" aria-hidden="true">*</span></label>
               <input id="no_hp" type="text" class="form-control" name="no_hp" required>
             </div>
             <div class="form-group">
-              <label for="pesan">Keterangan</label>
+              <label for="pesan">Keterangan </label>
               <input id="pesan" type="text" class="form-control" name="pesan">
             </div>
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['login'])){
+if (!isset($_SESSION['login'])) {
     header("location:login/login_view.php");
     exit;
 }
@@ -10,10 +10,10 @@ include "template/header.php";
 $page = $_GET['page'];
 switch ($page) {
     case 'beranda':
-        if($_SESSION["peran"] == "warga"){ 
+        if ($_SESSION["peran"] == "warga") {
             include "dashboard/dashboard_view.php";
             break;
-    };
+        };
     case 'adminkecamatan':
         include "dashboard/dashboard_admin.php";
         break;
@@ -45,7 +45,7 @@ switch ($page) {
         include "pengguna/pengguna_edit.php";
         break;
 
-    // untuk kartu keluarga
+        // untuk kartu keluarga
     case 'permohonankartukeluarga':
         include "kartu_keluarga/permohonan_kk.php";
         break;
@@ -67,9 +67,12 @@ switch ($page) {
     case 'viewKK':
         include "kartu_keluarga/viewKK.php";
         break;
-    // end kartu keluarga
+    case 'deleteKK':
+        include "kartu_keluarga/deleteKK.php";
+        break;
+        // end kartu keluarga
 
-    // akta kelahiran
+        // akta kelahiran
     case 'permohonanaktakelahiran':
         include "akta_kelahiran/permohonan_akta_kelahiran.php";
         break;
@@ -91,9 +94,12 @@ switch ($page) {
     case 'viewAK':
         include "akta_kelahiran/viewAK.php";
         break;
-    // end akta kelahiran
+    case 'deleteAK':
+        include "akta_kelahiran/deleteAK.php";
+        break;
+        // end akta kelahiran
 
-    // surat pindah
+        // surat pindah
     case 'permohonansuratpindah':
         include "surat_pindah/permohonan_sp.php";
         break;
@@ -115,9 +121,12 @@ switch ($page) {
     case 'viewSP':
         include "surat_pindah/viewSP.php";
         break;
-    // end surat pindah
+    case 'deleteSP':
+        include "surat_pindah/deleteSP.php";
+        break;
+        // end surat pindah
 
-    // akta kematian
+        // akta kematian
     case 'permohonanaktakematian':
         include "akta_kematian/permohonan_akta_kematian.php";
         break;
@@ -139,9 +148,12 @@ switch ($page) {
     case 'viewAKM':
         include "akta_kematian/viewAKM.php";
         break;
-    // end akta kematian
+    case 'deleteAKM':
+        include "akta_kematian/deleteAKM.php";
+        break;
+        // end akta kematian
 
-    // surat pindah datang
+        // surat pindah datang
     case 'permohonansuratpindahdatang':
         include "surat_pindah_datang/permohonan_spd.php";
         break;
@@ -163,9 +175,12 @@ switch ($page) {
     case 'viewSPD':
         include "surat_pindah_datang/viewSPD.php";
         break;
-    // end surat pindah datang
+    case 'deleteSPD':
+        include "surat_pindah_datang/deleteSPD.php";
+        break;
+        // end surat pindah datang
 
-    // biodata wni
+        // biodata wni
     case 'permohonanbiodatawni':
         include "biodata_wni/permohonan_wni.php";
         break;
@@ -187,9 +202,12 @@ switch ($page) {
     case 'viewWNI':
         include "biodata_wni/viewWNI.php";
         break;
-    // end biodata wni
+    case 'deleteWNI':
+        include "biodata_wni/deleteWNI.php";
+        break;
+        // end biodata wni
 
-    // rekam ktp
+        // rekam ktp
     case 'permohonanrekamktp':
         include "rekam_ktp/permohonan_rekam_ktp.php";
         break;
@@ -211,7 +229,10 @@ switch ($page) {
     case 'viewKTP':
         include "rekam_ktp/viewKTP.php";
         break;
-    // end rekam ktp
+    case 'deleteKTP':
+        include "rekam_ktp/hapus_rekam_ktp.php";
+        break;
+        // end rekam ktp
 
     case 'datakependudukan':
         include "laporan/data_kependudukan.php";

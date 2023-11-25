@@ -29,45 +29,46 @@
                       $sesi = $_SESSION['id'];
                       $query = mysqli_query($conn, "SELECT * FROM tb_akta_lahir a INNER JOIN tb_user b ON a.user_id = b.id_user WHERE b.id_user='$sesi' ORDER BY a.id_lahir DESC");
                       $no = 1;
-                      while($row = mysqli_fetch_array($query)) {
-                      setlocale(LC_TIME, 'id_ID');
-                      $tanggal_format = strftime('%d %B %Y', strtotime($row['tgl']));
+                      while ($row = mysqli_fetch_array($query)) {
+                        setlocale(LC_TIME, 'id_ID');
+                        $tanggal_format = strftime('%d %B %Y', strtotime($row['tgl']));
                       ?>
-                      <tr>
-                        <td><?php echo $no++ ?></td>
-                        <td><?php echo $tanggal_format; ?></td>
-                        <td><?php echo $row['nama']; ?></td>
-                        <td><?php echo $row['nik']; ?></td>
-                        <td><?php echo $row['nik']; ?></td>
-                        <td><?php echo $row['no_hp']; ?></td>
-                        <td>
-                        <?php
-                        if($row['status_berkas'] == 'Baru') {?>
-                          <div class="btn btn-primary" disabled><?php echo 'Baru' ?></div>
-                        <?php
-                        } else {?>
-                          <div class="btn btn-success" disabled><?php echo 'Selesai' ?></div>
-                        <?php
-                        }
-                        ?>
-                        </td>
-                        <td>
-                          <a href="?page=viewAK&id_lahir=<?php echo $row['id_lahir'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a>
-                          <?php if($row['status_berkas'] == 'Selesai' && !empty($row['file_pemohon'])) {?>
-                          <a href="assets/<?php echo $row['file_pemohon'] ?>" class="btn btn-danger btnktp" download="<?php echo $row['file_pemohon'] ?>"><i class="fas fa-file-upload"></i></a>
-                          <?php
-                          } else {
-                          ?>
-                          <a class="btn btn-secondary btnktp" disabled><i class="fas fa-file-upload"></i></a>
-                          <?php
-                          }
-                          ?>
-                        </td>
-                      </tr>
+                        <tr>
+                          <td><?php echo $no++ ?></td>
+                          <td><?php echo $tanggal_format; ?></td>
+                          <td><?php echo $row['nama']; ?></td>
+                          <td><?php echo $row['nik']; ?></td>
+                          <td><?php echo $row['nmr_urut']; ?></td>
+                          <td><?php echo $row['no_hp']; ?></td>
+                          <td>
+                            <?php
+                            if ($row['status_berkas'] == 'Baru') { ?>
+                              <div class="btn btn-primary" disabled><?php echo 'Baru' ?></div>
+                            <?php
+                            } else { ?>
+                              <div class="btn btn-success" disabled><?php echo 'Selesai' ?></div>
+                            <?php
+                            }
+                            ?>
+                          </td>
+                          <td>
+                            <a href="?page=viewAK&id_lahir=<?php echo $row['id_lahir'] ?>" class="btn btn-info btnktp"><i class="fas fa-search"></i></a>
+                            <a href="?page=deleteAK&id_lahir=<?php echo $row['id_lahir'] ?>" class="btn btn-danger" onclick="return confirm('Apakah anda yakin menghapus data ini?');"><i class="fas fa-trash"></i></a>
+                            <?php if ($row['status_berkas'] == 'Selesai' && !empty($row['file_pemohon'])) { ?>
+                              <a href="assets/<?php echo $row['file_pemohon'] ?>" class="btn btn-warning btnktp" download="<?php echo $row['file_pemohon'] ?>"><i class="fas fa-arrow-down"></i></a>
+                            <?php
+                            } else {
+                            ?>
+                              <a class="btn btn-secondary btnktp" disabled><i class="fas fa-arrow-down"></i></a>
+                            <?php
+                            }
+                            ?>
+                          </td>
+                        </tr>
                       <?php
                       }
                       ?>
-                        <!-- <td><div class="btn btn-success btn-sm">Completed</div></td>
+                      <!-- <td><div class="btn btn-success btn-sm">Completed</div></td>
                         <td><button class="btn btn-info" data-toggle="modal" data-target="#modalLihatDataKK"><i class="fas fa-search"></i></button></td> -->
                     </tbody>
                   </table>
